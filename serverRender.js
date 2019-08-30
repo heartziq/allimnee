@@ -9,7 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import ConfigStore from "./src/redux";
 import { Provider } from "react-redux";
 
-const store = ConfigStore({count: 100});
+const store = ConfigStore({ count: 100 });
 // Overall HTML layout
 function renderFullPage(html, css, store) {
   /* ... */
@@ -24,7 +24,7 @@ function renderFullPage(html, css, store) {
     <body>
       <div id="root">${html}</div>
       <script>
-        window.__STATE__ = ${JSON.stringify({count: 55})}
+        window.__STATE__ = ${JSON.stringify({ count: 55 })}
       </script>
     </body>
   </html>
@@ -39,7 +39,9 @@ export const handleRender = (request, h) => {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <CssBaseline />
-          <Main initialData={"Welcome to Server"} />
+          <StaticRouter>
+            <App />
+          </StaticRouter>
         </Provider>
       </ThemeProvider>
     )

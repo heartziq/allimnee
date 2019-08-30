@@ -5,7 +5,7 @@ import theme from "../../theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import Main from "../components/Main";
-import ConfigStore from '../redux'
+import ConfigStore from "../redux";
 
 import App from "../components/App";
 import { Provider } from "react-redux";
@@ -26,7 +26,9 @@ function AppRouter() {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <CssBaseline />
-        <Main initialData={"Welcome to Client"} />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </ThemeProvider>
   );
