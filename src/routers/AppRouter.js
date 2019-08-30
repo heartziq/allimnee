@@ -1,26 +1,35 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
-// import ExpenseDashboardPage from '../components/ExpenseDashboardPage';
-// import AddExpensePage from '../components/AddExpensePage';
-// import EditExpensePage from '../components/EditExpensePage';
-// import HelpPage from '../components/HelpPage';
-// import NotFoundPage from '../components/NotFoundPage';
-// import Header from '../components/Header';
-import App from '../components/App'
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "../../theme";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles } from "@material-ui/core/styles";
+import Main from "../components/Main";
+import ConfigStore from '../redux'
 
-const AppRouter = () => (
-  <BrowserRouter>
-    <div>
-      <Header />
-      <Switch>
-        <Route path="/" component={() => <App initialData={window.initialData} />} exact={true} />
-        {/* <Route path="/create" component={AddExpensePage} />
-        <Route path="/edit/:id" component={EditExpensePage} />
-        <Route path="/help" component={HelpPage} />
-        <Route component={NotFoundPage} /> */}
-      </Switch>
-    </div>
-  </BrowserRouter>
-);
+import App from "../components/App";
+import { Provider } from "react-redux";
+
+// grab data from window state
+const state = window.__STATE__;
+delete window.__STATE__;
+const store = ConfigStore(state);
+
+function AppRouter() {
+  React.useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }, []);
+  return (
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <CssBaseline />
+        <Main initialData={"Welcome to Client"} />
+      </Provider>
+    </ThemeProvider>
+  );
+}
 
 export default AppRouter;

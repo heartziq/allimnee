@@ -1,14 +1,31 @@
 "use strict";
-
 const Hapi = require("@hapi/hapi");
-const { serverRender } = require("./serverRender");
-const { handleRender } = require("./serverRender");
+const Path =  require('path');
+
+import { serverRender } from './serverRender';
 
 const init = async () => {
   const server = Hapi.server({
     host: "localhost",
-    port: 3000
+    port: 3000,
+    routes: {
+      files: {
+        relativeTo: Path.join(__dirname, "public")
+      }
+    }
   });
+
+  // register public
+  await server.register(require('inert'));
+
+  // testing public dir request
+  server.route({
+    method: 'GET',
+    path: '/bundle.js',
+    handler: function (request, h) {
+      return h.file('bundle.js')
+    }
+  })
 
   // register view
   await server.register(require("@hapi/vision"));
@@ -19,38 +36,25 @@ const init = async () => {
     relativeTo: __dirname,
     path: "views"
   });
-
+  
   // create Plugin
   const myPlugin = {
-    name: 'myPlugin',
-    version: '1.0.0',
-    register: async function (server, options) {
-  
-        // Create a route for example
-  
-        server.route({
-            method: 'GET',
-            path: '/test',
-            handler: function (request, h) {
-                return 'hello, world';
-            }
-        });
+    name: "myPlugin",
+    version: "1.0.0",
+    register: async function(server, options) {
+      server.route({
+        method: "GET",
+        path: "/",
+        handler: function (request, h) {
+          const {initialRender, initialState} = serverRender();
+          return h.view('index', {initialRender, initialState})
+        }
+      });
     }
   };
 
-   // load one plugin
-
-   await server.register(myPlugin);
-
-  // routing
-  server.route({
-    method: "GET",
-    path: "/",
-    handler: function(request, h) {
-      const { initialRender, initialData } = serverRender();
-      return h.view("index", { title: "elmo", initialRender, initialData });
-    }
-  });
+  // load one plugin
+  await server.register(myPlugin);
 
   await server.start();
   console.log("server running on %s", server.info.uri);

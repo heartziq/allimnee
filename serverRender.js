@@ -1,13 +1,17 @@
-import axios from "axios";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { ServerStyleSheets, ThemeProvider } from "@material-ui/styles";
 import App from "./src/components/App";
+import { StaticRouter } from "react-router";
 import theme from "./theme";
-// import config from "./config";
+import Main from "./src/components/Main";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import ConfigStore from "./src/redux";
+import { Provider } from "react-redux";
 
+const store = ConfigStore({count: 100});
 // Overall HTML layout
-function renderFullPage(html, css) {
+function renderFullPage(html, css, store) {
   /* ... */
   return `
   <!DOCTYPE html>
@@ -15,23 +19,28 @@ function renderFullPage(html, css) {
     <head>
       <title>My page</title>
       <style id="jss-server-side">${css}</style>
+      <script type="text/javascript" src="/bundle.js" defer></script>
     </head>
     <body>
       <div id="root">${html}</div>
+      <script>
+        window.__STATE__ = ${JSON.stringify({count: 55})}
+      </script>
     </body>
   </html>
 `;
 }
-//
-export const handleRender = (request, reply) => {
-  /* ... */
-  const sheets = new ServerStyleSheets();
 
-  // Render the component to a string.
+export const handleRender = (request, h) => {
+  const sheets = new ServerStyleSheets();
+  const context = {};
   const html = ReactDOMServer.renderToString(
     sheets.collect(
       <ThemeProvider theme={theme}>
-        <App />
+        <Provider store={store}>
+          <CssBaseline />
+          <Main initialData={"Welcome to Server"} />
+        </Provider>
       </ThemeProvider>
     )
   );
@@ -39,27 +48,14 @@ export const handleRender = (request, reply) => {
   // Grab the CSS from our sheets.
   const css = sheets.toString();
 
-  // Send the rendered page back to the client.
-  reply(renderFullPage(html, css));
+  return renderFullPage(html, css, store);
 };
 
 export const serverRender = () => {
-  // return axios
-  //   .get(`${config.serverUrl}/api/`)
-  //   .then(resp => {
-  //     return {
-  //       initialRender: ReactDOMServer.renderToString(
-  //         <App initialData={resp.data} />
-  //       ),
-  //       initialData: resp.data
-  //     };
-  //   })
-  //   .catch(err => console.error(err));
+  const markup = handleRender();
 
   return {
-    initialRender: ReactDOMServer.renderToString(
-      <App initialData={'hallo'} />
-    ),
-    initialData: 'hello'
+    initialRender: markup,
+    initialState: store
   };
 };
