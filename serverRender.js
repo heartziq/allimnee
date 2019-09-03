@@ -4,12 +4,14 @@ import { ServerStyleSheets, ThemeProvider } from "@material-ui/styles";
 import App from "./src/components/App";
 import { StaticRouter } from "react-router";
 import theme from "./theme";
-import Main from "./src/components/Main";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ConfigStore from "./src/redux";
 import { Provider } from "react-redux";
 
-const store = ConfigStore({ count: 100 });
+// set initialState
+const initialState = { count: 100 };
+const store = ConfigStore(initialState);
+
 // Overall HTML layout
 function renderFullPage(html, css, store) {
   /* ... */
@@ -24,7 +26,7 @@ function renderFullPage(html, css, store) {
     <body>
       <div id="root">${html}</div>
       <script>
-        window.__STATE__ = ${JSON.stringify({ count: 55 })}
+        window.__STATE__ = ${JSON.stringify(store.getState())}
       </script>
     </body>
   </html>
@@ -33,13 +35,15 @@ function renderFullPage(html, css, store) {
 
 export const handleRender = (request, h) => {
   const sheets = new ServerStyleSheets();
-  const context = {};
+  const context = {
+    isServer: true
+  };
   const html = ReactDOMServer.renderToString(
     sheets.collect(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <CssBaseline />
-          <StaticRouter>
+          <StaticRouter location={''} context={context}>
             <App />
           </StaticRouter>
         </Provider>
@@ -53,11 +57,11 @@ export const handleRender = (request, h) => {
   return renderFullPage(html, css, store);
 };
 
-export const serverRender = () => {
+export const serverRender = (request) => {
   const markup = handleRender();
 
   return {
     initialRender: markup,
-    initialState: store
+    initialState: store.getState(),
   };
 };

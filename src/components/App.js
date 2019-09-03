@@ -4,6 +4,9 @@ import Main from "./Main";
 import AboutPage from "./About";
 import Header from "./Header";
 
+// Load Pages
+import BrowseTutor from "../pages/BrowseTutor";
+
 function App() {
   return (
     <div>
@@ -11,8 +14,12 @@ function App() {
       <Switch>
         <Route
           path="/"
-          component={() => <Main initialData={"Client"} />}
+          render={props => <Main {...props} initialData={"Client"} />}
           exact={true}
+        />
+        <Route
+          path="/browse"
+          render={props => <BrowseTutor {...props} />}
         />
         <Route path="/about" component={AboutPage} />
       </Switch>

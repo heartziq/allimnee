@@ -42,14 +42,25 @@ const init = async () => {
     name: "myPlugin",
     version: "1.0.0",
     register: async function(server, options) {
+
+      // Main Page
       server.route({
         method: "GET",
         path: "/",
         handler: function (request, h) {
-          const {initialRender, initialState} = serverRender();
+          const {initialRender, initialState} = serverRender(request);
           return h.view('index', {initialRender, initialState})
         }
       });
+
+      // About Page
+      // server.route({
+      //   method: "GET",
+      //   path: "/about",
+      //   handler: function (request, h) {
+      //     return h.view('')
+      //   }
+      // });
     }
   };
 
