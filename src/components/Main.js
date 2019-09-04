@@ -19,7 +19,7 @@ class MainApp extends Component {
     console.log(`isServer: ${this.state.isServer}`)
     return (
       <div className="MainApp">
-        <h1>From {this.state.isServer ? 'Server' : 'Client'}</h1>
+        <h1>From Teehee</h1>
         <p>count: {this.props.count}</p>
         <MyButton
           increaseCounter={() => this.props.dispatch({ type: "add" })}

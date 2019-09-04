@@ -1,1 +1,13 @@
-<%- initialRender -%>
+<%- include('header') -%>
+    <style id="jss-server-side">
+      <%- cssData -%>
+    </style>
+    <script type="text/javascript" src="/bundle.js" defer></script>
+  </head>
+  <body>
+    <div id="root"><%- htmlData -%></div>
+    <script>
+      window.__STATE__ = <%- JSON.stringify(initialState) -%>
+    </script>
+  </body>
+</html>

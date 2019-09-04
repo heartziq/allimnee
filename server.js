@@ -1,8 +1,8 @@
 "use strict";
 const Hapi = require("@hapi/hapi");
-const Path =  require('path');
+const Path = require("path");
 
-import { serverRender } from './serverRender';
+import { serverRender } from "./serverRender";
 
 const init = async () => {
   const server = Hapi.server({
@@ -16,16 +16,16 @@ const init = async () => {
   });
 
   // register public
-  await server.register(require('inert'));
+  await server.register(require("inert"));
 
   // testing public dir request
   server.route({
-    method: 'GET',
-    path: '/bundle.js',
-    handler: function (request, h) {
-      return h.file('bundle.js')
+    method: "GET",
+    path: "/bundle.js",
+    handler: function(request, h) {
+      return h.file("bundle.js");
     }
-  })
+  });
 
   // register view
   await server.register(require("@hapi/vision"));
@@ -34,38 +34,48 @@ const init = async () => {
       ejs: require("ejs")
     },
     relativeTo: __dirname,
-    path: "views"
+    path: "views",
+    layout: true,
+    layoutPath: "templates/layout"
   });
-  
+
   // create Plugin
   const myPlugin = {
     name: "myPlugin",
     version: "1.0.0",
     register: async function(server, options) {
-
       // Main Page
       server.route({
         method: "GET",
         path: "/",
-        handler: function (request, h) {
-          const {initialRender, initialState} = serverRender(request);
-          return h.view('index', {initialRender, initialState})
+        handler: function(request, h) {
+          const { cssData, htmlData, initialState } = serverRender(request);
+          return h.view("index", { cssData, htmlData, initialState });
         }
       });
 
-      // About Page
-      // server.route({
-      //   method: "GET",
-      //   path: "/about",
-      //   handler: function (request, h) {
-      //     return h.view('')
-      //   }
-      // });
+      // Browse Page (with id)
+      server.route({
+        method: "GET",
+        path: "/browse",
+        handler: function(request, h) {
+          const id = request.query.id || false;
+          return h.response(`id:${id}`);
+        }
+      });
     }
   };
 
   // load one plugin
-  await server.register(myPlugin);
+  // await server.register(myPlugin);
+
+  server.route({
+    method: "GET",
+    path: "/test",
+    handler: function(request, h) {
+      return h.view("demo", null, { anotherLayout: "layout" });
+    }
+  });
 
   await server.start();
   console.log("server running on %s", server.info.uri);
