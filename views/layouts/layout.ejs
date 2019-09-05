@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%- pageTitle -%></title>
+    <style id="jss-server-side">
+      <%- cssData -%>
+    </style>
+    <script type="text/javascript" src="/bundle.js" defer></script>
+  </head>
+  <body>
+    <%- content -%>
+    <script>
+      window.__STATE__ = <%- JSON.stringify(initialState) -%>
+    </script>
+  </body>
+</html>

@@ -13,8 +13,6 @@ const initialState = { count: 100 };
 const store = ConfigStore(initialState);
 
 export const serverRender = request => {
-  // console.log(`request: ${request.url}`)
-
   const sheets = new ServerStyleSheets();
   const context = {
     isServer: true
@@ -24,7 +22,7 @@ export const serverRender = request => {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <CssBaseline />
-          <StaticRouter location={request.url} context={context}>
+          <StaticRouter location={request.url.pathname} context={context}>
             <App />
           </StaticRouter>
         </Provider>

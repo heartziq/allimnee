@@ -1,8 +1,7 @@
 "use strict";
 const Hapi = require("@hapi/hapi");
 const Path = require("path");
-
-import { serverRender } from "./serverRender";
+const myPlugin = require("./serverRoute");
 
 const init = async () => {
   const server = Hapi.server({
@@ -15,65 +14,51 @@ const init = async () => {
     }
   });
 
-  // register public
-  await server.register(require("inert"));
+  // register plugins
+  await server.register([require("inert"), require("@hapi/vision"), myPlugin]);
 
-  // testing public dir request
+  // serving static files
   server.route({
     method: "GET",
-    path: "/bundle.js",
-    handler: function(request, h) {
-      return h.file("bundle.js");
+    path: "/{filename}",
+    handler: {
+      file: function(request) {
+        return request.params.filename;
+      }
     }
   });
 
-  // register view
-  await server.register(require("@hapi/vision"));
   server.views({
     engines: {
       ejs: require("ejs")
     },
     relativeTo: __dirname,
-    path: "views",
-    layout: true,
-    layoutPath: "templates/layout"
+    path: Path.resolve("views"),
+    layoutPath: Path.resolve("views", "layouts"),
+    layout: "layout"
   });
 
-  // create Plugin
-  const myPlugin = {
-    name: "myPlugin",
-    version: "1.0.0",
-    register: async function(server, options) {
-      // Main Page
-      server.route({
-        method: "GET",
-        path: "/",
-        handler: function(request, h) {
-          const { cssData, htmlData, initialState } = serverRender(request);
-          return h.view("index", { cssData, htmlData, initialState });
-        }
-      });
-
-      // Browse Page (with id)
-      server.route({
-        method: "GET",
-        path: "/browse",
-        handler: function(request, h) {
-          const id = request.query.id || false;
-          return h.response(`id:${id}`);
-        }
-      });
-    }
-  };
-
-  // load one plugin
-  // await server.register(myPlugin);
-
   server.route({
-    method: "GET",
-    path: "/test",
+    method: "POST",
+    path: "/postit",
     handler: function(request, h) {
-      return h.view("demo", null, { anotherLayout: "layout" });
+      //bla bla bla post, mongo etc
+      console.log("post attempt...");
+      const j = {
+        data: "ffff"
+      };
+
+      const g = {
+        ...j,
+        k: "ahaha"
+      };
+
+      console.log(g);
+      // console.log(req)
+      return h.response(request.payload)
+
+      // return h.response({ ...request.payload, greetings: "thank you" });
+      // return h.redirect('/')
     }
   });
 

@@ -7,6 +7,8 @@ class MainApp extends Component {
   constructor(props){
     super(props);
 
+    const requestedURL = props.context || false;
+    console.log(`context: ${JSON.stringify(requestedURL)}`)
     const isServer = props.staticContext ? props.staticContext.isServer : false
 
     this.state = {
