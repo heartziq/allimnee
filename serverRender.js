@@ -8,11 +8,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import ConfigStore from "./src/redux";
 import { Provider } from "react-redux";
 
-// set initialState and initialize store
-const initialState = { count: 100 };
-const store = ConfigStore(initialState);
+// 3 things: initialState,
 
-export const serverRender = request => {
+export const serverRender = (request, initialState={}) => {
+  // set initialState and initialize store
+  // const initialState = { count: 100 };
+  const store = ConfigStore(initialState);
   const sheets = new ServerStyleSheets();
   const context = {
     isServer: true
@@ -36,6 +37,6 @@ export const serverRender = request => {
   return {
     cssData: css,
     htmlData: html,
-    initialState: store.getState(),
+    initialState: store.getState()
   };
 };

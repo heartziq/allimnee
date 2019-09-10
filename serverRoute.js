@@ -8,7 +8,7 @@ module.exports = {
       method: "GET",
       path: "/",
       handler: function(request, h) {
-        const { cssData, htmlData, initialState } = serverRender(request);
+        const { cssData, htmlData, initialState } = serverRender(request, { count: 100 });
         return h.view("index", {
           pageTitle: "home",
           cssData,
@@ -18,15 +18,16 @@ module.exports = {
       }
     });
 
-    // Browse Page (with id)
+    // BrowseTutor
     server.route({
       method: "GET",
       path: "/browse",
       handler: function(request, h) {
-        const { cssData, htmlData, initialState } = serverRender(request);
+        const state = { tutor: 'Anna' }
+        const { cssData, htmlData, initialState } = serverRender(request, state);
         const id = request.query.id || false;
         return h.view("index", {
-          pageTitle: "browse",
+          pageTitle: "Browse - Tutors",
           cssData,
           htmlData,
           initialState
@@ -34,6 +35,17 @@ module.exports = {
       }
     });
 
+    // BrowseTutor
+    // server.route({
+    //   method: 'GET',
+    //   path: '/BrowseTutor',
+    //   handler: function (request, reply) {
+
+
+    //   }
+    // })
+
+    // test
     server.route({
       method: "GET",
       path: "/test",
