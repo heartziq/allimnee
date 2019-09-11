@@ -4,7 +4,7 @@ import { createStore, combineReducers } from "redux";
 const countDefaultState = 0;
 
 // tutor name default layout
-const tutorDefaultState = "Anna";
+const tutorDefaultState = [];
 
 // reducer for add count
 const countReducer = (state = countDefaultState, action) => {

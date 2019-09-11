@@ -13,11 +13,16 @@ const BrowseTutor = props => {
     props.dispatch({ type: "change", name: textInput });
   };
 
-  console.log(`keyboard text: ${textInput}`);
+  const renderTutors = () => {
+    return props.tutor.map(e => <li key={e._id}>{e.name}, {e.subject}</li>)
+  }
 
   return (
     <div className="BrowseTutor">
-      <h1>Browse Tutor {props.tutor}</h1>
+      <h1>Browse Tutor f</h1>
+      <ul className="tutor-list">
+        { renderTutors() }
+      </ul>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
