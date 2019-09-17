@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from "redux";
+import uuid from 'uuid/v1';
 
 // count default layout
 const countDefaultState = 0;
@@ -20,7 +21,22 @@ const countReducer = (state = countDefaultState, action) => {
 const tutorReducer = (state = tutorDefaultState, action) => {
   switch (action.type) {
     case "change":
-      return action.name;
+      const dummySample =   {
+        "_id": uuid(),
+        "name": action.name,
+        "stars": 4,
+        "bio": "Goal-oriented 'math-head' with passion in crunching numbers - only numbers",
+        "subject": ["E Maths", "A Maths", "C Maths"],
+        "level": ["Secondary 2", "Secondary 3", "Secondary 4"],
+        "contact": {
+          "email": "vvalentine@telegram.com",
+          "phone": "94131322"
+        }
+      }
+      return [
+        ...state,
+        dummySample,
+      ];
     default:
       return state;
   }

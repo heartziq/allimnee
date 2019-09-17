@@ -13,8 +13,10 @@ const BrowseTutor = props => {
     props.dispatch({ type: "change", name: textInput });
   };
 
+  
+
   const renderTutors = () => {
-    return props.tutor.map(e => <li key={e._id}>{e.name}, {e.subject}</li>)
+    return props.tutor.map(e => <li key={e._id}>{e.name}, {e.stars}/5</li>)
   }
 
   return (
