@@ -2,20 +2,132 @@
   {
     "_id": 0,
     "name": "Tifa Lockheart",
-    "subject": "English"
+    "stars": 5,
+    "bio": "A dedicated cheetos-breath who is passionate in diversity of languages",
+    "subject": ["English", "French", "Mandarin"],
+    "level": ["Primary 6", "Secondary 1", "Secondary 2"],
+    "contact": {
+      "email": "tifa@gmail.com",
+      "phone": "94130032"
+    }
   },
   {
     "_id": 1,
-    "name": "Barrett Jones",
-    "subject": "Spanish"
-  },  {
+    "name": "Aerith West",
+    "stars": 4,
+    "bio": "Fun and caring tutor who likes children and wants to see them prosper",
+    "subject": ["Mathematics"],
+    "level": ["Primary 1", "Primary 2"],
+    "contact": {
+      "email": "aerith.w@aol.com",
+      "phone": "84130032"
+    }
+  },
+  {
+    "_id": 2,
+    "name": "Cait K. Sith",
+    "stars": 4,
+    "bio": "An inspiring soul who imparts fun in education - so they keep wanting more",
+    "subject": [
+      "Human Geography",
+      "History",
+      "Arts and Craft",
+      "English Literature",
+      "Sastera"
+    ],
+    "level": ["Secondary 1", "Secondary 2", "Secondary 3", "Secondary 4"],
+    "contact": {
+      "email": "csith@gmail.com",
+      "phone": "81130032"
+    }
+  },
+  {
     "_id": 3,
-    "name": "Cait Sith",
-    "subject": "Cat Language"
+    "name": "Cloud Strife",
+    "stars": 5,
+    "bio": "Father of two; Aspiring author; Prominent Teacher (see my portfolio)",
+    "subject": ["Spanish Major", "Spanish Basic"],
+    "level": ["Any"],
+    "contact": {
+      "email": "cloud_strife@gmail.com",
+      "phone": "93224013"
+    }
   },
   {
     "_id": 4,
-    "name": "Aerith Jones",
-    "subject": "Staff Healing"
+    "name": "Vincent Valentine",
+    "stars": 4,
+    "bio": "Goal-oriented 'math-head' with passion in crunching numbers - only numbers",
+    "subject": ["E Maths", "A Maths", "C Maths"],
+    "level": ["Secondary 2", "Secondary 3", "Secondary 4"],
+    "contact": {
+      "email": "vvalentine@telegram.com",
+      "phone": "94131322"
+    }
+  },
+  {
+    "_id": 5,
+    "name": "Ahmad",
+    "stars": 3,
+    "bio": "A loving soul seeker who enlighten people with my knowledge of the Earth",
+    "subject": ["Physical Geography"],
+    "level": ["Secondary 1", "Secondary 2"],
+    "contact": {
+      "email": "amad-bon-bon@gmail.com",
+      "phone": "9003032"
+    }
+  },
+  {
+    "_id": 6,
+    "name": "Gambit Iglesias",
+    "stars": 5,
+    "bio": "Plata O Plomo; Los Santos Hermanos",
+    "subject": ["French", "Sastera"],
+    "level": ["Primary 6", "Secondary 1", "Secondary 2"],
+    "contact": {
+      "email": "g.iglesias@gmail.com",
+      "phone": "93122031"
+    }
+  },
+  {
+    "_id": 7,
+    "name": "Lita Dumas",
+    "stars": 5,
+    "bio": "A kindred soul who is passionate in inspiring young minds to pursue their dreams",
+    "subject": ["English Language", "Chemistry", "Advanced Chemistry"],
+    "level": ["Secondary 1", "Secondary 2", "Secondary 3"],
+    "contact": {
+      "email": "lita.d.hardy@gmail.com",
+      "phone": "94110032"
+    }
+  },
+  {
+    "_id": 8,
+    "name": "Bret Hart",
+    "stars": 5,
+    "bio": "Ain't nothin much to say about me except that im aweeesooomme",
+    "subject": ["Pure Physics", "Pure Chemistry"],
+    "level": ["Secondary 3", "Secondary 4"],
+    "contact": {
+      "email": "bret_hart_awesome@wcw.com",
+      "phone": "83130021"
+    }
+  },
+  {
+    "_id": 9,
+    "name": "Owen Hart",
+    "stars": 5,
+    "bio": "Retired WCW legend whose current main focus is educating and motivating students to prosper in their education",
+    "subject": [
+      "English Language",
+      "English Literature",
+      "Human Geography",
+      "History"
+    ],
+    "level": ["Secondary 1", "Secondary 2", "Secondary 3", "Secondary 4"],
+    "contact": {
+      "email": "o.hart@gmail.com",
+      "phone": "99310043"
+    }
   }
 ]
