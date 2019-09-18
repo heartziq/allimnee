@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
-import theme from "../../theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
-import Main from "../components/Main";
-import ConfigStore from "../redux";
-
-import App from "../components/App";
 import { Provider } from "react-redux";
 
-// grab data from window state
+import theme from "../../theme";
+import ConfigStore from "../redux";
+import App from "../components/App";
+
+// grab initialState from window
 const state = window.__STATE__;
 delete window.__STATE__;
+
+// initialize store (Client Side)
 const store = ConfigStore(state);
 
 function AppRouter() {

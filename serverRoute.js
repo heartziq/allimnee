@@ -43,6 +43,8 @@ module.exports = {
         const res = await fetch("http://localhost:3000/api/tutor");
         const dataObj = await res.json();
 
+        // getting user param query (backend)
+        console.log(`[Server]: ${JSON.stringify(request.query)}`)
         const state = { tutor: dataObj };
         const { cssData, htmlData, initialState } = serverRender(
           request,

@@ -1,23 +1,23 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { ServerStyleSheets, ThemeProvider } from "@material-ui/styles";
-import App from "./src/components/App";
 import { StaticRouter } from "react-router";
-import theme from "./theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import ConfigStore from "./src/redux";
 import { Provider } from "react-redux";
 
-// 3 things: initialState,
+import ConfigStore from "./src/redux";
+import App from "./src/components/App";
+import theme from "./theme";
 
-export const serverRender = (request, initialState={}) => {
+export const serverRender = (request, initialState = {}) => {
   // set initialState and initialize store
-  // const initialState = { count: 100 };
   const store = ConfigStore(initialState);
+
   const sheets = new ServerStyleSheets();
   const context = {
     isServer: true
   };
+
   const html = ReactDOMServer.renderToString(
     sheets.collect(
       <ThemeProvider theme={theme}>

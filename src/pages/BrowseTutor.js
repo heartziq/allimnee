@@ -3,8 +3,11 @@ import qs from "query-string";
 import { connect } from "react-redux";
 
 const BrowseTutor = props => {
-  // get id from param id
-  // console.log(`id:${qs.parse(props.location.search).id}`);
+  // get user param query (frontend only)
+  const userQuery = qs.parse(props.location.search);
+  console.log(`userQuery: ${JSON.stringify(userQuery)}`)
+  console.log(`id:${qs.parse(props.location.search).id}`);
+  
   const [textInput, setTextInput] = React.useState("");
 
   const handleSubmit = e => {

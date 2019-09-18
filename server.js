@@ -38,6 +38,7 @@ const init = async () => {
     layout: "layout"
   });
 
+  // POST example
   server.route({
     method: "POST",
     path: "/postit",
