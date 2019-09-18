@@ -1,13 +1,14 @@
 import React from "react";
 import qs from "query-string";
 import { connect } from "react-redux";
+import { sort } from '../redux/selectors';
 
 const BrowseTutor = props => {
   // get user param query (frontend only)
   const userQuery = qs.parse(props.location.search);
   console.log(`userQuery: ${JSON.stringify(userQuery)}`)
   console.log(`id:${qs.parse(props.location.search).id}`);
-  
+
   const [textInput, setTextInput] = React.useState("");
 
   const handleSubmit = e => {
@@ -24,7 +25,7 @@ const BrowseTutor = props => {
 
   return (
     <div className="BrowseTutor">
-      <h1>Browse Tutor f</h1>
+      <h1 style={{color: 'red'}}>Browse Tutor f</h1>
       <ul className="tutor-list">
         { renderTutors() }
       </ul>
@@ -41,7 +42,7 @@ const BrowseTutor = props => {
 };
 
 const mapToProps = state => ({
-  tutor: state.tutor
+  tutor: sort(state.tutor)
 });
 
 export default connect(mapToProps)(BrowseTutor);
