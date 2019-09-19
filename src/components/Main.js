@@ -8,7 +8,6 @@ class MainApp extends Component {
     super(props);
 
     const requestedURL = props.context || false;
-    console.log(`context: ${JSON.stringify(requestedURL)}`)
     const isServer = props.staticContext ? props.staticContext.isServer : false
 
     this.state = {
@@ -18,7 +17,6 @@ class MainApp extends Component {
   }
   render() {
     // Remember return statement
-    console.log(`isServer: ${this.state.isServer}`)
     return (
       <div className="MainApp">
         <h1>From Teehee</h1>

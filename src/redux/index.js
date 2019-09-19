@@ -37,7 +37,11 @@ const tutorReducer = (state = tutorDefaultState, action) => {
         ...state,
         dummySample,
       ];
+    case "fill":
+      return action.initialData
+
     default:
+      // console.log('calling default action.type')
       return state;
   }
 };

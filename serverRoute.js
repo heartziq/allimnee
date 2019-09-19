@@ -15,6 +15,10 @@ module.exports = {
         const { cssData, htmlData, initialState } = serverRender(request, {
           count: 100
         });
+
+        console.log(
+          `serverRoute > initialState: ${JSON.stringify(initialState)}`
+        );
         return h.view("index", {
           pageTitle: "home",
           cssData,
@@ -29,15 +33,13 @@ module.exports = {
       method: "GET",
       path: "/browse",
       handler: async (request, h) => {
+        // getting user param query (backend)
         const qParam = request.query.id ? `?id=${request.query.id}` : ``;
         const uri = `http://localhost:3000/api/tutor${qParam}`;
-        console.log(`uri: ${uri}`);
+
         // fetch from api
         const res = await fetch(uri);
         const dataObj = await res.json();
-
-        // getting user param query (backend)
-        console.log(`[Server]: ${JSON.stringify(request.query)}`);
 
         const state = { tutor: dataObj };
         const { cssData, htmlData, initialState } = serverRender(
@@ -62,7 +64,6 @@ module.exports = {
         const _id = request.query.id
           ? { _id: parseInt(request.query.id, 10) }
           : {};
-        console.log(`api/tutor _id ${JSON.stringify(_id)}`);
 
         const qResult = await findAllTutor(_id);
         return reply.response(qResult).code(200);

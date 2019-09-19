@@ -18,7 +18,7 @@ export default function MyButton({increaseCounter}) {
   return (
     <div>
       <Button onClick={() => increaseCounter()} variant="contained" color="primary" className={classes.button}>
-        Primary
+        add
       </Button>
     </div>
   );

@@ -44,7 +44,6 @@ const init = async () => {
     path: "/postit",
     handler: function(request, h) {
       //bla bla bla post, mongo etc
-      console.log("post attempt...");
       const j = {
         data: "ffff"
       };
@@ -54,8 +53,6 @@ const init = async () => {
         k: "ahaha"
       };
 
-      console.log(g);
-      // console.log(req)
       return h.response(request.payload)
 
       // return h.response({ ...request.payload, greetings: "thank you" });
