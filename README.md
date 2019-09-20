@@ -5,9 +5,10 @@
   - [ ] search tutor
   - [ ] filter tutor
   - [ ] finalize BrowseTutor UI (ver: MVP)
-- [ ] /BrowseJob
-- [ ] /login
-- [ ] /register
+- [ ] clean up - organise folder structure
+- [ ] /BrowseJob (may replicate above design)
+- [ ] /login - Proper UI (Simple)
+- [ ] /register -  Proper UI (Simple)
 
 ## Bugs:
 
