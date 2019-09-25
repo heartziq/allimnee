@@ -16,9 +16,6 @@ module.exports = {
           count: 100
         });
 
-        console.log(
-          `serverRoute > initialState: ${JSON.stringify(initialState)}`
-        );
         return h.view("index", {
           pageTitle: "home",
           cssData,
@@ -42,6 +39,7 @@ module.exports = {
         const dataObj = await res.json();
 
         const state = { tutor: dataObj };
+
         const { cssData, htmlData, initialState } = serverRender(
           request,
           state

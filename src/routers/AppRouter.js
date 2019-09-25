@@ -13,32 +13,6 @@ import App from "../components/App";
 let state = window.__STATE__;
 delete window.__STATE__;
 
-const fetchInitialTutorState = async () => {
-  const result = await fetch("/api/tutor");
-  const tutorList = await result.json();
-  
-
-  const newState = {...state, tutor: tutorList};
-
-  console.log(`state (FE): ${JSON.stringify(state)}`)
-
-  return newState;
-};
-
-console.log(`AppRouter > state: ${JSON.stringify(state.tutor.length < 1)}`);
-if (state.tutor.length < 1) {
-  console.log("state.tutor is [], calling api/tutor...");
-  // fetch("/api/tutor")
-  //   .then(result => result.json())
-  //   .then(data => {
-  //     // console.log(`data: ${JSON.stringify(data)}`);
-  //     state = data;
-  //     console.log(`state: ${JSON.stringify(state)}`);
-  //   })
-  //   .catch(err => console.error(err.stack));
-  // state = (async () => await fetchInitialTutorState())();
-}
-
 // initialize store (Client Side)
 const store = ConfigStore(state);
 

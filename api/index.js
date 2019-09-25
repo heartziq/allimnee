@@ -8,7 +8,6 @@ const myMongo = new MongoClient("mongodb://localhost:27017/test", {
 
 let conn;
 myMongo.connect(async (err, result) => {
-  console.log(`err: ${JSON.stringify(err == null)}`)
   assert.strictEqual(err, null);
   conn = await result.db("test").collection("tutor");
 });
