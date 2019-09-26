@@ -3,8 +3,8 @@ import qs from "query-string";
 import { connect } from "react-redux";
 import fetch from "isomorphic-fetch";
 import { sort } from "../redux/selectors";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+
+import Filter from "../components/Filter";
 
 class BrowseTutor extends React.Component {
   constructor(props) {
@@ -13,28 +13,7 @@ class BrowseTutor extends React.Component {
     this.state = {
       textInput: ""
     };
-
-    this.classes = this.useStyles();
   }
-
-  useStyles = () =>
-    makeStyles(theme => ({
-      container: {
-        display: "flex",
-        flexWrap: "wrap"
-      },
-      textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200
-      },
-      dense: {
-        marginTop: 19
-      },
-      menu: {
-        width: 200
-      }
-    }));
 
   fetchInitialTutorState = async () => {
     const result = await fetch("/api/tutor");
@@ -67,41 +46,7 @@ class BrowseTutor extends React.Component {
     return (
       <div className="BrowseTutor">
         <h1 style={{ color: "red" }}>Browse Tutor</h1>
-        <form className={this.classes.container} noValidate autoComplete="off">
-          <TextField
-            id="standard-full-width"
-            label="Label"
-            style={{ margin: 8 }}
-            placeholder="Search tutor"
-            helperText="Full width!"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={e =>
-              this.props.dispatch({ type: "update", name: e.target.value })
-            }
-          />
-          <TextField
-            id="outlined-number"
-            label="Number"
-            value={this.props.filter.star}
-            onChange={e =>
-              this.props.dispatch({
-                type: "changeStar",
-                star: parseInt(e.target.value, 10)
-              })
-            }
-            type="number"
-            className={this.classes.textField}
-            InputLabelProps={{
-              shrink: true
-            }}
-            margin="normal"
-            variant="outlined"
-          />
-        </form>
+        <Filter />
         <ul className="tutor-list">{this.renderTutors()}</ul>
         <form onSubmit={this.handleSubmit}>
           <input
