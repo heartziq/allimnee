@@ -1,29 +1,50 @@
-import React, { Component } from "react";
-import fetch from "isomorphic-fetch";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
-    this.state = {
-      data: ""
-    };
-  }
-  componentDidMount() {
-    fetch("/test")
-      .then(res => res.json())
-      .then(({ data }) => {
-        this.setState(() => ({ data }));
-        return null;
-      })
-      .catch(err => console.error(err.stack));
-  }
+export default function Subject() {
+  const classes = useStyles();
+  const [state, setState] = React.useState('');
 
-  render() {
-    return (
-      <div>
-        <h1>{this.state.data}</h1>
-      </div>
-    );
-  }
+  const handleChange = event => {
+    setState(event.target.value);
+  };
+
+  return (
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="name-native-error">Subject</InputLabel>
+        <NativeSelect
+          value={state}
+          onChange={handleChange}
+          name="name"
+          inputProps={{
+            id: 'name-native-error',
+          }}
+        >
+          <option value="" />
+          <optgroup label="Maths">
+            <option value={1}>A Maths</option>
+            <option value={2}>E Maths</option>
+            <option value={3}>C Maths</option>
+          </optgroup>
+          <optgroup label="Science">
+            <option value={4}>Physics</option>
+            <option value={5}>Chemistry</option>
+            <option value={6}>Biology</option>
+          </optgroup>
+        </NativeSelect>
+      </FormControl>
+  );
 }

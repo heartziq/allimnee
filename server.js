@@ -2,6 +2,7 @@
 const Hapi = require("@hapi/hapi");
 const Path = require("path");
 const myPlugin = require("./serverRoute");
+const { logStarts } = require("./config");
 
 const init = async () => {
   const server = Hapi.server({
@@ -53,7 +54,7 @@ const init = async () => {
         k: "ahaha"
       };
 
-      return h.response(request.payload)
+      return h.response(request.payload);
 
       // return h.response({ ...request.payload, greetings: "thank you" });
       // return h.redirect('/')
@@ -61,7 +62,8 @@ const init = async () => {
   });
 
   await server.start();
-  console.log("server running on %s", server.info.uri);
+  logStarts(`server running on ${server.info.uri}`);
+  // console.log("server running on %s", server.info.uri);
 };
 
 process.on("unhandledRejection", err => {

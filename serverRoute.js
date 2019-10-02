@@ -67,5 +67,21 @@ module.exports = {
         return reply.response(qResult).code(200);
       }
     });
+
+    // /test
+    server.route({
+      method: "GET",
+      path: "/test",
+      handler: function(request, h) {
+        const { cssData, htmlData, initialState } = serverRender(request, {});
+
+        return h.view("index", {
+          pageTitle: "test",
+          cssData,
+          htmlData,
+          initialState
+        });
+      }
+    });
   }
 };

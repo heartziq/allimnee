@@ -2,8 +2,9 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import Level from "./Level";
+import Subject from './Subject';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -29,13 +30,15 @@ const Filter = props => {
     return `${value}°C`;
   }
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+    <form
+      noValidate
+      autoComplete="off"
+      style={{ margin: 8 }}
+    >
       <TextField
         id="standard-full-width"
-        label="Label"
-        style={{ margin: 8 }}
-        placeholder="Search tutor"
-        helperText="Full width!"
+        label="Name"
+        placeholder="Search tutor..."
         fullWidth
         margin="normal"
         InputLabelProps={{
@@ -43,9 +46,8 @@ const Filter = props => {
         }}
         onChange={e => props.dispatch({ type: "update", name: e.target.value })}
       />
-      <Typography id="discrete-slider" gutterBottom>
-        Temperature
-      </Typography>
+      <Subject />
+      <Level />
       <Slider
         defaultValue={props.filter.star}
         getAriaValueText={valuetext}
