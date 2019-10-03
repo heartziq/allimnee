@@ -40,9 +40,6 @@ export default function ButtonAppBar() {
             </NavLink>
           </Typography>
           <Button color="inherit">Login</Button>
-          <NavLink to="/test" color="inherit" className={classes.navLink}>
-            Test
-          </NavLink>
           <BrowseLink />
         </Toolbar>
       </AppBar>
