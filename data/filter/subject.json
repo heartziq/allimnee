@@ -1,0 +1,12 @@
+{
+  "maths": [
+    { "value": 1, "title": "A Maths" },
+    { "value": 2, "title": "E Maths" },
+    { "value": 3, "title": "C Maths" }
+  ],
+  "science": [
+    { "value": 4, "title": "Physics" },
+    { "value": 5, "title": "Chemistry" },
+    { "value": 6, "title": "Biology" }
+  ]
+}

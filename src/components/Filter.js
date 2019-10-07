@@ -8,6 +8,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import fetch from 'isomorphic-fetch';
 
 import Level from "./Level";
 import DropDownSelect from "./DropDownSelect";
@@ -33,10 +34,53 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const getAllSubjects = async () => {
+  const result = await fetch('/api/subject');
+
+  return result;
+}
+
 const Filter = props => {
   const classes = useStyles();
 
   const [gender, setGender] = React.useState("female");
+  
+  // data
+  // const subject = {
+  //   maths: [
+  //     { value: 1, title: "A Maths" },
+  //     { value: 2, title: "E Maths" },
+  //     { value: 3, title: "C Maths" }
+  //   ],
+  //   science: [
+  //     { value: 4, title: "Physics" },
+  //     { value: 5, title: "Chemistry" },
+  //     { value: 6, title: "Biology" }
+  //   ]
+  // };
+
+  // make use of Hook + state to populate this data
+  const subject = getAllSubjects().then()
+  
+
+  const areaLocation = {
+    north: [
+      { value: 1, title: "Yishun" },
+      { value: 2, title: "Sengkang" },
+      { value: 3, title: "Compassvale" }
+    ],
+    central: [
+      { value: 4, title: "Queensway" },
+      { value: 5, title: "Orchard" },
+      { value: 7, title: "Marina Boulevard" },
+      { value: 6, title: "Raffles City" }
+    ],
+    west: [
+      { value: 8, title: "Jurong" },
+      { value: 9, title: "Choa Chu Kang" },
+      { value: 10, title: "Bukit Gombak" }
+    ]
+  };
 
   const handleRadioChange = event => {
     const value = event.target.value;
@@ -62,40 +106,12 @@ const Filter = props => {
       <div className={classes.divider} />
       <DropDownSelect
         title={"Subject"}
-        data={{
-          maths: [
-            { value: 1, title: "A Maths" },
-            { value: 2, title: "E Maths" },
-            { value: 3, title: "C Maths" }
-          ],
-          science: [
-            { value: 4, title: "Physics" },
-            { value: 5, title: "Chemistry" },
-            { value: 6, title: "Chemistry" }
-          ]
-        }}
+        data={subject}
       />
       <div className={classes.divider} />
       <DropDownSelect
         title={"Area"}
-        data={{
-          north: [
-            { value: 1, title: "Yishun" },
-            { value: 2, title: "Sengkang" },
-            { value: 3, title: "Compassvale" }
-          ],
-          central: [
-            { value: 4, title: "Queensway" },
-            { value: 5, title: "Orchard" },
-            { value: 7, title: "Marina Boulevard" },
-            { value: 6, title: "Raffles City" }
-          ],
-          west: [
-            { value: 8, title: "Jurong" },
-            { value: 9, title: "Choa Chu Kang" },
-            { value: 10, title: "Bukit Gombak" }
-          ]
-        }}
+        data={areaLocation}
       />
       <Level />
       <div className={classes.divider} />

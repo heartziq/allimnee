@@ -2,10 +2,10 @@ import React from "react";
 import qs from "query-string";
 import { connect } from "react-redux";
 import fetch from "isomorphic-fetch";
-import { sort } from "../redux/selectors";
-import Filter from "../components/Filter";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { sort } from "../redux/selectors";
+import Filter from "../components/Filter";
 import DrawerFilter from "../components/DrawerFilter";
 
 class BrowseTutor extends React.Component {
@@ -57,13 +57,7 @@ class BrowseTutor extends React.Component {
 
   render() {
     // grab user query param
-    const userQuery = qs.parse(this.props.location.search);
-
-    const styles = {
-      paper: {
-        width: "40vw"
-      }
-    };
+    // const userQuery = qs.parse(this.props.location.search);
 
     return (
       <div className="BrowseTutor">

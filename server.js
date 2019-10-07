@@ -1,7 +1,7 @@
 "use strict";
 const Hapi = require("@hapi/hapi");
 const Path = require("path");
-const myPlugin = require("./serverRoute");
+const myPlugin = require("./plugins/serverRoute");
 const { logStarts } = require("./config");
 
 const init = async () => {
