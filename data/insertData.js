@@ -14,37 +14,45 @@ const subjects = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "filter", "subject.json"), "utf-8")
 );
 
+const area = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "filter", "area.json"), "utf-8")
+);
+
 // initiate Mongo Connection
 const myMongo = new MongoClient(mongodbUri, {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
 
-myMongo.connect((err, result) => {
+myMongo.connect(async (err, result) => {
   assert.strictEqual(err, null);
-  result
-    .db("test")
-    .collection("tutor")
-    .insertMany(tutors)
-    .then(res => {
-      const msg = `row(s) inserted: ${res.insertedCount}`;
-      console.info(msg);
+  try {
+    // insert tutors
+    const res = await result
+      .db("test")
+      .collection("tutor")
+      .insertMany(tutors);
 
-      // close DB connection
-      return result.close();
-    })
-    .catch(error => console.error(error.stack));
-});
+    console.info(`row(s) inserted: ${res.insertedCount}`);
 
-myMongo.connect((err, result) => {
-  assert.strictEqual(err, null);
-  result
-    .db("test")
-    .collection("subject")
-    .insertOne(subjects)
-    .then(() => {
-      console.log(`successfully inserted!`);
-      return result.close();
-    })
-    .catch(err => console.error(err.stack));
+    // insert subjects
+    await result
+      .db("test")
+      .collection("subject")
+      .insertOne(subjects);
+
+    console.info(`subject successfully inserted!`);
+
+    // insert area
+    await result
+      .db("test")
+      .collection("area")
+      .insertOne(area);
+
+    console.info(`area successfully inserted!`);
+
+    await result.close();
+  } catch (err) {
+    console.error(err);
+  }
 });

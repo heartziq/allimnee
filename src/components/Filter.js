@@ -8,7 +8,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import fetch from 'isomorphic-fetch';
+import fetch from "isomorphic-fetch";
 
 import Level from "./Level";
 import DropDownSelect from "./DropDownSelect";
@@ -34,34 +34,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const getAllSubjects = async () => {
-  const result = await fetch('/api/subject');
-
-  return result;
-}
-
 const Filter = props => {
   const classes = useStyles();
 
   const [gender, setGender] = React.useState("female");
-  
-  // data
-  // const subject = {
-  //   maths: [
-  //     { value: 1, title: "A Maths" },
-  //     { value: 2, title: "E Maths" },
-  //     { value: 3, title: "C Maths" }
-  //   ],
-  //   science: [
-  //     { value: 4, title: "Physics" },
-  //     { value: 5, title: "Chemistry" },
-  //     { value: 6, title: "Biology" }
-  //   ]
-  // };
+  const [filter, setFilter] = React.useState({});
 
-  // make use of Hook + state to populate this data
-  const subject = getAllSubjects().then()
-  
+  // state.filter = {area: {}, subject: {}}
+  const getSubsAndArea = async () => {
+    const result = await fetch("/api/subject");
+    const response = await result.json();
+    setSubject(response);
+  };
+
+  React.useEffect(() => {
+    getSubsAndArea();
+  }, []);
 
   const areaLocation = {
     north: [
@@ -104,15 +92,9 @@ const Filter = props => {
         onChange={e => props.dispatch({ type: "update", name: e.target.value })}
       />
       <div className={classes.divider} />
-      <DropDownSelect
-        title={"Subject"}
-        data={subject}
-      />
+      <DropDownSelect title={"Subject"} data={subject} />
       <div className={classes.divider} />
-      <DropDownSelect
-        title={"Area"}
-        data={areaLocation}
-      />
+      <DropDownSelect title={"Area"} data={areaLocation} />
       <Level />
       <div className={classes.divider} />
       <FormControl component="fieldset">

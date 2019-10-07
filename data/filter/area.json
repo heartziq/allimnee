@@ -1,0 +1,18 @@
+{
+  "north": [
+    { "value": 1, "title": "Yishun" },
+    { "value": 2, "title": "Sengkang" },
+    { "value": 3, "title": "Compassvale" }
+  ],
+  "central": [
+    { "value": 4, "title": "Queensway" },
+    { "value": 5, "title": "Orchard" },
+    { "value": 7, "title": "Marina Boulevard" },
+    { "value": 6, "title": "Raffles City" }
+  ],
+  "west": [
+    { "value": 8, "title": "Jurong" },
+    { "value": 9, "title": "Choa Chu Kang" },
+    { "value": 10, "title": "Bukit Gombak" }
+  ]
+}

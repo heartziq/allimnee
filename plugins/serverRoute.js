@@ -1,6 +1,6 @@
 import { serverRender } from "../serverRender";
 import fetch from "isomorphic-fetch";
-import { findAllTutor, getAllSubjects } from "../api";
+import { findAllTutor, getAllSubjects, getAllArea } from "../api";
 
 module.exports = {
   name: "myPlugin",
@@ -69,11 +69,20 @@ module.exports = {
 
     // /api/subject
     server.route({
-      method: 'GET',
-      path: '/api/subject',
+      method: "GET",
+      path: "/api/subject",
       handler: async function(request, reply) {
-        
         const qResult = await getAllSubjects();
+        return reply.response(qResult).code(200);
+      }
+    });
+
+    // /api/area
+    server.route({
+      method: "GET",
+      path: "/api/area",
+      handler: async function(request, reply) {
+        const qResult = await getAllArea();
         return reply.response(qResult).code(200);
       }
     });
