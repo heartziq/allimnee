@@ -38,37 +38,30 @@ const Filter = props => {
   const classes = useStyles();
 
   const [gender, setGender] = React.useState("female");
-  const [filter, setFilter] = React.useState({});
+  const [filter, setFilter] = React.useState({
+    area: [],
+    subject: []
+  });
 
   // state.filter = {area: {}, subject: {}}
   const getSubsAndArea = async () => {
-    const result = await fetch("/api/subject");
-    const response = await result.json();
-    setSubject(response);
+    // get subject
+    const subjectResponse = await fetch("/api/subject");
+    const subject = await subjectResponse.json();
+
+    // get area
+    const areaResponse = await fetch("/api/area");
+    const area = await areaResponse.json();
+
+    setFilter({
+      area,
+      subject
+    });
   };
 
   React.useEffect(() => {
     getSubsAndArea();
   }, []);
-
-  const areaLocation = {
-    north: [
-      { value: 1, title: "Yishun" },
-      { value: 2, title: "Sengkang" },
-      { value: 3, title: "Compassvale" }
-    ],
-    central: [
-      { value: 4, title: "Queensway" },
-      { value: 5, title: "Orchard" },
-      { value: 7, title: "Marina Boulevard" },
-      { value: 6, title: "Raffles City" }
-    ],
-    west: [
-      { value: 8, title: "Jurong" },
-      { value: 9, title: "Choa Chu Kang" },
-      { value: 10, title: "Bukit Gombak" }
-    ]
-  };
 
   const handleRadioChange = event => {
     const value = event.target.value;
@@ -92,9 +85,9 @@ const Filter = props => {
         onChange={e => props.dispatch({ type: "update", name: e.target.value })}
       />
       <div className={classes.divider} />
-      <DropDownSelect title={"Subject"} data={subject} />
+      <DropDownSelect title={"Subject"} data={filter.subject} />
       <div className={classes.divider} />
-      <DropDownSelect title={"Area"} data={areaLocation} />
+      <DropDownSelect title={"Area"} data={filter.area} />
       <Level />
       <div className={classes.divider} />
       <FormControl component="fieldset">
