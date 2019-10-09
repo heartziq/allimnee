@@ -14,24 +14,10 @@ import Level from "./Level";
 import DropDownSelect from "./DropDownSelect";
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  },
-  dense: {
-    marginTop: 19
-  },
-  menu: {
-    width: 200
-  },
   divider: {
     height: theme.spacing(2)
-  }
+  },
+  formContainer: { margin: 8, width: "40vw" }
 }));
 
 const Filter = props => {
@@ -39,8 +25,8 @@ const Filter = props => {
 
   const [gender, setGender] = React.useState("female");
   const [filter, setFilter] = React.useState({
-    area: [],
-    subject: []
+    area: {},
+    subject: {}
   });
 
   // state.filter = {area: {}, subject: {}}
@@ -59,6 +45,7 @@ const Filter = props => {
     });
   };
 
+  // componentDidMount
   React.useEffect(() => {
     getSubsAndArea();
   }, []);
@@ -72,7 +59,7 @@ const Filter = props => {
     return `${value}°C`;
   }
   return (
-    <form noValidate autoComplete="off" style={{ margin: 8, width: "40vw" }}>
+    <form className={classes.formContainer} noValidate autoComplete="off">
       <TextField
         id="standard-full-width"
         label="Name"
@@ -82,7 +69,10 @@ const Filter = props => {
         InputLabelProps={{
           shrink: true
         }}
-        onChange={e => props.dispatch({ type: "update", name: e.target.value })}
+        value={props.filter.tutorName}
+        onChange={e => {
+          props.dispatch({ type: "update", tutorName: e.target.value });
+        }}
       />
       <div className={classes.divider} />
       <DropDownSelect title={"Subject"} data={filter.subject} />

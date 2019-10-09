@@ -5,35 +5,29 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    fullWidth: true
-  }
+  // define styles here
 }));
 
 export default function DropDownSelect({ title, data }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [state, setState] = React.useState("");
 
-  const handleChange = event => {
-    setState(event.target.value);
-  };
+  const handleChange = event => setState(event.target.value);
 
-  const renderGroup = sampleData => {
-    return Object.keys(sampleData).map(each => {
-      return (
-        <optgroup label={each}>
-          {sampleData[each].map(e => (
-            <option value={e.value}>{e.title}</option>
-          ))}
-        </optgroup>
-      );
-    });
-  };
+  const renderGroup = sampleData =>
+    Object.keys(sampleData).map(each => (
+      <optgroup key={each} label={each}>
+        {sampleData[each].map(e => (
+          <option key={e.value} value={e.value}>
+            {e.title}
+          </option>
+        ))}
+      </optgroup>
+    ));
 
   return (
     <Box width={1}>
-      <InputLabel htmlFor="name-native-error">{title}{state}</InputLabel>
+      <InputLabel htmlFor="name-native-error">{title}</InputLabel>
       <NativeSelect
         value={state}
         onChange={handleChange}

@@ -15,9 +15,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
   title: {
     flexGrow: 1
   },
@@ -27,22 +24,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ButtonAppBar() {
+export default function Nav() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            <NavLink to="/" color="inherit" className={classes.navLink}>
-              Home
-            </NavLink>
-          </Typography>
-          <Button color="inherit">Login</Button>
-          <BrowseLink />
-        </Toolbar>
-      </AppBar>
-    </div>
+    <header>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              <NavLink to="/" color="inherit" className={classes.navLink}>
+                Home
+              </NavLink>
+            </Typography>
+            <Button color="inherit">Login</Button>
+            <BrowseLink />
+          </Toolbar>
+        </AppBar>
+      </div>
+    </header>
   );
 }

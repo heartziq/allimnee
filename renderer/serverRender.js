@@ -5,8 +5,8 @@ import { StaticRouter } from "react-router";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "react-redux";
 
-import ConfigStore from "./src/redux";
-import App from "./src/components/App";
+import ConfigStore from "../src/redux";
+import Routes from "../src/routes";
 import theme from "./theme";
 
 export const serverRender = (request, initialState = {}) => {
@@ -24,7 +24,7 @@ export const serverRender = (request, initialState = {}) => {
         <Provider store={store}>
           <CssBaseline />
           <StaticRouter location={request.url.pathname} context={context}>
-            <App />
+            <Routes />
           </StaticRouter>
         </Provider>
       </ThemeProvider>

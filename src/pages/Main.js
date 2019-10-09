@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
-import MyButton from "./MyButton";
+import MyButton from "../components/MyButton";
 import { connect } from "react-redux";
 
 class MainApp extends Component {

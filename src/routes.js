@@ -1,17 +1,19 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Main from "./Main";
-import Header from "./Header";
 import Container from "@material-ui/core/Container";
 
+// navbar...
+import Nav from "./components/Navbar";
+
 // Load Pages
-import BrowseTutor from "../pages/BrowseTutor";
-import Test from "../pages/Test";
+import BrowseTutor from "./pages/BrowseTutor";
+import Test from "./pages/Test";
+import Main from "./pages/Main";
 
 function App() {
   return (
     <div>
-      <Header />
+      <Nav />
       <Container fixed>
         <Switch>
           <Route

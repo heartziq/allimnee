@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AppRouter from "./routers/AppRouter";
-import 'babel-polyfill';
+import App from "./App";
+import "babel-polyfill";
 
-ReactDOM.hydrate(<AppRouter />, document.querySelector("#root"));
+ReactDOM.hydrate(<App />, document.querySelector("#root"));

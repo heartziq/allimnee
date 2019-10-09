@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { sort } from "../redux/selectors";
 import Filter from "../components/Filter";
-import DrawerFilter from "../components/DrawerFilter";
+import DrawerFilter from "../components/Filter/DrawerFilter";
 
 class BrowseTutor extends React.Component {
   constructor(props) {
@@ -20,12 +20,7 @@ class BrowseTutor extends React.Component {
 
     // define custom styles
     this.classes = makeStyles({
-      list: {
-        width: 250
-      },
-      fullList: {
-        width: "auto"
-      }
+      // styles here
     });
   }
 
@@ -64,13 +59,13 @@ class BrowseTutor extends React.Component {
         <DrawerFilter>
           <Filter />
         </DrawerFilter>
-        <h1 style={{ color: "red" }}>Browse Tutor</h1>
+        <h1>Browse Tutor</h1>
         <ul className="tutor-list">{this.renderTutors()}</ul>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={this.state.textInput}
-            onChange={e => this.handleKeyChange(e.target.value)}
+            onChange={({target: { value }}) => this.handleKeyChange(value)}
           />
           <button type="submit">submit</button>
         </form>

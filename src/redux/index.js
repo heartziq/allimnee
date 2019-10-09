@@ -52,7 +52,7 @@ const tutorReducer = (state = tutorDefaultState, action) => {
 const filterReducer = (state = filter, action) => {
   switch (action.type) {
     case "update":
-      return { ...state, tutorName: action.name };
+      return { ...state, tutorName: action.tutorName };
     case "changeStar":
       return { ...state, star: action.star };
     default:

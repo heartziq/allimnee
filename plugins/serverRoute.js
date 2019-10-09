@@ -1,4 +1,4 @@
-import { serverRender } from "../serverRender";
+import { serverRender } from "../renderer/serverRender";
 import fetch from "isomorphic-fetch";
 import { findAllTutor, getAllSubjects, getAllArea } from "../api";
 

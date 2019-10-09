@@ -35,7 +35,7 @@ const init = async () => {
     },
     relativeTo: __dirname,
     path: Path.resolve("views"),
-    layoutPath: Path.resolve("views", "layouts"),
+    layoutPath: Path.resolve("views", "templates"),
     layout: "layout"
   });
 

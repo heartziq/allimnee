@@ -3,11 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "react-redux";
-import fetch from "isomorphic-fetch";
 
-import theme from "../../theme";
-import ConfigStore from "../redux";
-import App from "../components/App";
+import theme from "../renderer/theme";
+import ConfigStore from "./redux";
+import Routes from "./routes";
 
 // grab initialState from window
 let state = window.__STATE__;
@@ -28,7 +27,7 @@ function AppRouter() {
       <Provider store={store}>
         <CssBaseline />
         <BrowserRouter>
-          <App />
+          <Routes />
         </BrowserRouter>
       </Provider>
     </ThemeProvider>
