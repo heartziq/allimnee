@@ -3,10 +3,12 @@ import qs from "query-string";
 import { connect } from "react-redux";
 import fetch from "isomorphic-fetch";
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
 
 import { sort } from "../redux/selectors";
 import Filter from "../components/Filter";
 import DrawerFilter from "../components/Filter/DrawerFilter";
+import TutorCard from "../components/TutorCard";
 
 class BrowseTutor extends React.Component {
   constructor(props) {
@@ -43,11 +45,13 @@ class BrowseTutor extends React.Component {
   handleKeyChange = value => this.setState(() => ({ textInput: value }));
 
   renderTutors = () => {
-    return this.props.tutor.map(e => (
-      <li key={e._id}>
-        {e.name}, {e.stars}/5
-      </li>
-    ));
+    return (
+      <Grid container direction="row" justify="center" alignItems="center">
+        {this.props.tutor.map(e => (
+          <TutorCard key={e._id} tutor={e} />
+        ))}
+      </Grid>
+    );
   };
 
   render() {
@@ -60,12 +64,13 @@ class BrowseTutor extends React.Component {
           <Filter />
         </DrawerFilter>
         <h1>Browse Tutor</h1>
-        <ul className="tutor-list">{this.renderTutors()}</ul>
+        {/* <TutorCard tutor={this.props.tutor[0]} /> */}
+        {this.renderTutors()}
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={this.state.textInput}
-            onChange={({target: { value }}) => this.handleKeyChange(value)}
+            onChange={({ target: { value } }) => this.handleKeyChange(value)}
           />
           <button type="submit">submit</button>
         </form>
