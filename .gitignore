@@ -1,5 +1,14 @@
+// FOr mAC
 node_modules
 
 .DS_Store
 
 public/bundle.js
+
+src/components/test
+
+// FOr Windows
+
+public\bundle.js
+
+src\components\test
