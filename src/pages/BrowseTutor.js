@@ -30,6 +30,7 @@ class BrowseTutor extends React.Component {
     const result = await fetch("/api/tutor");
     const tutorList = await result.json();
 
+    // populate redux state.tutor
     this.props.dispatch({ type: "fill", initialData: tutorList });
   };
 
