@@ -2,13 +2,25 @@ import React from "react";
 import qs from "query-string";
 import { connect } from "react-redux";
 import fetch from "isomorphic-fetch";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from '@material-ui/core/Grid';
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 import { sort } from "../redux/selectors";
 import Filter from "../components/Filter";
 import DrawerFilter from "../components/Filter/DrawerFilter";
 import TutorCard from "../components/TutorCard";
+
+const styles = theme => ({
+  topBar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  paper: {
+    padding: theme.spacing(1, 2)
+  }
+});
 
 class BrowseTutor extends React.Component {
   constructor(props) {
@@ -19,11 +31,6 @@ class BrowseTutor extends React.Component {
       right: false,
       value: "female"
     };
-
-    // define custom styles
-    this.classes = makeStyles({
-      // styles here
-    });
   }
 
   fetchInitialTutorState = async () => {
@@ -47,7 +54,7 @@ class BrowseTutor extends React.Component {
 
   renderTutors = () => {
     return (
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid container spacing={1} direction="row" justify="center" alignItems="center">
         {this.props.tutor.map(e => (
           <TutorCard key={e._id} tutor={e} />
         ))}
@@ -55,26 +62,27 @@ class BrowseTutor extends React.Component {
     );
   };
 
+  handleClick = event => {
+    event.preventDefault();
+    alert("You clicked a breadcrumb.");
+  };
+
   render() {
     // grab user query param
     // const userQuery = qs.parse(this.props.location.search);
-
+    // grab props injected by HOC (withStyles)
+    const { classes } = this.props;
     return (
       <div className="BrowseTutor">
-        <DrawerFilter>
-          <Filter />
-        </DrawerFilter>
-        <h1>Browse Tutor</h1>
-        {/* <TutorCard tutor={this.props.tutor[0]} /> */}
+        <div className={classes.topBar}>
+          <Typography variant="h5">Browse Tutors</Typography>
+
+          <DrawerFilter>
+            <Filter />
+          </DrawerFilter>
+        </div>
+        <hr />
         {this.renderTutors()}
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.textInput}
-            onChange={({ target: { value } }) => this.handleKeyChange(value)}
-          />
-          <button type="submit">submit</button>
-        </form>
       </div>
     );
   }
@@ -85,4 +93,4 @@ const mapToProps = state => ({
   filter: state.filter
 });
 
-export default connect(mapToProps)(BrowseTutor);
+export default connect(mapToProps)(withStyles(styles)(BrowseTutor));

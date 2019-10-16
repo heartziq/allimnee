@@ -12,3 +12,6 @@
 - [ ] /BrowseJob
 - [ ] /login - Proper UI (Simple)
 - [ ] /register -  Proper UI (Simple)
+- [ ] Changes in DB reflect FE
+- [ ] Make UI/UX responsive: tablets, mobile, large screens...
+- [ ] Include map: Geolocations, pins etc

@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     height: 140
   },
   margin: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   }
 }));
 
@@ -53,33 +53,40 @@ export default function TutorCard(props) {
   }
 
   return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Grid container justify="center" alignItems="center">
-          <Avatar
-            alt={props.tutor.name}
-            src={image}
-            className={classes.bigAvatar}
-          />
-        </Grid>
+    <Grid item>
+      <Card className={classes.card}>
         <CardContent>
-          <Typography align="center" variant="h6" gutterBottom>
-            {props.tutor.name}
-          </Typography>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </div>
+          <Grid container justify="center" alignItems="center">
+            <Avatar
+              alt={props.tutor.name}
+              src={image}
+              className={classes.bigAvatar}
+            />
+          </Grid>
+          <CardContent>
+            <Typography align="center" variant="h6" gutterBottom>
+              {props.tutor.name}
+            </Typography>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <StarIcon />
+              <StarIcon />
+              <StarIcon />
+              <StarIcon />
+              <StarIcon />
+            </div>
+          </CardContent>
         </CardContent>
-      </CardContent>
-      <CardActions>
-        <Button fullWidth variant="contained" style={{backgroundColor: 'green'}} className={classes.margin}>
-          Email
-        </Button>
-      </CardActions>
-    </Card>
+        <CardActions>
+          <Button
+            fullWidth
+            variant="contained"
+            style={{ backgroundColor: "green" }}
+            className={classes.margin}
+          >
+            Email
+          </Button>
+        </CardActions>
+      </Card>
+    </Grid>
   );
 }
