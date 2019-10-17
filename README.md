@@ -1,5 +1,9 @@
 # To-Do:
 
+
+
+- [x] Change menu-drop-down position: make it at the bottom
+
 - [ ] /BrowseTutor
   - [ ] filter tutor
     - [x] filter search inconsistency
@@ -7,11 +11,13 @@
   - [ ] BrowseTutor UI (ver: MVP)
     - [ ] Show up all the other important data: {area, subject, level, gender etc}
     - [ ] Refine UI/UX
-      - [ ] figure out better design for 'Browse Tutor' headings (use breadcrumbs instead?)
-      - [ ] move the filter button
+      - [x] figure out better design for 'Browse Tutor' headings (use breadcrumbs instead?)
+      - [x] move the filter button
 - [ ] /BrowseJob
 - [ ] /login - Proper UI (Simple)
 - [ ] /register -  Proper UI (Simple)
 - [ ] Changes in DB reflect FE
-- [ ] Make UI/UX responsive: tablets, mobile, large screens...
+- [ ] Refine/Improve UI/UX:
+  - [ ] Make responsive across range of devices
+  - [ ] 
 - [ ] Include map: Geolocations, pins etc
