@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 
@@ -12,20 +12,18 @@ import Main from "./pages/Main";
 
 function App() {
   return (
-    <div>
+    <Fragment>
       <Nav />
-      <Container fixed>
-        <Switch>
-          <Route
-            path="/"
-            render={props => <Main {...props} initialData={"Client"} />}
-            exact={true}
-          />
-          <Route path="/browse" render={props => <BrowseTutor {...props} />} />
-          <Route path="/test" render={props => <Test {...props} />} />
-        </Switch>
-      </Container>
-    </div>
+      <Switch>
+        <Route
+          path="/"
+          render={props => <Main {...props} initialData={"Client"} />}
+          exact={true}
+        />
+        <Route path="/browse" render={props => <BrowseTutor {...props} />} />
+        <Route path="/test" render={props => <Test {...props} />} />
+      </Switch>
+    </Fragment>
   );
 }
 

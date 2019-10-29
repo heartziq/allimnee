@@ -9,14 +9,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Chip from "@material-ui/core/Chip";
 
 const suggestions = [
-  { label: "Primary (Lower)" },
-  { label: "Primary (Upper)" },
-  { label: "Secondary (Lower)" },
-  { label: "Secondary (Upper)" },
-  { label: "Poly" },
-  { label: "JC1" },
-  { label: "JC2" },
-  { label: "Others" }
+  { label: "Chemistry" },
+  { label: "Physics" },
+  { label: "Mathematics" },
+  { label: "English Language" },
+  { label: "Literature" },
+  { label: "Mandarin" },
+  { label: "Science" },
+  { label: "Social Studies" },
+  { label: "History" },
+  { label: "Music" },
 ];
 
 function renderInput(inputProps) {
@@ -163,8 +165,8 @@ function DownshiftMultiple(props) {
             {renderInput({
               fullWidth: true,
               classes,
-              placeholder: "Select Level...",
-              label: "Level",
+              placeholder: "Select Subjects...",
+              label: "Subjects",
               InputLabelProps: getLabelProps(),
               InputProps: {
                 startAdornment: selectedItem.map(item => (

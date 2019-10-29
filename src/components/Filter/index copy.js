@@ -4,8 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import Slider from "@material-ui/core/Slider";
 import Radio from "@material-ui/core/Radio";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -14,7 +12,6 @@ import fetch from "isomorphic-fetch";
 import InputLabel from "@material-ui/core/InputLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
 
 import DropDownSelect from "./DropDownSelect";
 
@@ -22,20 +19,16 @@ const useStyles = makeStyles(theme => ({
   divider: {
     height: theme.spacing(2)
   },
-  formContainer: { margin: 8 },
-  formControl: {
-    margin: theme.spacing(3)
-  }
+  formContainer: { margin: 8 }
 }));
 
 const Filter = props => {
   const classes = useStyles();
 
   const [state, setState] = React.useState("");
+
   const handleChange = event => setState(event.target.value);
 
-  const [when, setWhen] = React.useState('');
-  const handleWhen = event => setWhen(event.target.value);
 
   const [gender, setGender] = React.useState("female");
   const [filter, setFilter] = React.useState({
@@ -91,101 +84,30 @@ const Filter = props => {
       <div className={classes.divider} />
       {/* <DropDownSelect title={"Subject"} data={filter.subject} /> */}
       <Box width={1}>
-        <InputLabel shrink htmlFor="name-native-error">Level: {state}</InputLabel>
+        <InputLabel htmlFor="name-native-error">Level: {state}</InputLabel>
         <NativeSelect
           value={state}
           onChange={handleChange}
-          name={"Level"}
+          name={'Level'}
           inputProps={{
             id: "name-native-error"
           }}
         >
           <option value="" />
           <option key={1} value={1}>
-            {"Primary 1"}
+            {'Primary 1'}
           </option>
           <option key={2} value={2}>
-            {"Primary 2"}
+            {'Primary 2'}
           </option>
           <option key={3} value={3}>
-            {"Primary 3"}
+            {'Primary 3'}
           </option>
         </NativeSelect>
       </Box>
       <div className={classes.divider} />
       <DropDownSelect title={"Area"} data={filter.area} />
       {/* <Level /> */}
-      <div className={classes.divider} />
-      <Box width={1}>
-        <InputLabel shrink htmlFor="name-native-error">Day:</InputLabel>
-        <NativeSelect
-          value={state}
-          onChange={handleChange}
-          name={"Day"}
-          inputProps={{
-            id: "name-native-error"
-          }}
-        >
-          <option value="" />
-          <option key={1} value={1}>
-            {"Mon"}
-          </option>
-          <option key={2} value={2}>
-            {"Tue"}
-          </option>
-          <option key={3} value={3}>
-            {"Wed"}
-          </option>
-        </NativeSelect>
-      </Box>
-      <div className={classes.divider} />
-      <Grid container>
-        <Grid item>
-          {" "}
-          <RadioGroup
-            aria-label="when"
-            name="when1"
-            value={when}
-            onChange={handleWhen}
-          >
-            <FormLabel component="label">When</FormLabel>
-            <FormControlLabel
-              value="before"
-              control={
-                <Radio
-                  icon={<RadioButtonUncheckedIcon fontSize="small" />}
-                  checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-                />
-              }
-              label="before"
-            />
-            <FormControlLabel
-              value="after"
-              control={
-                <Radio
-                  icon={<RadioButtonUncheckedIcon fontSize="small" />}
-                  checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-                />
-              }
-              label="after"
-            />
-          </RadioGroup>
-        </Grid>
-        <Grid item>
-          <TextField
-            id="time"
-            label="Time"
-            type="time"
-            defaultValue="07:30"
-            InputLabelProps={{
-              shrink: true
-            }}
-            inputProps={{
-              step: 300 // 5 min
-            }}
-          />
-        </Grid>
-      </Grid>
       <div className={classes.divider} />
       <FormControl component="fieldset">
         <FormLabel component="legend">Gender:</FormLabel>
@@ -209,7 +131,6 @@ const Filter = props => {
             labelPlacement="end"
           />
         </RadioGroup>
-        <div className={classes.divider} />
         <FormLabel component="legend">Ratings:</FormLabel>
         <Slider
           defaultValue={props.filter.star}

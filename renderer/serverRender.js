@@ -14,8 +14,12 @@ export const serverRender = (request, initialState = {}) => {
   const store = ConfigStore(initialState);
 
   const sheets = new ServerStyleSheets();
+
+  // can be retrieved at the FE
+  // ...props.staticContext
   const context = {
-    isServer: true
+    isServer: true,
+    greetings: 'Mellloo',
   };
 
   const html = ReactDOMServer.renderToString(

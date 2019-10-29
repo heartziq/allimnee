@@ -27,7 +27,7 @@ export default function DropDownSelect({ title, data }) {
 
   return (
     <Box width={1}>
-      <InputLabel htmlFor="name-native-error">{title}</InputLabel>
+      <InputLabel shrink htmlFor="name-native-error">{title}</InputLabel>
       <NativeSelect
         value={state}
         onChange={handleChange}
