@@ -52,6 +52,8 @@ export default function TutorCard(props) {
     setImage(medium);
   }
 
+  // console.log(`tutor img: ${image}`)
+
   return (
     <Grid item>
       <Card className={classes.card}>

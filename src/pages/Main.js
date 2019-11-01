@@ -11,9 +11,13 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import TodayIcon from "@material-ui/icons/Today";
 
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
+
+// helper
+import { getRandomImage } from "../helper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: "inline"
   },
   paperStyles: {
-    height: "100vh"
+    height: "88vh"
   },
   divider: {
     height: theme.spacing(2)
@@ -33,6 +37,13 @@ const useStyles = makeStyles(theme => ({
 
 function MainApp() {
   const classes = useStyles();
+
+  const [img, setImg] = React.useState('');
+  React.useEffect(async () => {
+    const imgSrc = await getRandomImage();
+
+    setImg(imgSrc)
+  }, [])
   return (
     <Grid container>
       <Grid item md={2}>
@@ -46,47 +57,26 @@ function MainApp() {
           <List className={classes.root}>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src={img}
+                />
               </ListItemAvatar>
               <ListItemText
-                primary="Brunch this weekend?"
+                primary={
+                  <Typography variant="h6">Mathematics, Primary</Typography>
+                }
                 secondary={
                   <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Ali Connors
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
+                    <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
+                    <span style={{ verticalAlign: "text-bottom" }}>
+                      {"Sat, 11:00am - 1:00pm"}
+                    </span>
                   </React.Fragment>
                 }
               />
             </ListItem>
             <Divider variant="inset" component="li" />
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Brunch this weekend?"
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Ali Connors
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
           </List>
         </Container>
       </Grid>

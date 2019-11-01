@@ -148,7 +148,7 @@ const Filter = props => {
             value={when}
             onChange={handleWhen}
           >
-            <FormLabel component="label">When</FormLabel>
+            <FormLabel component="label" style={{fontSize: 13}}>When</FormLabel>
             <FormControlLabel
               value="before"
               control={
