@@ -69,7 +69,9 @@ class BrowseTutor extends React.Component {
 
   render() {
     // grab user query param
-    // const userQuery = qs.parse(this.props.location.search);
+    const userQuery = qs.parse(this.props.location.search);
+    console.log(`userQuery: ${JSON.stringify(userQuery)}`)
+
     // grab props injected by HOC (withStyles)
     const { classes } = this.props;
     return (

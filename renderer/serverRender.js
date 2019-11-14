@@ -22,6 +22,9 @@ export const serverRender = (request, initialState = {}) => {
     greetings: 'Mellloo',
   };
 
+  if (context.url)
+    console.log('redirect has occured')
+
   const html = ReactDOMServer.renderToString(
     sheets.collect(
       <ThemeProvider theme={theme}>

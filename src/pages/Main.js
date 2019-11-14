@@ -12,6 +12,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import TodayIcon from "@material-ui/icons/Today";
+import RoomIcon from '@material-ui/icons/Room';
+import { NavLink } from "react-router-dom";
 
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
@@ -24,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     backgroundColor: theme.palette.background.paper
   },
+  navLink: {
+    textDecoration: "none",
+    color: "black"
+  },
   inline: {
     display: "inline"
   },
@@ -35,15 +41,60 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MainApp() {
+function MainApp(props) {
   const classes = useStyles();
 
-  const [img, setImg] = React.useState('');
-  React.useEffect(async () => {
-    const imgSrc = await getRandomImage();
+  const [img, setImg] = React.useState("");
 
-    setImg(imgSrc)
-  }, [])
+  // React.useEffect(async () => {
+  //   const imgSrc = await getRandomImage();
+  //   console.log(`imgSrc: ${imgSrc}`)
+  //   setImg(imgSrc)
+  // }, [])
+
+  function renderClasses() {
+    return (
+      <React.Fragment>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src={img} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={
+              <NavLink to="/browse" className={classes.navLink}>
+                <Typography variant="h6">Mathematics, Primary</Typography>
+              </NavLink>
+            }
+            secondary={
+              <React.Fragment>
+                <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
+                <span style={{ verticalAlign: "text-bottom" }}>
+                  {"Sat, 11:00am - 1:00pm"}
+                </span>
+              </React.Fragment>
+            }
+          />
+          <ListItemText
+            secondary={
+              <React.Fragment>
+                <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
+                {"494 Tampines Ave 3"}
+              </React.Fragment>
+            }
+          />
+          <ListItemText
+            secondary={
+              <Typography variant="subtitle1" align="center">
+                John Cristo
+              </Typography>
+            }
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+      </React.Fragment>
+    );
+  }
+
   return (
     <Grid container>
       <Grid item md={2}>
@@ -54,30 +105,7 @@ function MainApp() {
       <Grid item md={10}>
         <Container fixed>
           <Level />
-          <List className={classes.root}>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={img}
-                />
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <Typography variant="h6">Mathematics, Primary</Typography>
-                }
-                secondary={
-                  <React.Fragment>
-                    <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
-                    <span style={{ verticalAlign: "text-bottom" }}>
-                      {"Sat, 11:00am - 1:00pm"}
-                    </span>
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </List>
+          <List className={classes.root}>{renderClasses()}</List>
         </Container>
       </Grid>
     </Grid>
