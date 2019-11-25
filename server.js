@@ -1,69 +1,66 @@
 "use strict";
-const Hapi = require("@hapi/hapi");
 const Path = require("path");
-const myPlugin = require("./plugins/serverRoute");
+const Hapi = require("@hapi/hapi");
+
+/* TEMPLATE RENDERING */
+const Vision = require("@hapi/vision");
+const ejs = require("ejs");
+
+/* STATIC FILES */
+const Inert = require("@hapi/inert");
+
+/* LOAD CUSTOM PLUGIN(S) */
+const RouteHandler = require("./plugins/serverRoute");
+const EndPointAPI = require("./plugins/endpoints.js");
+
+/* LOAD CONFIG FILE(S) */
 const { logStarts } = require("./config");
 
 const init = async () => {
-  const server = Hapi.server({
+  // MAIN SERVER CONFIG
+  const serverConfig = {
     host: "localhost",
     port: 3000,
     routes: {
       files: {
-        relativeTo: Path.join(__dirname, "public")
+        relativeTo: Path.resolve("public")
       }
     }
-  });
+  };
+
+  const server = Hapi.server(serverConfig);
 
   // register plugins
-  await server.register([require("inert"), require("@hapi/vision"), myPlugin]);
+  await server.register([Inert, Vision, RouteHandler, EndPointAPI]);
 
-  // serving static files
-  server.route({
+  // ...serve static...
+  const staticConfig = {
     method: "GET",
-    path: "/{filename}",
+    path: "/{param*}",
     handler: {
-      file: function(request) {
-        return request.params.filename;
+      directory: {
+        path: ".",
+        redirectToSlash: true,
+        index: true
       }
     }
-  });
+  };
+  server.route(staticConfig);
 
-  server.views({
+  // ..config view engine...
+  const viewConfig = {
     engines: {
-      ejs: require("ejs")
+      ejs
     },
     relativeTo: __dirname,
     path: Path.resolve("views"),
     layoutPath: Path.resolve("views", "templates"),
     layout: "layout"
-  });
-
-  // POST example
-  server.route({
-    method: "POST",
-    path: "/postit",
-    handler: function(request, h) {
-      //bla bla bla post, mongo etc
-      const j = {
-        data: "ffff"
-      };
-
-      const g = {
-        ...j,
-        k: "ahaha"
-      };
-
-      return h.response(request.payload);
-
-      // return h.response({ ...request.payload, greetings: "thank you" });
-      // return h.redirect('/')
-    }
-  });
+  };
+  server.views(viewConfig);
 
   await server.start();
   logStarts(`server running on ${server.info.uri}`);
-  // console.log("server running on %s", server.info.uri);
 };
 
 process.on("unhandledRejection", err => {
