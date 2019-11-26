@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: ["babel-polyfill", "./src/index.js"],
+  entry: ["core-js/stable", "regenerator-runtime/runtime", "./src/index.js"],
   output: {
     path: path.join(__dirname, "public"),
     filename: "bundle.js"
@@ -9,9 +9,11 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: "babel-loader",
         test: /\.js$/,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
       }
     ]
   },
