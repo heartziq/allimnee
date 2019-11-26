@@ -9,6 +9,7 @@
 - [ ] wireframe
 - [ ] deploy to heroku
 - [ ] Config and Organise
+  - [ ] simply file dev scripts `yarn start & dev`
   - [x] upgrade deprecated and outdated packages
     - [x] yarn, node etc
     - [x] babel and webpack

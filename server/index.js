@@ -11,10 +11,10 @@ const Inert = require("@hapi/inert");
 
 /* LOAD CUSTOM PLUGIN(S) */
 const RouteHandler = require("./plugins/serverRoute");
-const EndPointAPI = require("./plugins/endpoints.js");
+const EndPointAPI = require("./plugins/endpoints");
 
 /* LOAD CONFIG FILE(S) */
-const { logStarts } = require("./config");
+const { logStarts } = require("../config");
 
 const init = async () => {
   // MAIN SERVER CONFIG
@@ -53,8 +53,8 @@ const init = async () => {
       ejs
     },
     relativeTo: __dirname,
-    path: Path.resolve("views"),
-    layoutPath: Path.resolve("views", "templates"),
+    path: Path.resolve("server", "views"),
+    layoutPath: Path.resolve("server", "views", "templates"),
     layout: "layout"
   };
   server.views(viewConfig);

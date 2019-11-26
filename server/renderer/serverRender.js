@@ -5,8 +5,8 @@ import { StaticRouter } from "react-router";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "react-redux";
 
-import ConfigStore from "../src/redux";
-import Routes from "../src/routes";
+import ConfigStore from "../../src/redux";
+import Routes from "../../src/routes";
 import theme from "./theme";
 
 export const serverRender = (request, initialState = {}) => {
