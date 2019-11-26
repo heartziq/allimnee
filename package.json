@@ -5,8 +5,8 @@
   "author": "Me",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack -wd",
-    "start": "nodemon --exec babel-node server/index.js --ignore public/"
+    "build": "webpack -wd",
+    "serve": "nodemon --exec babel-node server/index.js --ignore public/"
   },
   "dependencies": {
     "@hapi/hapi": "^18.3.2",
