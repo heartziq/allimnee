@@ -1,26 +1,15 @@
 import { createStore, combineReducers } from "redux";
 import uuid from "uuid/v1";
 
-// count default layout
-const countDefaultState = 0;
+/* DEFINE DEFAULT STATE */
 
-// tutor name default layout
+// tutor list...
 const tutorDefaultState = [];
 
-// filter
+// filter tutor...
 const filter = {
   tutorName: "",
   star: 5
-};
-
-// reducer for add count
-const countReducer = (state = countDefaultState, action) => {
-  switch (action.type) {
-    case "add":
-      return state + 1;
-    default:
-      return state;
-  }
 };
 
 // reducer for tutor
@@ -62,7 +51,6 @@ const filterReducer = (state = filter, action) => {
 export default function(initialState) {
   const store = createStore(
     combineReducers({
-      count: countReducer,
       tutor: tutorReducer,
       filter: filterReducer
     }),

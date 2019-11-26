@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import TodayIcon from "@material-ui/icons/Today";
-import RoomIcon from '@material-ui/icons/Room';
+import RoomIcon from "@material-ui/icons/Room";
 import { NavLink } from "react-router-dom";
 
 import Filter from "../components/Filter";
@@ -20,6 +20,7 @@ import Level from "../components/Filter/Level";
 
 // helper
 import { getRandomImage } from "../helper";
+import { ExpansionPanelSummary } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,13 +47,31 @@ function MainApp(props) {
 
   const [img, setImg] = React.useState("");
 
-  // React.useEffect(async () => {
-  //   const imgSrc = await getRandomImage();
-  //   console.log(`imgSrc: ${imgSrc}`)
-  //   setImg(imgSrc)
-  // }, [])
+  async function popImg() {
+    const imgSrc = await getRandomImage();
+    setImg(imgSrc);
+  }
+
+  React.useEffect(() => {
+    popImg();
+  }, []);
+
+  function getLevelText(levelList) {
+    const sum = levelList.reduce((acc, ele) => acc + ele);
+
+    return sum < 7 ? "Lower Primary" : "Upper Primary";
+  }
 
   function renderClasses() {
+    const thisClass = {
+      _id: 0,
+      subject: "Mathematics",
+      level: [1, 2, 3],
+      tutorName: "Lily Aldrin",
+      location: "494 Tampines Ave 3",
+      datetime: "Sat, 11:00am - 1:00pm"
+    };
+
     return (
       <React.Fragment>
         <ListItem>
@@ -62,14 +81,17 @@ function MainApp(props) {
           <ListItemText
             primary={
               <NavLink to="/browse" className={classes.navLink}>
-                <Typography variant="h6">Mathematics, Primary</Typography>
+                <Typography variant="h6">
+                  {getLevelText(thisClass.level)},
+                  {thisClass.subject}
+                </Typography>
               </NavLink>
             }
             secondary={
               <React.Fragment>
                 <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
                 <span style={{ verticalAlign: "text-bottom" }}>
-                  {"Sat, 11:00am - 1:00pm"}
+                  {thisClass.datetime}
                 </span>
               </React.Fragment>
             }
@@ -78,14 +100,14 @@ function MainApp(props) {
             secondary={
               <React.Fragment>
                 <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
-                {"494 Tampines Ave 3"}
+                {thisClass.location}
               </React.Fragment>
             }
           />
           <ListItemText
             secondary={
               <Typography variant="subtitle1" align="center">
-                John Cristo
+                {thisClass.tutorName}
               </Typography>
             }
           />

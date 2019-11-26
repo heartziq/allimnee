@@ -10,9 +10,7 @@ module.exports = {
       method: "GET",
       path: "/",
       handler: function(request, h) {
-        const { cssData, htmlData, initialState } = serverRender(request, {
-          count: 100
-        });
+        const { cssData, htmlData, initialState } = serverRender(request);
 
         return h.view("index", {
           pageTitle: "home",
