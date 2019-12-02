@@ -75,12 +75,7 @@ const Filter = props => {
   }
 
   const handleTimeChange = e => {
-    const usrInputTime = moment(e.target.value, "H:mma");
-    const classTime = moment("3:00pm", "h:mma");
-
-    // console.log(usrInputTime.isBefore(classTime));
-    props.dispatch({ type: "updateTime", time: usrInputTime });
-
+    props.dispatch({ type: "updateTime", time: e.target.value });
   };
 
   return (
@@ -167,7 +162,14 @@ const Filter = props => {
               When
             </FormLabel>
             <FormControlLabel
+              checked
               value="before"
+              onChange={e =>
+                props.dispatch({
+                  type: "updateBeforeOrAfter",
+                  when: e.target.value
+                })
+              }
               control={
                 <Radio
                   icon={<RadioButtonUncheckedIcon fontSize="small" />}
@@ -178,6 +180,12 @@ const Filter = props => {
             />
             <FormControlLabel
               value="after"
+              onChange={e =>
+                props.dispatch({
+                  type: "updateBeforeOrAfter",
+                  when: e.target.value
+                })
+              }
               control={
                 <Radio
                   icon={<RadioButtonUncheckedIcon fontSize="small" />}

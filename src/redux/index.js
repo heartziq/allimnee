@@ -40,12 +40,14 @@ const classDefaultState = [
     location: "494 Tampines Ave 3",
     datetime: "Sat, 11:00am - 1:00pm",
     time: "11:00am"
-  },
+  }
 ];
 
 // filter classes...
 const filterClass = {
-  time: ""
+  beforeOrAfter: "before",
+  time: "07:30",
+  subject: ""
 };
 
 // class reducer
@@ -63,6 +65,10 @@ const filterClassReducer = (state = filterClass, action) => {
   switch (action.type) {
     case "updateTime":
       return { ...state, time: action.time };
+    case "updateBeforeOrAfter":
+      return { ...state, beforeOrAfter: action.when };
+    case "updateFilterSubject":
+      return { ...state, subject: action.subject };
     default:
       return state;
   }

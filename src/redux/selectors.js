@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const sort = (tutor, filter) => {
   // try default (for now)
   const resultList = tutor
@@ -13,9 +15,21 @@ export const sort = (tutor, filter) => {
 };
 
 export const sortClass = (classList, filterClass) => {
-  const sortedClasslist = classList.filter(
-    eachClass => eachClass.time > filterClass.time
-  );
+  const sortedClasslist = classList
+    .filter(eachClass => {
+      if (filterClass.beforeOrAfter === "before") {
+        return moment(filterClass.time, "H:mma").isBefore(
+          moment(eachClass.time, "h:mma")
+        );
+      } else {
+        return moment(filterClass.time, "H:mma").isAfter(
+          moment(eachClass.time, "h:mma")
+        );
+      }
+    })
+    .filter(eachClass =>
+      eachClass.subject.toLowerCase().includes(filterClass.subject)
+    );
 
   return sortedClasslist;
 };

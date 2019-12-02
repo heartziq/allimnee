@@ -17,6 +17,7 @@ import { NavLink } from "react-router-dom";
 
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
+import { sortClass } from "../redux/selectors";
 
 // helper
 import { getRandomImage } from "../helper";
@@ -127,7 +128,7 @@ function MainApp(props) {
 }
 
 const mapStateToProps = state => ({
-  classes: state.classes
+  classes: sortClass(state.classes, state.filterClass)
 });
 
 export default connect(mapStateToProps)(MainApp);
