@@ -63,17 +63,10 @@ function MainApp(props) {
   }
 
   function renderClasses() {
-    const thisClass = {
-      _id: 0,
-      subject: "Mathematics",
-      level: [1, 2, 3],
-      tutorName: "Lily Aldrin",
-      location: "494 Tampines Ave 3",
-      datetime: "Sat, 11:00am - 1:00pm"
-    };
+    const classList = props.classes;
 
-    return (
-      <React.Fragment>
+    return classList.map(thisClass => (
+      <React.Fragment key={thisClass._id}>
         <ListItem>
           <ListItemAvatar>
             <Avatar alt="Remy Sharp" src={img} />
@@ -82,8 +75,7 @@ function MainApp(props) {
             primary={
               <NavLink to="/browse" className={classes.navLink}>
                 <Typography variant="h6">
-                  {getLevelText(thisClass.level)},
-                  {thisClass.subject}
+                  {getLevelText(thisClass.level)},{thisClass.subject}
                 </Typography>
               </NavLink>
             }
@@ -114,7 +106,7 @@ function MainApp(props) {
         </ListItem>
         <Divider variant="inset" component="li" />
       </React.Fragment>
-    );
+    ));
   }
 
   return (
@@ -135,7 +127,7 @@ function MainApp(props) {
 }
 
 const mapStateToProps = state => ({
-  count: state.count
+  classes: state.classes
 });
 
 export default connect(mapStateToProps)(MainApp);

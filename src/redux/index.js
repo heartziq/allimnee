@@ -9,7 +9,63 @@ const tutorDefaultState = [];
 // filter tutor...
 const filter = {
   tutorName: "",
-  star: 5
+  star: 3
+};
+
+// class list...
+const classDefaultState = [
+  {
+    _id: 0,
+    subject: "Mathematics",
+    level: [1, 2, 3],
+    tutorName: "Lily Aldrin",
+    location: "494 Tampines Ave 3",
+    datetime: "Sat, 11:00am - 1:00pm",
+    time: "11:00am"
+  },
+  {
+    _id: 1,
+    subject: "Science",
+    level: [4, 5, 6],
+    tutorName: "Lily Aldrin",
+    location: "494 Tampines Ave 3",
+    datetime: "Sat, 11:00am - 1:00pm",
+    time: "11:00am"
+  },
+  {
+    _id: 2,
+    subject: "English",
+    level: [1, 2, 3],
+    tutorName: "Lily Aldrin",
+    location: "494 Tampines Ave 3",
+    datetime: "Sat, 11:00am - 1:00pm",
+    time: "11:00am"
+  },
+];
+
+// filter classes...
+const filterClass = {
+  time: ""
+};
+
+// class reducer
+const classReducer = (state = classDefaultState, action) => {
+  switch (action.type) {
+    case "updateClassList":
+      return action.initialData;
+
+    default:
+      return state;
+  }
+};
+
+const filterClassReducer = (state = filterClass, action) => {
+  switch (action.type) {
+    case "updateTime":
+      return { ...state, time: action.time };
+    default:
+      return state;
+  }
 };
 
 // reducer for tutor
@@ -52,7 +108,9 @@ export default function(initialState) {
   const store = createStore(
     combineReducers({
       tutor: tutorReducer,
-      filter: filterReducer
+      filter: filterReducer,
+      classes: classReducer,
+      filterClass: filterClassReducer
     }),
     initialState
   );

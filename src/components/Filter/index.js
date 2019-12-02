@@ -15,6 +15,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import moment from "moment";
 
 import DropDownSelect from "./DropDownSelect";
 
@@ -34,7 +35,7 @@ const Filter = props => {
   const [state, setState] = React.useState("");
   const handleChange = event => setState(event.target.value);
 
-  const [when, setWhen] = React.useState('');
+  const [when, setWhen] = React.useState("");
   const handleWhen = event => setWhen(event.target.value);
 
   const [gender, setGender] = React.useState("female");
@@ -72,6 +73,16 @@ const Filter = props => {
   function valuetext(value) {
     return `${value}°C`;
   }
+
+  const handleTimeChange = e => {
+    const usrInputTime = moment(e.target.value, "H:mma");
+    const classTime = moment("3:00pm", "h:mma");
+
+    // console.log(usrInputTime.isBefore(classTime));
+    props.dispatch({ type: "updateTime", time: usrInputTime });
+
+  };
+
   return (
     <form className={classes.formContainer} noValidate autoComplete="off">
       <TextField
@@ -91,7 +102,9 @@ const Filter = props => {
       <div className={classes.divider} />
       {/* <DropDownSelect title={"Subject"} data={filter.subject} /> */}
       <Box width={1}>
-        <InputLabel shrink htmlFor="name-native-error">Level: {state}</InputLabel>
+        <InputLabel shrink htmlFor="name-native-error">
+          Level: {state}
+        </InputLabel>
         <NativeSelect
           value={state}
           onChange={handleChange}
@@ -117,7 +130,9 @@ const Filter = props => {
       {/* <Level /> */}
       <div className={classes.divider} />
       <Box width={1}>
-        <InputLabel shrink htmlFor="name-native-error">Day:</InputLabel>
+        <InputLabel shrink htmlFor="name-native-error">
+          Day:
+        </InputLabel>
         <NativeSelect
           value={state}
           onChange={handleChange}
@@ -148,7 +163,9 @@ const Filter = props => {
             value={when}
             onChange={handleWhen}
           >
-            <FormLabel component="label" style={{fontSize: 13}}>When</FormLabel>
+            <FormLabel component="label" style={{ fontSize: 13 }}>
+              When
+            </FormLabel>
             <FormControlLabel
               value="before"
               control={
@@ -177,6 +194,7 @@ const Filter = props => {
             label="Time"
             type="time"
             defaultValue="07:30"
+            onChange={handleTimeChange}
             InputLabelProps={{
               shrink: true
             }}
@@ -233,7 +251,8 @@ const Filter = props => {
 };
 
 const mapStateToProps = state => ({
-  filter: state.filter
+  filter: state.filter,
+  filterClass: state.filterClass
 });
 
 export default connect(mapStateToProps)(Filter);

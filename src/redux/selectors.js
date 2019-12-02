@@ -11,3 +11,11 @@ export const sort = (tutor, filter) => {
 
   return resultList;
 };
+
+export const sortClass = (classList, filterClass) => {
+  const sortedClasslist = classList.filter(
+    eachClass => eachClass.time > filterClass.time
+  );
+
+  return sortedClasslist;
+};

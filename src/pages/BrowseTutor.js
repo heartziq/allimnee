@@ -54,7 +54,13 @@ class BrowseTutor extends React.Component {
 
   renderTutors = () => {
     return (
-      <Grid container spacing={1} direction="row" justify="center" alignItems="center">
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
         {this.props.tutor.map(e => (
           <TutorCard key={e._id} tutor={e} />
         ))}
@@ -70,7 +76,7 @@ class BrowseTutor extends React.Component {
   render() {
     // grab user query param
     const userQuery = qs.parse(this.props.location.search);
-    console.log(`userQuery: ${JSON.stringify(userQuery)}`)
+    console.log(`userQuery: ${JSON.stringify(userQuery)}`);
 
     // grab props injected by HOC (withStyles)
     const { classes } = this.props;
