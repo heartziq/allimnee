@@ -45,10 +45,11 @@ const classDefaultState = [
 
 // filter classes...
 const filterClass = {
-  isBefore: true,
+  isBefore: false,
   time: "07:30",
   subject: [],
-  day: ""
+  day: "",
+  level: 0,
 };
 
 // class reducer
@@ -72,6 +73,8 @@ const filterClassReducer = (state = filterClass, action) => {
       return { ...state, subject: action.subject };
     case "updateFilterDay":
       return { ...state, day: action.day };
+    case 'updateFilterLevel':
+      return { ...state, level: action.level };
     default:
       return state;
   }

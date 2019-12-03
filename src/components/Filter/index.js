@@ -109,8 +109,13 @@ const Filter = props => {
           Level: {state}
         </InputLabel>
         <NativeSelect
-          value={state}
-          onChange={handleChange}
+          value={props.filterClass.level}
+          onChange={event =>
+            props.dispatch({
+              type: "updateFilterLevel",
+              level: parseInt(event.target.value, 10)
+            })
+          }
           name={"Level"}
           inputProps={{
             id: "name-native-error"
@@ -125,6 +130,27 @@ const Filter = props => {
           </option>
           <option key={3} value={3}>
             {"Primary 3"}
+          </option>
+          <option key={4} value={4}>
+            {"Primary 4"}
+          </option>
+          <option key={5} value={5}>
+            {"Primary 5"}
+          </option>
+          <option key={6} value={6}>
+            {"Primary 6"}
+          </option>
+          <option key={7} value={7}>
+            {"Secondary 1"}
+          </option>
+          <option key={8} value={8}>
+            {"Secondary 2"}
+          </option>
+          <option key={9} value={9}>
+            {"Secondary 3"}
+          </option>
+          <option key={10} value={10}>
+            {"Secondary 4"}
           </option>
         </NativeSelect>
       </Box>

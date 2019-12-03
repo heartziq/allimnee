@@ -46,6 +46,16 @@ export const sortClass = (classList, filterClass) => {
 
       // if no day filter, return all days
       return true;
+    })
+    .filter(eachClass => {
+      console.log(
+        `filterClass.level: ${filterClass.level}, eachClass.level: ${eachClass.level}`
+      );
+      if (filterClass.level > 0) {
+        return eachClass.level.includes(filterClass.level);
+      }
+
+      return true;
     });
 
   return sortedClasslist;
