@@ -7,18 +7,20 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import Chip from "@material-ui/core/Chip";
+import { connect } from "react-redux";
 
+/* list of suggestions of subjects */
 const suggestions = [
   { label: "Chemistry" },
   { label: "Physics" },
   { label: "Mathematics" },
-  { label: "English Language" },
+  { label: "English" },
   { label: "Literature" },
   { label: "Mandarin" },
   { label: "Science" },
   { label: "Social Studies" },
   { label: "History" },
-  { label: "Music" },
+  { label: "Music" }
 ];
 
 function renderInput(inputProps) {
@@ -109,7 +111,7 @@ function getSuggestions(value, { showEmpty = false } = {}) {
 function DownshiftMultiple(props) {
   const { classes } = props;
   const [inputValue, setInputValue] = React.useState("");
-  const [selectedItem, setSelectedItem] = React.useState([]);
+  const [selectedItem, setSelectedItem] = React.useState(props.filterClass.subject);
 
   const handleKeyDown = event => {
     if (
@@ -132,12 +134,14 @@ function DownshiftMultiple(props) {
     }
     setInputValue("");
     setSelectedItem(newSelectedItem);
+    props.dispatch({type: 'updateFilterSubject', subject: newSelectedItem})
   };
 
   const handleDelete = item => () => {
     const newSelectedItem = [...selectedItem];
     newSelectedItem.splice(newSelectedItem.indexOf(item), 1);
     setSelectedItem(newSelectedItem);
+    props.dispatch({type: 'updateFilterSubject', subject: newSelectedItem})
   };
 
   return (
@@ -212,9 +216,15 @@ DownshiftMultiple.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  filterClass: state.filterClass
+});
+
+const MappedDownshiftMultiple = connect(mapStateToProps)(DownshiftMultiple);
+
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   container: {
     flexGrow: 1,
@@ -244,13 +254,15 @@ const useStyles = makeStyles(theme => ({
 
 let popperNode;
 
-export default function IntegrationDownshift() {
+function IntegrationDownshift() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <div className={classes.divider} />
-      <DownshiftMultiple classes={classes} />
+      <MappedDownshiftMultiple classes={classes} />
     </div>
   );
 }
+
+export default IntegrationDownshift;

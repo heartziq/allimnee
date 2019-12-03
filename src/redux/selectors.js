@@ -15,12 +15,9 @@ export const sort = (tutor, filter) => {
 };
 
 export const sortClass = (classList, filterClass) => {
+  console.log(`current .subject: ${filterClass.subject}`);
   const sortedClasslist = classList
     .filter(eachClass => {
-      console.log('selectors...');
-      console.log(`.beforeOrAfter: ${filterClass.isBefore}`);
-      // console.log(`.time: ${filterClass.time}`);
-
       if (filterClass.isBefore) {
         return moment(eachClass.time, "h:mma").isBefore(
           moment(filterClass.time, "H:mma")
@@ -31,9 +28,11 @@ export const sortClass = (classList, filterClass) => {
         );
       }
     })
-    .filter(eachClass =>
-      eachClass.subject.toLowerCase().includes(filterClass.subject)
-    );
+    .filter(eachClass => {
+      if (filterClass.subject.length === 0) return true;
+
+      return filterClass.subject.includes(eachClass.subject);
+    });
 
   return sortedClasslist;
 };

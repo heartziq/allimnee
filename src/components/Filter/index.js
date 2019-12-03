@@ -48,9 +48,9 @@ const Filter = props => {
     props.dispatch({
       type: "updateBeforeOrAfter"
     });
-
-    console.log(`.isBefore: ${props.filterClass.isBefore}`)
   };
+
+  console.log(`.isBefore: ${props.filterClass.isBefore}`)
 
   // state.filter = {area: {}, subject: {}}
   const getSubsAndArea = async () => {
@@ -200,7 +200,7 @@ const Filter = props => {
             id="time"
             label="Time"
             type="time"
-            defaultValue="07:30"
+            defaultValue={props.filterClass.time}
             onChange={handleTimeChange}
             InputLabelProps={{
               shrink: true

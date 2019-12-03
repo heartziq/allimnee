@@ -47,7 +47,7 @@ const classDefaultState = [
 const filterClass = {
   isBefore: true,
   time: "07:30",
-  subject: ""
+  subject: []
 };
 
 // class reducer
