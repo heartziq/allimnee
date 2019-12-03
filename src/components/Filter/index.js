@@ -50,7 +50,7 @@ const Filter = props => {
     });
   };
 
-  console.log(`.isBefore: ${props.filterClass.isBefore}`)
+  console.log(`.isBefore: ${props.filterClass.isBefore}`);
 
   // state.filter = {area: {}, subject: {}}
   const getSubsAndArea = async () => {
@@ -137,22 +137,36 @@ const Filter = props => {
           Day:
         </InputLabel>
         <NativeSelect
-          value={state}
-          onChange={handleChange}
+          value={props.filterClass.day}
+          onChange={event =>
+            props.dispatch({ type: "updateFilterDay", day: event.target.value })
+          }
           name={"Day"}
           inputProps={{
             id: "name-native-error"
           }}
         >
           <option value="" />
-          <option key={1} value={1}>
+          <option key={1} value={"Mon"}>
             {"Mon"}
           </option>
-          <option key={2} value={2}>
+          <option key={2} value={"Tue"}>
             {"Tue"}
           </option>
-          <option key={3} value={3}>
+          <option key={3} value={"Wed"}>
             {"Wed"}
+          </option>
+          <option key={4} value={"Thu"}>
+            {"Thu"}
+          </option>
+          <option key={5} value={"Fri"}>
+            {"Fri"}
+          </option>
+          <option key={6} value={"Sat"}>
+            {"Sat"}
+          </option>
+          <option key={7} value={"Sun"}>
+            {"Sun"}
           </option>
         </NativeSelect>
       </Box>

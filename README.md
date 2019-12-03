@@ -13,7 +13,7 @@
       - [x] subjects
         - [x] have the subjects reflected on the inputs
       - [ ] level
-      - [ ] day
+      - [x] day
       - [x] after/before
         - [x] inconsistency redux update; sometimes isBefore === true when checkbox `after` is being checked
   - [ ] Contact Tutor (email)

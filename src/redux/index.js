@@ -29,7 +29,7 @@ const classDefaultState = [
     level: [4, 5, 6],
     tutorName: "Lily Aldrin",
     location: "494 Tampines Ave 3",
-    datetime: "Sat, 11:00am - 1:00pm",
+    datetime: "Sun, 11:00am - 1:00pm",
     time: "11:00am"
   },
   {
@@ -38,7 +38,7 @@ const classDefaultState = [
     level: [1, 2, 3],
     tutorName: "Lily Aldrin",
     location: "494 Tampines Ave 3",
-    datetime: "Sat, 11:00am - 1:00pm",
+    datetime: "Mon, 11:00am - 1:00pm",
     time: "11:00am"
   }
 ];
@@ -47,7 +47,8 @@ const classDefaultState = [
 const filterClass = {
   isBefore: true,
   time: "07:30",
-  subject: []
+  subject: [],
+  day: ""
 };
 
 // class reducer
@@ -69,6 +70,8 @@ const filterClassReducer = (state = filterClass, action) => {
       return { ...state, isBefore: !state.isBefore };
     case "updateFilterSubject":
       return { ...state, subject: action.subject };
+    case "updateFilterDay":
+      return { ...state, day: action.day };
     default:
       return state;
   }

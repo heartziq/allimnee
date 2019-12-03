@@ -32,6 +32,20 @@ export const sortClass = (classList, filterClass) => {
       if (filterClass.subject.length === 0) return true;
 
       return filterClass.subject.includes(eachClass.subject);
+    })
+    .filter(eachClass => {
+      if (filterClass.day !== "") {
+        const targetString = eachClass.datetime;
+
+        const regex = /[A-Z][a-z]{2}/g;
+
+        const day = targetString.match(regex)[0];
+
+        return day === filterClass.day;
+      }
+
+      // if no day filter, return all days
+      return true;
     });
 
   return sortedClasslist;
