@@ -45,7 +45,7 @@ const classDefaultState = [
 
 // filter classes...
 const filterClass = {
-  beforeOrAfter: "before",
+  isBefore: true,
   time: "07:30",
   subject: ""
 };
@@ -66,7 +66,7 @@ const filterClassReducer = (state = filterClass, action) => {
     case "updateTime":
       return { ...state, time: action.time };
     case "updateBeforeOrAfter":
-      return { ...state, beforeOrAfter: action.when };
+      return { ...state, isBefore: !state.isBefore };
     case "updateFilterSubject":
       return { ...state, subject: action.subject };
     default:

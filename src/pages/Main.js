@@ -21,7 +21,6 @@ import { sortClass } from "../redux/selectors";
 
 // helper
 import { getRandomImage } from "../helper";
-import { ExpansionPanelSummary } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {

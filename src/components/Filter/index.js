@@ -44,6 +44,14 @@ const Filter = props => {
     subject: {}
   });
 
+  const handleTimeCheck = e => {
+    props.dispatch({
+      type: "updateBeforeOrAfter"
+    });
+
+    console.log(`.isBefore: ${props.filterClass.isBefore}`)
+  };
+
   // state.filter = {area: {}, subject: {}}
   const getSubsAndArea = async () => {
     // get subject
@@ -162,14 +170,9 @@ const Filter = props => {
               When
             </FormLabel>
             <FormControlLabel
-              checked
+              checked={props.filterClass.isBefore}
               value="before"
-              onChange={e =>
-                props.dispatch({
-                  type: "updateBeforeOrAfter",
-                  when: e.target.value
-                })
-              }
+              onChange={e => handleTimeCheck(e)}
               control={
                 <Radio
                   icon={<RadioButtonUncheckedIcon fontSize="small" />}
@@ -179,13 +182,9 @@ const Filter = props => {
               label="before"
             />
             <FormControlLabel
+              checked={!props.filterClass.isBefore}
               value="after"
-              onChange={e =>
-                props.dispatch({
-                  type: "updateBeforeOrAfter",
-                  when: e.target.value
-                })
-              }
+              onChange={e => handleTimeCheck(e)}
               control={
                 <Radio
                   icon={<RadioButtonUncheckedIcon fontSize="small" />}

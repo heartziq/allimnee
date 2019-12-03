@@ -17,12 +17,16 @@ export const sort = (tutor, filter) => {
 export const sortClass = (classList, filterClass) => {
   const sortedClasslist = classList
     .filter(eachClass => {
-      if (filterClass.beforeOrAfter === "before") {
-        return moment(filterClass.time, "H:mma").isBefore(
-          moment(eachClass.time, "h:mma")
+      console.log('selectors...');
+      console.log(`.beforeOrAfter: ${filterClass.isBefore}`);
+      // console.log(`.time: ${filterClass.time}`);
+
+      if (filterClass.isBefore) {
+        return moment(eachClass.time, "h:mma").isBefore(
+          moment(filterClass.time, "H:mma")
         );
       } else {
-        return moment(filterClass.time, "H:mma").isAfter(
+        return moment(filterClass.time, "H:mma").isBefore(
           moment(eachClass.time, "h:mma")
         );
       }
