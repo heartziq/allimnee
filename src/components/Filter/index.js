@@ -49,10 +49,6 @@ const Filter = props => {
       type: "updateBeforeOrAfter"
     });
   };
-
-  console.log(`.isBefore: ${props.filterClass.isBefore}`);
-
-  // state.filter = {area: {}, subject: {}}
   const getSubsAndArea = async () => {
     // get subject
     const subjectResponse = await fetch("/api/subject");
@@ -105,9 +101,7 @@ const Filter = props => {
       <div className={classes.divider} />
       {/* <DropDownSelect title={"Subject"} data={filter.subject} /> */}
       <Box width={1}>
-        <InputLabel shrink htmlFor="name-native-error">
-          Level: {state}
-        </InputLabel>
+        <InputLabel shrink htmlFor="name-native-error">Level:</InputLabel>
         <NativeSelect
           value={props.filterClass.level}
           onChange={event =>
@@ -151,6 +145,21 @@ const Filter = props => {
           </option>
           <option key={10} value={10}>
             {"Secondary 4"}
+          </option>
+          <option key={11} value={11}>
+            {"Secondary 5"}
+          </option>
+          <option key={12} value={12}>
+            {"NITEC"}
+          </option>
+          <option key={13} value={13}>
+            {"JC1"}
+          </option>
+          <option key={14} value={14}>
+            {"JC2"}
+          </option>
+          <option key={15} value={15}>
+            {"Poly"}
           </option>
         </NativeSelect>
       </Box>

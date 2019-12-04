@@ -36,7 +36,6 @@ const Filter = props => {
     subject: {}
   });
 
-  // state.filter = {area: {}, subject: {}}
   const getSubsAndArea = async () => {
     // get subject
     const subjectResponse = await fetch("/api/subject");
@@ -52,7 +51,7 @@ const Filter = props => {
     });
   };
 
-  // componentDidMount
+  // equivalent to componentDidMount()
   React.useEffect(() => {
     getSubsAndArea();
   }, []);

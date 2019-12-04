@@ -1,7 +1,6 @@
 import moment from "moment";
 
 export const sort = (tutor, filter) => {
-  // try default (for now)
   const resultList = tutor
     .filter(value =>
       value.name.toLowerCase().includes(filter.tutorName.toLowerCase())
@@ -15,25 +14,31 @@ export const sort = (tutor, filter) => {
 };
 
 export const sortClass = (classList, filterClass) => {
-  console.log(`current .subject: ${filterClass.subject}`);
   const sortedClasslist = classList
     .filter(eachClass => {
+      const regex = /\d+(:)\d+[a|p]m/g;
+      // filterClass.time
+      const found = eachClass.datetime.match(regex);
+      const [startTime, endTime] = found;
+
       if (filterClass.isBefore) {
-        return moment(eachClass.time, "h:mma").isBefore(
+        return moment(startTime, "h:mma").isBefore(
           moment(filterClass.time, "H:mma")
         );
       } else {
-        return moment(filterClass.time, "H:mma").isBefore(
-          moment(eachClass.time, "h:mma")
+        return moment(startTime, "H:mma").isAfter(
+          moment(filterClass.time, "h:mma")
         );
       }
     })
     .filter(eachClass => {
+      /* BY SUBJECT(S) */
       if (filterClass.subject.length === 0) return true;
 
       return filterClass.subject.includes(eachClass.subject);
     })
     .filter(eachClass => {
+      /* BY Day */
       if (filterClass.day !== "") {
         const targetString = eachClass.datetime;
 
@@ -48,9 +53,7 @@ export const sortClass = (classList, filterClass) => {
       return true;
     })
     .filter(eachClass => {
-      console.log(
-        `filterClass.level: ${filterClass.level}, eachClass.level: ${eachClass.level}`
-      );
+      /* BY Level */
       if (filterClass.level > 0) {
         return eachClass.level.includes(filterClass.level);
       }

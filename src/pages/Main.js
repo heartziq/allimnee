@@ -55,11 +55,27 @@ function MainApp(props) {
   React.useEffect(() => {
     popImg();
   }, []);
-
+  
+  const lookupTable = {
+    "Lower Primary": [1, 2, 3],
+    "Upper Primary": [4, 5, 6],
+    "Lower Secondary": [7, 8],
+    "Upper Secondary": [9, 10, 11],
+    "NITEC": [12],
+    "JC1": [13],
+    "JC2": [14],
+    "Poly": [15],
+  }
+  
+  function isSubsetOf(target, ref) {
+    return target.every(item => ref.includes(item))
+  }
+  
   function getLevelText(levelList) {
-    const sum = levelList.reduce((acc, ele) => acc + ele);
-
-    return sum < 7 ? "Lower Primary" : "Upper Primary";
+    for (let [key, value] of Object.entries(lookupTable)){
+      if (isSubsetOf(levelList, value))
+        return key;
+    }
   }
 
   function renderClasses() {
@@ -75,7 +91,7 @@ function MainApp(props) {
             primary={
               <NavLink to="/browse" className={classes.navLink}>
                 <Typography variant="h6">
-                  {getLevelText(thisClass.level)},{thisClass.subject}
+                  {getLevelText(thisClass.level)}, {thisClass.subject}
                 </Typography>
               </NavLink>
             }

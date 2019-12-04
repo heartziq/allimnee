@@ -1,25 +1,21 @@
 # Pivot! - MVP (by EOY 2019) :
 
-- [x] MVP features;
-  - [ ] Browse classes (+filter)
-    - [ ] retrieve data from db
-      - [ ] think of data structure format for `db.test.classes`
-      - [ ] pre-load dummy data adhering to the format above
-      - [ ] replace dummy data with props
-    - [ ] wire up with redux store
-      - [ ] create classReducer
-      - [x] create selector for class; sort .filter
-    - [ ] Filter
-      - [x] subjects
-        - [x] have the subjects reflected on the inputs
-      - [ ] level
-      - [x] day
-      - [x] after/before
-        - [x] inconsistency redux update; sometimes isBefore === true when checkbox `after` is being checked
+- [ ] MVP features;
+  
+  - [ ] better algorithm for `getLevelText()` lookup
+    - [ ] Question: is there a scenario where a tution class skips level? .e.g Primary 1 and Primary 6
+    - [ ] Is it possible for 1 class that fits 'the whole range' .e.g. Primary 1 all the way to Primary 6?
+  - [ ] retrieve data from db
+    - [ ] think of data structure format for `db.test.classes`
+    - [ ] pre-load dummy data adhering to the format above
+    - [ ] replace dummy data with props
+  
   - [ ] Contact Tutor (email)
   - [ ] Tutor details
   - [ ] Class Details
   - [ ] [UI] Responsive; desktop and mobile
+  
 - [ ] wireframe**
+
 - [ ] deploy to heroku
 

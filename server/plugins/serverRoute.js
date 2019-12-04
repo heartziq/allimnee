@@ -30,7 +30,7 @@ module.exports = {
         const qParam = request.query.id ? `?id=${request.query.id}` : ``;
         const uri = `http://localhost:3000/api/tutor${qParam}`;
 
-        console.log(`qParam: ${qParam}`);
+        // console.log(`qParam: ${qParam}`);
         // fetch from api
         const res = await fetch(uri);
         const dataObj = await res.json();

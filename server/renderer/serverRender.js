@@ -38,7 +38,7 @@ export const serverRender = (request, initialState = {}) => {
     )
   );
 
-  // Grab the CSS from our sheets.
+  // One big css string...
   const css = sheets.toString();
 
   return {

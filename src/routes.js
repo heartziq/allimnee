@@ -7,7 +7,7 @@ import Nav from "./components/Navbar";
 
 // Load Pages
 import BrowseTutor from "./pages/BrowseTutor";
-import Test from "./pages/Test";
+// import Test from "./pages/Test";
 import Main from "./pages/Main";
 
 function App(props) {
