@@ -18,6 +18,7 @@ import { NavLink } from "react-router-dom";
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
 import { sortClass } from "../redux/selectors";
+import { getAllClasses } from "../api";
 
 // helper
 import { getRandomImage } from "../helper";
@@ -52,29 +53,34 @@ function MainApp(props) {
     setImg(imgSrc);
   }
 
+  async function fetchClass() {
+    const classList = await getAllClasses();
+    props.dispatch({ type: "updateClassList", initialData: classList });
+  }
+
   React.useEffect(() => {
     popImg();
+    fetchClass();
   }, []);
-  
+
   const lookupTable = {
     "Lower Primary": [1, 2, 3],
     "Upper Primary": [4, 5, 6],
     "Lower Secondary": [7, 8],
     "Upper Secondary": [9, 10, 11],
-    "NITEC": [12],
-    "JC1": [13],
-    "JC2": [14],
-    "Poly": [15],
-  }
-  
+    NITEC: [12],
+    JC1: [13],
+    JC2: [14],
+    Poly: [15]
+  };
+
   function isSubsetOf(target, ref) {
-    return target.every(item => ref.includes(item))
+    return target.every(item => ref.includes(item));
   }
-  
+
   function getLevelText(levelList) {
-    for (let [key, value] of Object.entries(lookupTable)){
-      if (isSubsetOf(levelList, value))
-        return key;
+    for (let [key, value] of Object.entries(lookupTable)) {
+      if (isSubsetOf(levelList, value)) return key;
     }
   }
 

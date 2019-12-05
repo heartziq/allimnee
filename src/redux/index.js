@@ -13,104 +13,7 @@ const filter = {
 };
 
 // class list...
-const classDefaultState = [
-  {
-    _id: 0,
-    subject: "Mathematics",
-    level: [1, 2],
-    tutorName: "Lily Aldrin",
-    location: "494 Tampines Ave 3",
-    datetime: "Sat, 4:30pm - 7:00pm",
-  },
-  {
-    _id: 1,
-    subject: "Science",
-    level: [4, 5, 6],
-    tutorName: "Robin Schebatsky",
-    location: "11 Madlin St, Albino",
-    datetime: "Sun, 11:00am - 1:00pm",
-  },
-  {
-    _id: 2,
-    subject: "English",
-    level: [11],
-    tutorName: "Thomas McCoy",
-    location: "112 Baskerville St",
-    datetime: "Mon, 10:00am - 12:00pm",
-  },
-  {
-    _id: 3,
-    subject: "Chemistry (Pure)",
-    level: [9, 10, 11],
-    tutorName: "Walter White",
-    location: "72nd Washington St, Alfredo's Mansion",
-    datetime: "Wed, 10:00am - 12:00pm",
-  },
-  {
-    _id: 4,
-    subject: "Physics (Pure)",
-    level: [9, 10, 11],
-    tutorName: "Walter White",
-    location: "72nd Washington St, Alfredo's Mansion",
-    datetime: "Wed, 12:00pm - 2:00pm",
-  },
-  {
-    _id: 5,
-    subject: "Social Studies",
-    level: [7, 8],
-    tutorName: "Portia Eustace",
-    location: "9th Detroit Rockstar Ave",
-    datetime: "Thu, 5:00pm - 7:00pm",
-  },
-  {
-    _id: 6,
-    subject: "Mathematics",
-    level: [4, 5],
-    tutorName: "Kenneth Chua",
-    location: "Zero Metropolitan (District Z)",
-    datetime: "Fri, 5:00pm - 7:00pm",
-  },
-  {
-    _id: 7,
-    subject: "Mathematics",
-    level: [1, 2, 3],
-    tutorName: "Kenneth Chua",
-    location: "Zero Metropolitan (District Z)",
-    datetime: "Sat, 5:00pm - 7:00pm",
-  },
-  {
-    _id: 8,
-    subject: "Mandarin",
-    level: [1, 2, 3],
-    tutorName: "Shauna Ng",
-    location: "Pagoda Tower, 2nd Floor",
-    datetime: "Tue, 8:30pm - 10:00pm",
-  },
-  {
-    _id: 9,
-    subject: "Mandarin",
-    level: [4, 5, 6],
-    tutorName: "Shauna Ng",
-    location: "Pagoda Tower, 2nd Floor",
-    datetime: "Thu, 8:30pm - 10:00pm",
-  },
-  {
-    _id: 10,
-    subject: "History",
-    level: [7, 8],
-    tutorName: "Shauna Ng",
-    location: "Liam Choo Ave 3",
-    datetime: "Sat, 9:00am - 11:00am",
-  },
-  {
-    _id: 11,
-    subject: "History",
-    level: [10, 11],
-    tutorName: "Albert Shaw Jr",
-    location: "Pagoda Tower, 4th Floor",
-    datetime: "Sun, 9:00pm - 11:30pm",
-  },
-];
+const classDefaultState = [];
 
 // filter classes...
 const filterClass = {
@@ -118,7 +21,7 @@ const filterClass = {
   time: "07:30",
   subject: [],
   day: "",
-  level: 0,
+  level: 0
 };
 
 // class reducer
@@ -142,7 +45,7 @@ const filterClassReducer = (state = filterClass, action) => {
       return { ...state, subject: action.subject };
     case "updateFilterDay":
       return { ...state, day: action.day };
-    case 'updateFilterLevel':
+    case "updateFilterLevel":
       return { ...state, level: action.level };
     default:
       return state;

@@ -24,3 +24,9 @@ export const getAllSubjects = async () =>
 
 export const getAllArea = async () =>
   await conn.collection("area").findOne({}, { projection: { _id: 0 } });
+
+export const getAllClasses = async (id) =>
+  await conn
+    .collection("classes")
+    .find(id)
+    .toArray();

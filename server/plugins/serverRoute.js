@@ -9,8 +9,21 @@ module.exports = {
     server.route({
       method: "GET",
       path: "/",
-      handler: function(request, h) {
-        const { cssData, htmlData, initialState } = serverRender(request);
+      handler: async function(request, h) {
+        const qParam = request.query.id ? `?id=${request.query.id}` : ``;
+        const uri = `http://localhost:3000/api/classes${qParam}`;
+
+        const res = await fetch(uri);
+        const result = await res.json();
+
+        const state = {
+          classes: result
+        };
+
+        const { cssData, htmlData, initialState } = serverRender(
+          request,
+          state
+        );
 
         return h.view("index", {
           pageTitle: "home",

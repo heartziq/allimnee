@@ -1,10 +1,14 @@
-import { findAllTutor, getAllSubjects, getAllArea } from "../api";
+import {
+  findAllTutor,
+  getAllSubjects,
+  getAllArea,
+  getAllClasses
+} from "../api";
 
 module.exports = {
   name: "api-endpoint",
   version: "1.0.0",
   register: async function(server) {
-
     // /api/tutor
     server.route({
       method: "GET",
@@ -35,6 +39,21 @@ module.exports = {
       path: "/api/area",
       handler: async function(request, reply) {
         const qResult = await getAllArea();
+        return reply.response(qResult).code(200);
+      }
+    });
+
+    // /api/classes
+    server.route({
+      method: "GET",
+      path: "/api/classes",
+      handler: async function(request, reply) {
+        // get id
+        const id = request.query.id
+          ? { _id: parseInt(request.query.id, 10) }
+          : {};
+
+        const qResult = await getAllClasses(id);
         return reply.response(qResult).code(200);
       }
     });
