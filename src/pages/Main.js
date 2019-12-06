@@ -149,7 +149,7 @@ function MainApp(props) {
     <Grid container>
       <Grid item md={2}>
         <Paper className={classes.paperStyles}>
-          <Filter />
+          <Filter isBrowseClass />
         </Paper>
       </Grid>
       <Grid item md={10}>

@@ -86,7 +86,7 @@ class BrowseTutor extends React.Component {
           <Typography variant="h5">Browse Tutors</Typography>
 
           <DrawerFilter>
-            <Filter />
+            <Filter isBrowseTutor />
           </DrawerFilter>
         </div>
         <hr />
