@@ -14,6 +14,7 @@ import Divider from "@material-ui/core/Divider";
 import TodayIcon from "@material-ui/icons/Today";
 import RoomIcon from "@material-ui/icons/Room";
 import { NavLink } from "react-router-dom";
+import TablePagination from "@material-ui/core/TablePagination";
 
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
@@ -47,6 +48,17 @@ function MainApp(props) {
   const classes = useStyles();
 
   const [img, setImg] = React.useState("");
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   async function popImg() {
     const imgSrc = await getRandomImage();
@@ -87,48 +99,50 @@ function MainApp(props) {
   function renderClasses() {
     const classList = props.classes;
 
-    return classList.map(thisClass => (
-      <React.Fragment key={thisClass._id}>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src={img} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={
-              <NavLink to="/browse" className={classes.navLink}>
-                <Typography variant="h6">
-                  {getLevelText(thisClass.level)}, {thisClass.subject}
+    return classList
+      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+      .map(thisClass => (
+        <React.Fragment key={thisClass._id}>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar alt="Remy Sharp" src={img} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={
+                <NavLink to="/browse" className={classes.navLink}>
+                  <Typography variant="h6">
+                    {getLevelText(thisClass.level)}, {thisClass.subject}
+                  </Typography>
+                </NavLink>
+              }
+              secondary={
+                <React.Fragment>
+                  <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
+                  <span style={{ verticalAlign: "text-bottom" }}>
+                    {thisClass.datetime}
+                  </span>
+                </React.Fragment>
+              }
+            />
+            <ListItemText
+              secondary={
+                <React.Fragment>
+                  <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
+                  {thisClass.location}
+                </React.Fragment>
+              }
+            />
+            <ListItemText
+              secondary={
+                <Typography variant="subtitle1" align="center">
+                  {thisClass.tutorName}
                 </Typography>
-              </NavLink>
-            }
-            secondary={
-              <React.Fragment>
-                <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
-                <span style={{ verticalAlign: "text-bottom" }}>
-                  {thisClass.datetime}
-                </span>
-              </React.Fragment>
-            }
-          />
-          <ListItemText
-            secondary={
-              <React.Fragment>
-                <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
-                {thisClass.location}
-              </React.Fragment>
-            }
-          />
-          <ListItemText
-            secondary={
-              <Typography variant="subtitle1" align="center">
-                {thisClass.tutorName}
-              </Typography>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-      </React.Fragment>
-    ));
+              }
+            />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </React.Fragment>
+      ));
   }
 
   return (
@@ -142,6 +156,15 @@ function MainApp(props) {
         <Container fixed>
           <Level />
           <List className={classes.root}>{renderClasses()}</List>
+          <TablePagination
+            rowsPerPageOptions={[1, 5, 10]}
+            component="div"
+            count={props.classes.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </Container>
       </Grid>
     </Grid>
