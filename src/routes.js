@@ -7,7 +7,7 @@ import Nav from "./components/Navbar";
 
 // Load Pages
 import BrowseTutor from "./pages/BrowseTutor";
-// import Test from "./pages/Test";
+import Test from "./pages/Test";
 import Main from "./pages/Main";
 
 function App(props) {
@@ -22,8 +22,8 @@ function App(props) {
           exact={true}
         />
         <Route path="/browse" render={props => <BrowseTutor {...props} />} />
-        {/* <Route path="/test" render={props => <Test {...props} />} /> */}
-        <Route path="/test" render={props => <Redirect to={"/browse"} />} />
+        <Route path="/test" render={props => <Test {...props} />} />
+        {/* <Route path="/test" render={props => <Redirect to={"/browse"} />} /> */}
       </Switch>
     </Fragment>
   );
