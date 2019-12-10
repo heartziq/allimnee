@@ -15,6 +15,7 @@ import TodayIcon from "@material-ui/icons/Today";
 import RoomIcon from "@material-ui/icons/Room";
 import { NavLink } from "react-router-dom";
 import TablePagination from "@material-ui/core/TablePagination";
+import Hidden from "@material-ui/core/Hidden";
 
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
@@ -147,17 +148,20 @@ function MainApp(props) {
 
   return (
     <Grid container>
-      <Grid item md={2}>
-        <Paper className={classes.paperStyles}>
-          <Filter isBrowseClass />
-        </Paper>
-      </Grid>
-      <Grid item md={10}>
+      <Hidden smDown>
+        <Grid item md={2}>
+          <Paper className={classes.paperStyles}>
+            <Filter isBrowseClass />
+          </Paper>
+        </Grid>
+      </Hidden>
+
+      <Grid item md={10} sm={12} xs={12}>
         <Container fixed>
           <Level />
           <List className={classes.root}>{renderClasses()}</List>
           <TablePagination
-            rowsPerPageOptions={[1, 5, 10]}
+            rowsPerPageOptions={[5, 10]}
             component="div"
             count={props.classes.length}
             rowsPerPage={rowsPerPage}

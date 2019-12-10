@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import FilterListOutlinedIcon from "@material-ui/icons/FilterListOutlined";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -21,7 +20,13 @@ function DrawerFilter(props) {
   const classes = useStyles();
   const { children } = props;
 
-  const [state, setState] = React.useState({ textInput: "", right: false });
+  console.log(`props.side: ${props.side}`);
+
+  const [state, setState] = React.useState({
+    textInput: "",
+    right: false,
+    left: false
+  });
 
   const toggleDrawer = (side, open) => event => {
     if (
@@ -40,20 +45,24 @@ function DrawerFilter(props) {
         variant="contained"
         color="primary"
         className={classes.button}
-        onClick={toggleDrawer("right", true)}
+        onClick={toggleDrawer(props.side, true)}
       >
         <FilterListOutlinedIcon />
         Filter
       </Button>
       <Drawer
-        anchor="right"
-        open={state.right}
-        onClose={toggleDrawer("right", false)}
+        anchor={props.side}
+        open={props.side === 'right' ? state.right : state.left}
+        onClose={toggleDrawer(props.side, false)}
       >
         {children}
       </Drawer>
     </Fragment>
   );
 }
+
+DrawerFilter.defaultProps = {
+  side: "right"
+};
 
 export default DrawerFilter;

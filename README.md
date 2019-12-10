@@ -3,21 +3,14 @@
 - [ ] MVP features;
   
   - [ ] Browse ClassList
-    - [x] Cleanups; mainly delete unnecessary filter types
-    - [ ] UI/UX
-      - [x] Pagination; 5 records per page
-      - [ ] Draft a mockups - look examples from material ui
-      - [ ] responsive
-    - [ ] URI
+    - [ ] UI/UX [Friday, 2359 - 13/12]
+      - [ ] [Level 1] Draft a good wireframe: xs (mobile), md (laptop/desktop)
+      - [ ] [Level 2] "" "": sm(tablet)
+    - [ ] URI - Query params persistent (stays when refreshed) [Weekend HaCK - 14/12 to 15/12]
       - [ ] How to make query params 'synchronize' with current filters?
-      - [ ] Use (above) to query n number of rows from `test.classes` records
-    - [ ] better algorithm for `getLevelText()` lookup
-  - [ ] [BUTTON] Contact Tutor (email)
+      - [ ] pagination on DB.query side
+  - [ ] Class Details [before long holiday]
+    - [ ] [BUTTON] Contact Tutor (email)
   - [ ] Tutor details
-  - [ ] Class Details
-  - [ ] [UI] Responsive; desktop and mobile
-  
-- [ ] wireframe**
-
-- [ ] deploy to heroku
+  - [ ] Deploy to heroku
 
