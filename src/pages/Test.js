@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Clock from '../components/examples/Clock';
-import Pagination from '../components/examples/Pagination';
+import React from "react";
+
+// import to-be-tested Component(s) here
 
 function Test(props) {
-  return <Pagination />
+  return <div>Testing</div>
 }
 
 export default Test;

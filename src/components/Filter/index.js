@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   divider: {
     height: theme.spacing(2)
   },
-  formContainer: { margin: 8 },
+  formContainer: { margin: theme.spacing(1) },
   formControl: {
     margin: theme.spacing(3)
   }
@@ -210,6 +210,7 @@ const Filter = props => {
                   <Radio
                     icon={<RadioButtonUncheckedIcon fontSize="small" />}
                     checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
+                    color="primary"
                   />
                 }
                 label="before"

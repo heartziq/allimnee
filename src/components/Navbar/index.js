@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   navLink: {
     textDecoration: "none",
     color: "#fff"
+  },
+  appBarColor: {
+    backgroundColor: "black"
   }
 }));
 
@@ -32,28 +35,26 @@ export default function Nav() {
 
   return (
     <header>
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              <NavLink to="/" color="inherit" className={classes.navLink}>
-                <Hidden only={['sm', 'xs']}>
-                  <NavLink to="/" color="inherit" className={classes.navLink}>
-                    Brand
-                  </NavLink>
-                </Hidden>
-                <Hidden mdUp>
-                  <DrawerFilter side={"left"}>
-                    <Filter isBrowseClass />
-                  </DrawerFilter>
-                </Hidden>
-              </NavLink>
-            </Typography>
-            <Button color="inherit">Login</Button>
-            <BrowseLink />
-          </Toolbar>
-        </AppBar>
-      </div>
+      <AppBar className={classes.appBarColor} position="sticky">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            <NavLink to="/" color="inherit" className={classes.navLink}>
+              <Hidden only={["sm", "xs"]}>
+                <NavLink to="/" color="inherit" className={classes.navLink}>
+                  Brand
+                </NavLink>
+              </Hidden>
+              <Hidden mdUp>
+                <DrawerFilter side={"left"}>
+                  <Filter isBrowseClass />
+                </DrawerFilter>
+              </Hidden>
+            </NavLink>
+          </Typography>
+          <Button color="inherit">Login</Button>
+          <BrowseLink />
+        </Toolbar>
+      </AppBar>
     </header>
   );
 }

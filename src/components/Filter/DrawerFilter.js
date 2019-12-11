@@ -5,22 +5,15 @@ import Button from "@material-ui/core/Button";
 import FilterListOutlinedIcon from "@material-ui/icons/FilterListOutlined";
 
 const useStyles = makeStyles(theme => ({
-  fab: {
-    margin: 1
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1)
-  },
   button: {
-    margin: theme.spacing(1)
-  }
+    margin: theme.spacing(1, 1, 1, 0)
+  },
+  icon: theme.buttonIcon,
 }));
 
 function DrawerFilter(props) {
   const classes = useStyles();
   const { children } = props;
-
-  console.log(`props.side: ${props.side}`);
 
   const [state, setState] = React.useState({
     textInput: "",
@@ -42,17 +35,15 @@ function DrawerFilter(props) {
   return (
     <Fragment>
       <Button
-        variant="contained"
-        color="primary"
         className={classes.button}
         onClick={toggleDrawer(props.side, true)}
       >
-        <FilterListOutlinedIcon />
-        Filter
+        <FilterListOutlinedIcon className={classes.icon} />
+        {props.title}
       </Button>
       <Drawer
         anchor={props.side}
-        open={props.side === 'right' ? state.right : state.left}
+        open={props.side === "right" ? state.right : state.left}
         onClose={toggleDrawer(props.side, false)}
       >
         {children}

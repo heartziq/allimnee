@@ -42,6 +42,11 @@ const useStyles = makeStyles(theme => ({
   },
   divider: {
     height: theme.spacing(2)
+  },
+  subjectStyle: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 10
+    }
   }
 }));
 
@@ -111,7 +116,7 @@ function MainApp(props) {
             <ListItemText
               primary={
                 <NavLink to="/browse" className={classes.navLink}>
-                  <Typography variant="h6">
+                  <Typography variant="h6" className={classes.subjectStyle}>
                     {getLevelText(thisClass.level)}, {thisClass.subject}
                   </Typography>
                 </NavLink>

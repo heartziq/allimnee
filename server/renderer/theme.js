@@ -15,6 +15,20 @@ const theme = createMuiTheme({
     },
     background: {
       default: "#fff"
+    },
+    icon: {
+      default: "#fff"
+    }
+  },
+  buttonIcon: {
+    fontSize: 32,
+    color: "#fff"
+  },
+  overrides: {
+    MuiRadio: {
+      colorPrimary: {
+        color: 'red'
+      }
     }
   }
 });
