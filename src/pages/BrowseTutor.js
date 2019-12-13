@@ -34,6 +34,8 @@ class BrowseTutor extends React.Component {
   }
 
   fetchInitialTutorState = async () => {
+    console.info("running componentDidMount fetch(BrowseTUtor)....");
+
     const result = await fetch("/api/tutor");
     const tutorList = await result.json();
 
@@ -74,10 +76,10 @@ class BrowseTutor extends React.Component {
   };
 
   render() {
-    // grab user query param
+    // grab user query param (use this for URI persistent refresh)
     const userQuery = qs.parse(this.props.location.search);
-    // console.log(`userQuery: ${JSON.stringify(userQuery)}`);
-
+    console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
+    
     // grab props injected by HOC (withStyles)
     const { classes } = this.props;
     return (

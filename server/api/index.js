@@ -25,8 +25,15 @@ export const getAllSubjects = async () =>
 export const getAllArea = async () =>
   await conn.collection("area").findOne({}, { projection: { _id: 0 } });
 
-export const getAllClasses = async (id) =>
-  await conn
+export const getAllClasses = async (filter, limit, skip) => {
+  // strip off undefined
+  const filterStripped = JSON.parse(JSON.stringify(filter));
+  console.log(filter._id);
+  console.log(filterStripped._id);
+  return await conn
     .collection("classes")
-    .find(id)
+    .find({ ...filterStripped, _id: parseInt(filter._id, 10) })
+    .skip(skip)
+    .limit(limit)
     .toArray();
+};

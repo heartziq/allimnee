@@ -8,3 +8,13 @@ export const getRandomImage = async () => {
 
   return medium;
 };
+
+export const isBrowser = () => {
+  try {
+    if (window || document)
+      return true;
+  } catch (error) {
+    console.error('Server does not have access to window or document');
+    return false;
+  }
+}

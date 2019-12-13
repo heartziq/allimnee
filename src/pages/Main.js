@@ -16,14 +16,15 @@ import RoomIcon from "@material-ui/icons/Room";
 import { NavLink } from "react-router-dom";
 import TablePagination from "@material-ui/core/TablePagination";
 import Hidden from "@material-ui/core/Hidden";
+import qs from "query-string";
 
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
 import { sortClass } from "../redux/selectors";
-import { getAllClasses } from "../api";
+import { getAllClasses as FGetClasses } from "../api";
 
 // helper
-import { getRandomImage } from "../helper";
+import { getRandomImage, isBrowser } from "../helper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -72,13 +73,16 @@ function MainApp(props) {
   }
 
   async function fetchClass() {
-    const classList = await getAllClasses();
+    console.info("running componentDidMount fetch(Main)....");
+    // id will be synchronize with uri
+    // get id from uri
+    const classList = await FGetClasses();
     props.dispatch({ type: "updateClassList", initialData: classList });
   }
 
   React.useEffect(() => {
     popImg();
-    fetchClass();
+    if (props.classes.length < 1) fetchClass();
   }, []);
 
   const lookupTable = {
@@ -101,6 +105,10 @@ function MainApp(props) {
       if (isSubsetOf(levelList, value)) return key;
     }
   }
+
+  // grab user query param (use this for URI persistent refresh)
+  const userQuery = qs.parse(props.location.search);
+  console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
 
   function renderClasses() {
     const classList = props.classes;

@@ -1,5 +1,6 @@
 import { serverRender } from "../renderer/serverRender";
 import fetch from "isomorphic-fetch";
+import qs from "query-string";
 
 module.exports = {
   name: "route-handling",
@@ -10,7 +11,12 @@ module.exports = {
       method: "GET",
       path: "/",
       handler: async function(request, h) {
-        const qParam = request.query.id ? `?id=${request.query.id}` : ``;
+        console.info("running server fetch(Main)....");
+
+        let qParam = request.query.id ? `?id=${request.query.id}` : ``;
+        const { limit, skip } = request.query;
+        qParam.concat(`&limit=${limit}&skip=${skip}`);
+
         const uri = `http://localhost:3000/api/classes${qParam}`;
 
         const res = await fetch(uri);
@@ -39,6 +45,8 @@ module.exports = {
       method: "GET",
       path: "/browse",
       handler: async (request, h) => {
+        console.info("running server fetch(BrowseTutor)....");
+
         // getting user param query (backend)
         const qParam = request.query.id ? `?id=${request.query.id}` : ``;
         const uri = `http://localhost:3000/api/tutor${qParam}`;

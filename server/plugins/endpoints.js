@@ -48,12 +48,20 @@ module.exports = {
       method: "GET",
       path: "/api/classes",
       handler: async function(request, reply) {
-        // get id
-        const id = request.query.id
-          ? { _id: parseInt(request.query.id, 10) }
-          : {};
+        const { id, subject } = request.query;
 
-        const qResult = await getAllClasses(id);
+        const filter = {
+          _id: id,
+          subject
+        };
+        // get limit
+        const { limit, skip } = request.query;
+
+        const qResult = await getAllClasses(
+          filter,
+          parseInt(limit, 10),
+          parseInt(skip, 10)
+        );
         return reply.response(qResult).code(200);
       }
     });
