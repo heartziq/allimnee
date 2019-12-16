@@ -27,12 +27,12 @@ export const getAllArea = async () =>
 
 export const getAllClasses = async (filter, limit, skip) => {
   // strip off undefined
-  const filterStripped = JSON.parse(JSON.stringify(filter));
+  // const filterStripped = JSON.parse(JSON.stringify(filter));
   // console.log("filterStripped", filterStripped);
-  const filterModify = { ...filterStripped, _id: parseInt(filter._id, 10) };
+  // const filterModify = { ...filterStripped, _id: parseInt(filter._id, 10) };
   return await conn
     .collection("classes")
-    .find(filterStripped)
+    .find(filter)
     .skip(skip)
     .limit(limit)
     .toArray();

@@ -54,8 +54,6 @@ const useStyles = makeStyles(theme => ({
 function MainApp(props) {
   const classes = useStyles();
 
-  console.log("MainApp > props.hasFetch", props.hasFetch);
-
   const [img, setImg] = React.useState("");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);

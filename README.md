@@ -3,18 +3,18 @@
 - [ ] MVP features;
   
   - [ ] Browse ClassList
-    - [ ] UI/UX [Friday, 2359 - 13/12]
-      - [x] [Level 1] Draft a good wireframe: xs (mobile), md (laptop/desktop)
-      - [x] [Level 2] "" "": sm(tablet)
+    - [ ] UI/UX
       - [ ] For SM, MD; replace pagination with InfiniteScrolling
-    - [ ] URI - Query params persistent (stays when refreshed) [Weekend HaCK - 14/12 to 15/12]
-      - [x] [Bug] BrowseClass page only shows 1 record
-      - [x] [Bug] Redundancy in fetch same results on both server AND frontEnd
-      - [ ] How to make query params 'synchronize' with current filters?
-      - [ ] [Bug] server.api.findClasses, filter.id === undefined
-      - [ ] pagination on DB.query side
-    - [ ] Touch up/Fine tune UI/UX [Sunday 6pm]
-  - [ ] Class Details [before long holiday]
+    - [ ] URI - Query params persistent (stays when refreshed)
+      - [ ] How to make query params 'synchronize' with current filters? (Redux + URI)
+      - [x] pagination on DB.query side
+      - [ ] [Challenge] How to solve redundancy in server request + api request
+        - [ ] [Step 1] Read up on API design best practices
+        - [ ] [Step 2] Redesign endpoints (keep functionalities the same)
+        - [ ] [Step 3] Implement!
+      - [ ] [Challenge] How to make frontend pagination works with DB pagination
+    - [ ] Touch up/Fine tune UI/UX
+  - [ ] Class Details
     - [ ] [BUTTON] Contact Tutor (email)
   - [ ] Tutor details
   - [ ] Deploy to heroku

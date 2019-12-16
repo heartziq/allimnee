@@ -51,18 +51,15 @@ module.exports = {
       path: "/api/classes",
       handler: async function(request, reply) {
         // FROM server: http://localhost:3000/api/classes?id=3&limit=1&skip=3
-        console.log('endpoint > request.query ', JSON.stringify(request.query));
+        // console.log('endpoint > request.query ', JSON.stringify(request.query));
+        // console.log("endpoint > request.url", request.url.search);
+        const { subject, limit, skip } = request.query;
+        const filter = Object.assign(
+          {},
+          JSON.parse(JSON.stringify({ subject }))
+        );
 
-        const { id, subject } = request.query;
-        const filter = {
-          _id: id,
-          subject
-        };
-
-        // get object (strippedOff) and call MongoApi
-
-        // get limit
-        const { limit, skip } = request.query;
+        console.log("endpoints > filter", filter);
 
         const qResult = await getAllClasses(
           filter,

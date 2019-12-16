@@ -6,16 +6,16 @@ module.exports = {
   name: "route-handling",
   version: "1.0.0",
   register: async function(server) {
-    // Main Page
+    // Main Page (Browse ClassList)
     server.route({
       method: "GET",
       path: "/",
       handler: async function(request, h) {
         console.info("running [SERVER] fetch(Main)....");
-        const { id, subject, limit, skip } = request.query;
+        const { subject, limit, skip } = request.query;
         const qStrippedOff = Object.assign(
           {},
-          JSON.parse(JSON.stringify({ id, subject, limit, skip }))
+          JSON.parse(JSON.stringify({ subject, limit, skip }))
         );
         let qParam = qs.stringify(qStrippedOff);
 
@@ -42,6 +42,15 @@ module.exports = {
         });
       }
     });
+
+    // Class Details (Indiv class)
+    server.route({
+      method: 'GET',
+      path: '/class/{id}',
+      handler: async (req, res) => {
+
+      }
+    })
 
     // BrowseTutor
     server.route({
