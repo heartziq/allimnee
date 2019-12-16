@@ -54,6 +54,8 @@ const useStyles = makeStyles(theme => ({
 function MainApp(props) {
   const classes = useStyles();
 
+  console.log("MainApp > props.hasFetch", props.hasFetch);
+
   const [img, setImg] = React.useState("");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -73,7 +75,7 @@ function MainApp(props) {
   }
 
   async function fetchClass() {
-    console.info("running componentDidMount fetch(Main)....");
+    console.info("running [FE] fetch(Main)....");
     // id will be synchronize with uri
     // get id from uri
     const classList = await FGetClasses();
@@ -82,7 +84,7 @@ function MainApp(props) {
 
   React.useEffect(() => {
     popImg();
-    if (props.classes.length < 1) fetchClass();
+    if (!props.hasFetch) fetchClass();
   }, []);
 
   const lookupTable = {
@@ -108,7 +110,7 @@ function MainApp(props) {
 
   // grab user query param (use this for URI persistent refresh)
   const userQuery = qs.parse(props.location.search);
-  console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
+  // console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
 
   function renderClasses() {
     const classList = props.classes;
@@ -189,7 +191,8 @@ function MainApp(props) {
 }
 
 const mapStateToProps = state => ({
-  classes: sortClass(state.classes, state.filterClass)
+  classes: sortClass(state.classes, state.filterClass),
+  hasFetch: state.hasFetch
 });
 
 export default connect(mapStateToProps)(MainApp);

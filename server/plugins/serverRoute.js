@@ -11,19 +11,22 @@ module.exports = {
       method: "GET",
       path: "/",
       handler: async function(request, h) {
-        console.info("running server fetch(Main)....");
+        console.info("running [SERVER] fetch(Main)....");
+        const { id, subject, limit, skip } = request.query;
+        const qStrippedOff = Object.assign(
+          {},
+          JSON.parse(JSON.stringify({ id, subject, limit, skip }))
+        );
+        let qParam = qs.stringify(qStrippedOff);
 
-        let qParam = request.query.id ? `?id=${request.query.id}` : ``;
-        const { limit, skip } = request.query;
-        qParam.concat(`&limit=${limit}&skip=${skip}`);
-
-        const uri = `http://localhost:3000/api/classes${qParam}`;
-
+        const uri = `http://localhost:3000/api/classes?${qParam}`;
+        console.log("serverRoute > uri", uri);
         const res = await fetch(uri);
         const result = await res.json();
 
         const state = {
-          classes: result
+          classes: result,
+          hasFetch: true
         };
 
         const { cssData, htmlData, initialState } = serverRender(
@@ -45,7 +48,7 @@ module.exports = {
       method: "GET",
       path: "/browse",
       handler: async (request, h) => {
-        console.info("running server fetch(BrowseTutor)....");
+        console.info("running [SERVER] fetch(BrowseTutor)....");
 
         // getting user param query (backend)
         const qParam = request.query.id ? `?id=${request.query.id}` : ``;

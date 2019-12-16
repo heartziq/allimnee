@@ -24,6 +24,16 @@ const filterClass = {
   level: 0
 };
 
+// hasFetch; determine if server has alrdy pre-fetch
+const hasFetch = false;
+const hasFetchReducer = (state = hasFetch, action) => {
+  switch (action.type) {
+    case "update":
+      return !state;
+    default:
+      return state;
+  }
+};
 // class reducer
 const classReducer = (state = classDefaultState, action) => {
   switch (action.type) {
@@ -94,7 +104,8 @@ export default function(initialState) {
       tutor: tutorReducer,
       filter: filterReducer,
       classes: classReducer,
-      filterClass: filterClassReducer
+      filterClass: filterClassReducer,
+      hasFetch: hasFetchReducer
     }),
     initialState
   );

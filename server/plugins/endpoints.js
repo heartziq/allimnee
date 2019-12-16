@@ -5,6 +5,8 @@ import {
   getAllClasses
 } from "../api";
 
+import qs from "query-string";
+
 module.exports = {
   name: "api-endpoint",
   version: "1.0.0",
@@ -48,12 +50,17 @@ module.exports = {
       method: "GET",
       path: "/api/classes",
       handler: async function(request, reply) {
-        const { id, subject } = request.query;
+        // FROM server: http://localhost:3000/api/classes?id=3&limit=1&skip=3
+        console.log('endpoint > request.query ', JSON.stringify(request.query));
 
+        const { id, subject } = request.query;
         const filter = {
           _id: id,
           subject
         };
+
+        // get object (strippedOff) and call MongoApi
+
         // get limit
         const { limit, skip } = request.query;
 
