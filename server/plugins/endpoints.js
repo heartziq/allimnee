@@ -5,8 +5,6 @@ import {
   getAllClasses
 } from "../api";
 
-import qs from "query-string";
-
 module.exports = {
   name: "api-endpoint",
   version: "1.0.0",
@@ -50,16 +48,11 @@ module.exports = {
       method: "GET",
       path: "/api/classes",
       handler: async function(request, reply) {
-        // FROM server: http://localhost:3000/api/classes?id=3&limit=1&skip=3
-        // console.log('endpoint > request.query ', JSON.stringify(request.query));
-        // console.log("endpoint > request.url", request.url.search);
         const { subject, limit, skip } = request.query;
         const filter = Object.assign(
           {},
           JSON.parse(JSON.stringify({ subject }))
         );
-
-        console.log("endpoints > filter", filter);
 
         const qResult = await getAllClasses(
           filter,

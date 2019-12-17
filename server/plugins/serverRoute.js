@@ -12,14 +12,10 @@ module.exports = {
       path: "/",
       handler: async function(request, h) {
         console.info("running [SERVER] fetch(Main)....");
-        const { subject, limit, skip } = request.query;
-        const qStrippedOff = Object.assign(
-          {},
-          JSON.parse(JSON.stringify({ subject, limit, skip }))
-        );
-        let qParam = qs.stringify(qStrippedOff);
+        const qParam = request.url.search;
+        // let qParam = qs.stringify(qStrippedOff);
 
-        const uri = `http://localhost:3000/api/classes?${qParam}`;
+        const uri = `http://localhost:3000/api/classes${qParam}`;
         console.log("serverRoute > uri", uri);
         const res = await fetch(uri);
         const result = await res.json();
@@ -45,12 +41,10 @@ module.exports = {
 
     // Class Details (Indiv class)
     server.route({
-      method: 'GET',
-      path: '/class/{id}',
-      handler: async (req, res) => {
-
-      }
-    })
+      method: "GET",
+      path: "/class/{id}",
+      handler: async (req, res) => {}
+    });
 
     // BrowseTutor
     server.route({

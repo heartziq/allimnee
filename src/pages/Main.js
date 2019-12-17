@@ -56,9 +56,10 @@ function MainApp(props) {
 
   const [img, setImg] = React.useState("");
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(2);
 
   const handleChangePage = (event, newPage) => {
+    console.log(`you are now at page: ${newPage}`);
     setPage(newPage);
   };
 
@@ -118,41 +119,57 @@ function MainApp(props) {
       .map(thisClass => (
         <React.Fragment key={thisClass._id}>
           <ListItem>
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src={img} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={
-                <NavLink to="/browse" className={classes.navLink}>
-                  <Typography variant="h6" className={classes.subjectStyle}>
-                    {getLevelText(thisClass.level)}, {thisClass.subject}
-                  </Typography>
-                </NavLink>
-              }
-              secondary={
-                <React.Fragment>
-                  <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
-                  <span style={{ verticalAlign: "text-bottom" }}>
-                    {thisClass.datetime}
-                  </span>
-                </React.Fragment>
-              }
-            />
-            <ListItemText
-              secondary={
-                <React.Fragment>
-                  <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
-                  {thisClass.location}
-                </React.Fragment>
-              }
-            />
-            <ListItemText
-              secondary={
-                <Typography variant="subtitle1" align="center">
-                  {thisClass.tutorName}
-                </Typography>
-              }
-            />
+            <Grid container>
+              <Grid item container direction="row" md={4}>
+                <ListItemAvatar>
+                  <Avatar alt="Remy Sharp" src={img} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <NavLink to="/browse" className={classes.navLink}>
+                      <Typography
+                        variant="body1"
+                        className={classes.subjectStyle}
+                      >
+                        {thisClass._id}
+                        {getLevelText(thisClass.level)}, {thisClass.subject}
+                      </Typography>
+                    </NavLink>
+                  }
+                  secondary={
+                    <React.Fragment>
+                      <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
+                      <span style={{ verticalAlign: "text-bottom" }}>
+                        {thisClass.datetime}
+                      </span>
+                    </React.Fragment>
+                  }
+                />
+              </Grid>
+              <Grid item md={4}>
+                <ListItemText
+                  secondary={
+                    <Typography
+                      variant="body2"
+                      align="right"
+                      style={{ color: "rgba(0, 0, 0, 0.54)" }}
+                    >
+                      <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
+                      {thisClass.location}
+                    </Typography>
+                  }
+                />
+              </Grid>
+              <Grid item md={4}>
+                <ListItemText
+                  secondary={
+                    <Typography variant="subtitle1" align="right">
+                      {thisClass.tutorName}
+                    </Typography>
+                  }
+                />
+              </Grid>
+            </Grid>
           </ListItem>
           <Divider variant="inset" component="li" />
         </React.Fragment>
@@ -163,9 +180,7 @@ function MainApp(props) {
     <Grid container>
       <Hidden smDown>
         <Grid item md={2}>
-          <Paper className={classes.paperStyles}>
-            <Filter isBrowseClass />
-          </Paper>
+          <Filter isBrowseClass />
         </Grid>
       </Hidden>
 
@@ -174,7 +189,7 @@ function MainApp(props) {
           <Level />
           <List className={classes.root}>{renderClasses()}</List>
           <TablePagination
-            rowsPerPageOptions={[5, 10]}
+            rowsPerPageOptions={[2, 5, 10]}
             component="div"
             count={props.classes.length}
             rowsPerPage={rowsPerPage}

@@ -29,6 +29,11 @@ const theme = createMuiTheme({
       colorPrimary: {
         color: 'red'
       }
+    },
+    MuiTypography: {
+      h6: {
+        color: 'red'
+      }
     }
   }
 });
