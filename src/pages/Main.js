@@ -45,8 +45,8 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(2)
   },
   subjectStyle: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 10
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 15
     }
   },
   locationIcon: { fontSize: 15, marginRight: 3 },
@@ -125,11 +125,12 @@ function MainApp(props) {
 
   function renderLocation(location) {
     if (isMobileOrTablet) {
-      console.log("sm and below");
       return (
         <Typography
-          variant="caption"
+          variant="body2"
           align="right"
+          display="block"
+          noWrap
           style={{ color: "rgba(0, 0, 0, 0.54)" }}
         >
           <RoomIcon className={classes.locationIcon} />
@@ -137,7 +138,6 @@ function MainApp(props) {
         </Typography>
       );
     } else {
-      console.log("md and up");
       return (
         <Typography variant="body2" align="right" style={{ color: "green" }}>
           <RoomIcon className={classes.locationIcon} />
@@ -149,7 +149,6 @@ function MainApp(props) {
 
   function renderClasses() {
     const classList = props.classes;
-
     return classList
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map(thisClass => (
@@ -214,8 +213,7 @@ function MainApp(props) {
       </Hidden>
 
       <Grid item md={10} xs={12}>
-        <Container fixed>
-          <Level />
+        <MainBody screen={useMediaQuery(theme.breakpoints.only("sm"))}>
           <List className={classes.root}>{renderClasses()}</List>
           <TablePagination
             rowsPerPageOptions={[2, 5, 10]}
@@ -226,9 +224,30 @@ function MainApp(props) {
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
           />
-        </Container>
+        </MainBody>
       </Grid>
     </Grid>
+  );
+}
+
+function MainBody(props) {
+  if (props.screen)
+    return (
+      <React.Fragment>
+        <div style={{ margin: "0 5%" }}>
+          <Level />
+        </div>
+
+        {props.children}
+      </React.Fragment>
+    );
+  return (
+    <React.Fragment>
+      <Container fixed>
+        <Level />
+      </Container>
+      {props.children}
+    </React.Fragment>
   );
 }
 
