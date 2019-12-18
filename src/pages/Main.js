@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { connect } from "react-redux";
 import Container from "@material-ui/core/Container";
 import List from "@material-ui/core/List";
@@ -48,12 +48,24 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: 10
     }
+  },
+  locationIcon: { fontSize: 15, marginRight: 3 },
+  [theme.breakpoints.down("sm")]: {
+    locationIcon: { color: "red" }
   }
 }));
 
 function MainApp(props) {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const [ssr, setSsr] = React.useState("css");
+
+  React.useEffect(() => {
+    setSsr("js");
+  }, [ssr]);
+  console.log("ssr: ", ssr);
   const [img, setImg] = React.useState("");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(2);
@@ -111,6 +123,30 @@ function MainApp(props) {
   const userQuery = qs.parse(props.location.search);
   // console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
 
+  function renderLocation(location) {
+    if (isMobileOrTablet) {
+      console.log("sm and below");
+      return (
+        <Typography
+          variant="caption"
+          align="right"
+          style={{ color: "rgba(0, 0, 0, 0.54)" }}
+        >
+          <RoomIcon className={classes.locationIcon} />
+          {location}
+        </Typography>
+      );
+    } else {
+      console.log("md and up");
+      return (
+        <Typography variant="body2" align="right" style={{ color: "green" }}>
+          <RoomIcon className={classes.locationIcon} />
+          {location}
+        </Typography>
+      );
+    }
+  }
+
   function renderClasses() {
     const classList = props.classes;
 
@@ -120,10 +156,13 @@ function MainApp(props) {
         <React.Fragment key={thisClass._id}>
           <ListItem>
             <Grid container>
-              <Grid item container direction="row" md={4}>
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={img} />
-                </ListItemAvatar>
+              <Grid item container direction="row" xs={9} md={4}>
+                <Hidden smDown>
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={img} />
+                  </ListItemAvatar>
+                </Hidden>
+
                 <ListItemText
                   primary={
                     <NavLink to="/browse" className={classes.navLink}>
@@ -131,7 +170,6 @@ function MainApp(props) {
                         variant="body1"
                         className={classes.subjectStyle}
                       >
-                        {thisClass._id}
                         {getLevelText(thisClass.level)}, {thisClass.subject}
                       </Typography>
                     </NavLink>
@@ -146,29 +184,20 @@ function MainApp(props) {
                   }
                 />
               </Grid>
-              <Grid item md={4}>
-                <ListItemText
-                  secondary={
-                    <Typography
-                      variant="body2"
-                      align="right"
-                      style={{ color: "rgba(0, 0, 0, 0.54)" }}
-                    >
-                      <RoomIcon style={{ fontSize: 15, marginRight: 3 }} />
-                      {thisClass.location}
-                    </Typography>
-                  }
-                />
+              <Grid item xs={3} md={4}>
+                <ListItemText secondary={renderLocation(thisClass.location)} />
               </Grid>
-              <Grid item md={4}>
-                <ListItemText
-                  secondary={
-                    <Typography variant="subtitle1" align="right">
-                      {thisClass.tutorName}
-                    </Typography>
-                  }
-                />
-              </Grid>
+              <Hidden smDown>
+                <Grid item md={4}>
+                  <ListItemText
+                    secondary={
+                      <Typography variant="subtitle1" align="right">
+                        {thisClass.tutorName}
+                      </Typography>
+                    }
+                  />
+                </Grid>
+              </Hidden>
             </Grid>
           </ListItem>
           <Divider variant="inset" component="li" />
@@ -178,13 +207,13 @@ function MainApp(props) {
 
   return (
     <Grid container>
-      <Hidden smDown>
+      <Hidden implementation={ssr} smDown>
         <Grid item md={2}>
           <Filter isBrowseClass />
         </Grid>
       </Hidden>
 
-      <Grid item md={10} sm={12} xs={12}>
+      <Grid item md={10} xs={12}>
         <Container fixed>
           <Level />
           <List className={classes.root}>{renderClasses()}</List>
