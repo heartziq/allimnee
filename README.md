@@ -3,7 +3,7 @@
 - [ ] Browse ClassList
   - [ ] UI/UX
     - [ ] For < MD; replace pagination with InfiniteScrolling
-      - [ ] Study code example
+      - [x] Study code example
       - [ ] Implement!
   - [ ] URI - Query params persistent (stays when refreshed)
     - [ ] How to make query params 'synchronize' with current filters? (Redux + URI)

@@ -1,8 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import debounce from "lodash.debounce";
 import fetch from "isomorphic-fetch";
-import { isBrowser } from "../../helper";
+import PropTypes from "prop-types";
+import InsertData from "./Injector";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -87,7 +88,7 @@ function InifiniteUsers(props) {
           console.log("User has scrolled till the end!");
           // React.useEffect(() => {
           //   fetchRandomUsers(10);
-          // }, [setOverallState]);
+          // }, [overallState]);
           fetchRandomUsers(10);
         }
       }, 100);
@@ -113,20 +114,27 @@ function InifiniteUsers(props) {
               verticalAlign: "top"
             }}
           >
-            {user.uuid}
+            {user.uuid || user.login.uuid}
           </span>
           <h2>
-            {user.name.first}, {user.name.last}
+            {index} = {user.name.first}, {user.name.last}
           </h2>
           <p>email: {user.email}</p>
           <ul>
             <li>username: {user.username}</li>
           </ul>
-          <img src={user.photo} alt="profile-pic" />
+          <img
+            src={user.photo ? user.photo : user.picture.large}
+            alt="profile-pic"
+          />
         </div>
       ))}
     </div>
   );
 }
 
-export default InifiniteUsers;
+InifiniteUsers.propTypes = {
+  data: PropTypes.array
+};
+
+export default InsertData(<InifiniteUsers />);
