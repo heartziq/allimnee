@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import debounce from "lodash.debounce";
 import fetch from "isomorphic-fetch";
+import { isBrowser } from "../../helper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 function InifiniteUsers(props) {
   const classes = useStyles();
 
-	// state to keep track of scrolling & listofusers
+  // state to keep track of scrolling & listofusers
   const [overallState, setOverallState] = React.useState({
     error: false,
     hasMore: true,
@@ -20,23 +21,40 @@ function InifiniteUsers(props) {
     users: []
   });
 
-	// fetch 3 class per scroll
+  const [isBrowser, setBrowser] = React.useState(false);
+
+  const populateInitialUsers = async () => {
+    const response = await fetch("https://randomuser.me/api/?results=10");
+    const results = await response.json();
+
+    setOverallState({ ...overallState, users: [...results.results] });
+  };
+
+  React.useEffect(() => {
+    populateInitialUsers();
+    setBrowser(true);
+  }, []);
+
+  // fetch 3 class per scroll
   const fetchRandomUsers = async numberOfUsers => {
     const response = await fetch(
       `https://randomuser.me/api/?results=${numberOfUsers}`
     );
 
+    const results = await response.json();
+
     try {
       // new list of users
-      const nextUsers = response.body.results.map(user => ({
+      const nextUsers = results.results.map(user => ({
         email: user.email,
         name: Object.values(user.name).join(" "),
-        photo: user.picture.medium,
+        photo: user.picture.large,
         username: user.login.username,
         uuid: user.login.uuid
       }));
 
       // Merge into list of existing users
+      // maxed 100 users at any given time
       setOverallState({
         ...overallState,
         hasMore: overallState.users.length < 100,
@@ -53,8 +71,7 @@ function InifiniteUsers(props) {
   };
 
   try {
-    if (__isBrowser__) {
-      console.log(`isBrowser: ${__isBrowser__}`);
+    if (isBrowser) {
       // bind .onscroll
       window.onscroll = debounce(() => {
         const { error, isLoading, hasMore } = overallState;
@@ -66,25 +83,48 @@ function InifiniteUsers(props) {
 
         if (error || isLoading || !hasMore) return;
 
-        console.log(`hasScroll: ${hasScrolledToTheEnd}`)
         if (hasScrolledToTheEnd) {
-          
-          React.useEffect(() => {
-            fetchRandomUsers(10);
-          }, [setOverallState]);
+          console.log("User has scrolled till the end!");
+          // React.useEffect(() => {
+          //   fetchRandomUsers(10);
+          // }, [setOverallState]);
+          fetchRandomUsers(10);
         }
       }, 100);
     }
   } catch (error) {
-    console.log('am I here?')
     console.error(error.message);
   }
 
   const { error, hasMore, isLoading, users } = overallState;
-  console.log('users', users);
+
   return (
     <div>
       <h1>Inifinite Users!</h1>
+
+      {users.map((user, index) => (
+        <div key={index}>
+          <span
+            style={{
+              marginRight: 5,
+              fontStyle: "italic",
+              fontSize: "2rem",
+              float: "left",
+              verticalAlign: "top"
+            }}
+          >
+            {user.uuid}
+          </span>
+          <h2>
+            {user.name.first}, {user.name.last}
+          </h2>
+          <p>email: {user.email}</p>
+          <ul>
+            <li>username: {user.username}</li>
+          </ul>
+          <img src={user.photo} alt="profile-pic" />
+        </div>
+      ))}
     </div>
   );
 }
