@@ -1,4 +1,3 @@
-// FOr mAC
 node_modules
 
 .DS_Store
@@ -6,9 +5,3 @@ node_modules
 public/bundle.js
 
 src/components/test
-
-// FOr Windows
-
-public\bundle.js
-
-src\components\test
