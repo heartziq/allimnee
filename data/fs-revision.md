@@ -779,7 +779,7 @@ export default class App extends React.Component {
 
 
 /* Responsive meta element */h
-<meta name="viewport" scale="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
 const a = (this.state.p) ? 'show THIS' : 'or THAT';
