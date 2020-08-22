@@ -30,28 +30,28 @@ myMongo.connect(async (err, result) => {
   assert.strictEqual(err, null);
   try {
     // insert tutors
-    // const res = await result
-    //   .db("test")
-    //   .collection("tutor")
-    //   .insertMany(tutors);
+    const tutorsInserted = await result
+      .db("test")
+      .collection("tutor")
+      .insertMany(tutors);
 
-    // console.info(`row(s) inserted: ${res.insertedCount}`);
+    console.info(`tutor row(s) inserted: ${tutorsInserted.insertedCount}`);
 
     // // insert subjects
-    // await result
-    //   .db("test")
-    //   .collection("subject")
-    //   .insertOne(subjects);
+    const subjectsInserted = await result
+      .db("test")
+      .collection("subject")
+      .insertOne(subjects);
 
-    // console.info(`subject successfully inserted!`);
+    console.info(`subject row(s) inserted: ${subjectsInserted.insertedCount}`);
 
     // // insert area
-    // await result
-    //   .db("test")
-    //   .collection("area")
-    //   .insertOne(area);
+    const areasInserted = await result
+      .db("test")
+      .collection("area")
+      .insertOne(area);
 
-    // console.info(`area successfully inserted!`);
+    console.info(`areas row(s) inserted: ${areasInserted.insertedCount}`);
 
     // insert classList
     const insertClassList = await result
@@ -59,7 +59,7 @@ myMongo.connect(async (err, result) => {
       .collection("classes")
       .insertMany(classList);
 
-    console.info(`${insertClassList.insertedCount} row(s) inserted!`)
+    console.info(`classes row(s) inserted: ${insertClassList.insertedCount}`);
 
     await result.close();
   } catch (err) {

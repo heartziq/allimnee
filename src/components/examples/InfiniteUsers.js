@@ -137,4 +137,5 @@ InifiniteUsers.propTypes = {
   data: PropTypes.array
 };
 
-export default InsertData(<InifiniteUsers />);
+// export default InsertData(InifiniteUsers);
+export default InifiniteUsers;
