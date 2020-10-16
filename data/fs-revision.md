@@ -781,18 +781,24 @@ export default class App extends React.Component {
 /* Responsive meta element */h
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+/* selective viewing */
+const MainViewPanel = (this.state.isLogin) ? 'Show List of Employees' : 'or Show Login Form instead';
 
-const a = (this.state.p) ? 'show THIS' : 'or THAT';
-const b = this.state.isOff && 'ffff' // show either 'ffff' (if true) or none at all
+const AnnouncementBar = this.state.hasAnnouncement && 'Show Announcement' // show nothing if there is no announcement at all
 
-<p>{b}</p>
+<div>{MainViewPanel}</div>
+<p>{AnnoucementBar}</div>
 
 /* arrow function with explicit return */
 const express = () => {
 	/* some code */
 	
-	return something	
+	return something
 }
+
+/* arrow function with implicit return */
+const express = () => `something`
+const implicitReturnObject = justOneArgument => ({first: 'john', last: 'nanny'})
 
 // callbacks
 console.log('----------------------------')
