@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from "redux";
-import uuid from "uuid/v1";
+import { v4 as uuidv4 } from "uuid";
 
 /* DEFINE DEFAULT STATE */
 
@@ -67,7 +67,7 @@ const tutorReducer = (state = tutorDefaultState, action) => {
   switch (action.type) {
     case "change":
       const dummySample = {
-        _id: uuid(),
+        _id: uuidv4(),
         name: action.name,
         stars: 4,
         bio:
@@ -98,7 +98,7 @@ const filterReducer = (state = filter, action) => {
       return state;
   }
 };
-export default function(initialState) {
+export default function (initialState) {
   const store = createStore(
     combineReducers({
       tutor: tutorReducer,

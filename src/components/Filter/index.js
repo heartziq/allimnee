@@ -157,7 +157,7 @@ const Filter = props => {
             onChange={event =>
               props.dispatch({
                 type: "updateFilterDay",
-                day: event.target.value
+                day: event.target.value.toString()
               })
             }
             name={"Day"}
@@ -255,7 +255,7 @@ const Filter = props => {
       {props.isBrowseTutor && renderBrowseTutorFilter()}
       <div className={classes.divider} />
       <Box width={1}>
-        <InputLabel shrink htmlFor="name-native-error">
+        <InputLabel shrink htmlFor="level-native-error">
           Level:
         </InputLabel>
         <NativeSelect
@@ -263,15 +263,15 @@ const Filter = props => {
           onChange={event =>
             props.dispatch({
               type: "updateFilterLevel",
-              level: parseInt(event.target.value, 10)
+              level: parseInt(event.target.value.toString(), 10)
             })
           }
           name={"Level"}
           inputProps={{
-            id: "name-native-error"
+            id: "level-native-error"
           }}
         >
-          <option value="" />
+          <option value={0} />
           <option key={1} value={1}>
             {"Primary 1"}
           </option>

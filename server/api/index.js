@@ -13,6 +13,12 @@ myMongo.connect(async (err, result) => {
   conn = await result.db("test");
 });
 
+export const findTutorId = async listOfId =>
+  await conn
+    .collection("tutor")
+    .find(listOfId, { projection: { name: 1, img: 1 } })
+    .toArray();
+
 export const findAllTutor = async _id =>
   await conn
     .collection("tutor")

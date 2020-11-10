@@ -26,6 +26,10 @@ class BrowseTutor extends React.Component {
   constructor(props) {
     super(props);
 
+    const isServer = this.props.staticContext && this.props.staticContext.isServer;
+    if (!isServer)
+      this.abortController = new AbortController();
+
     this.state = {
       textInput: "",
       right: false,
@@ -36,15 +40,30 @@ class BrowseTutor extends React.Component {
   fetchInitialTutorState = async () => {
     console.info("running [FE] fetch(BrowseTUtor)....");
 
-    const result = await fetch("/api/tutor");
-    const tutorList = await result.json();
+    // const abortController = new AbortController();
+    // const { signal } = abortController;
 
-    // populate redux state.tutor
-    this.props.dispatch({ type: "fill", initialData: tutorList });
+    try {
+      const result = await fetch("/api/tutor");
+      const tutorList = await result.json();
+
+      // populate redux state.tutor
+      this.props.dispatch({ type: "fill", initialData: tutorList });
+    } catch (e) {
+
+      if (e.name === 'AbortError')
+        console.log(e.name)
+    }
+
   };
 
   componentDidMount() {
     if (this.props.tutor.length < 1) this.fetchInitialTutorState();
+  }
+
+  componentWillUnmount() {
+    // console.log('abort controller....')
+    // this.abortController.abort();
   }
 
   handleSubmit = e => {
@@ -79,7 +98,7 @@ class BrowseTutor extends React.Component {
     // grab user query param (use this for URI persistent refresh)
     const userQuery = qs.parse(this.props.location.search);
     // console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
-    
+
     // grab props injected by HOC (withStyles)
     const { classes } = this.props;
     return (

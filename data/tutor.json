@@ -2,12 +2,21 @@
   {
     "_id": 0,
     "name": "Tifa Lockheart",
+    "img": "https://randomuser.me/api/portraits/med/women/1.jpg",
     "stars": 5,
     "gender": "Female",
     "location": "north",
     "bio": "A dedicated cheetos-breath who is passionate in diversity of languages",
-    "subject": ["English", "French", "Mandarin"],
-    "level": ["Primary 6", "Secondary 1", "Secondary 2"],
+    "subject": [
+      "English",
+      "French",
+      "Mandarin"
+    ],
+    "level": [
+      "Primary 6",
+      "Secondary 1",
+      "Secondary 2"
+    ],
     "contact": {
       "email": "tifa@gmail.com",
       "phone": "94130032"
@@ -16,12 +25,18 @@
   {
     "_id": 1,
     "name": "Aerith West",
+    "img": "https://randomuser.me/api/portraits/med/women/2.jpg",
     "stars": 4,
     "gender": "Female",
     "location": "south",
     "bio": "Fun and caring tutor who likes children and wants to see them prosper",
-    "subject": ["Mathematics"],
-    "level": ["Primary 1", "Primary 2"],
+    "subject": [
+      "Mathematics"
+    ],
+    "level": [
+      "Primary 1",
+      "Primary 2"
+    ],
     "contact": {
       "email": "aerith.w@aol.com",
       "phone": "84130032"
@@ -30,6 +45,7 @@
   {
     "_id": 2,
     "name": "Cait K. Sith",
+    "img": "https://randomuser.me/api/portraits/med/men/3.jpg",
     "stars": 4,
     "gender": "Male",
     "location": "East",
@@ -41,7 +57,12 @@
       "English Literature",
       "Sastera"
     ],
-    "level": ["Secondary 1", "Secondary 2", "Secondary 3", "Secondary 4"],
+    "level": [
+      "Secondary 1",
+      "Secondary 2",
+      "Secondary 3",
+      "Secondary 4"
+    ],
     "contact": {
       "email": "csith@gmail.com",
       "phone": "81130032"
@@ -50,12 +71,18 @@
   {
     "_id": 3,
     "name": "Cloud Strife",
+    "img": "https://randomuser.me/api/portraits/med/men/4.jpg",
     "stars": 5,
     "gender": "Male",
     "location": "west",
     "bio": "Father of two; Aspiring author; Prominent Teacher (see my portfolio)",
-    "subject": ["Spanish Major", "Spanish Basic"],
-    "level": ["Any"],
+    "subject": [
+      "Spanish Major",
+      "Spanish Basic"
+    ],
+    "level": [
+      "Any"
+    ],
     "contact": {
       "email": "cloud_strife@gmail.com",
       "phone": "93224013"
@@ -64,12 +91,21 @@
   {
     "_id": 4,
     "name": "Vincent Valentine",
+    "img": "https://randomuser.me/api/portraits/med/men/5.jpg",
     "stars": 4,
     "gender": "Male",
     "location": "central",
     "bio": "Goal-oriented 'math-head' with passion in crunching numbers - only numbers",
-    "subject": ["E Maths", "A Maths", "C Maths"],
-    "level": ["Secondary 2", "Secondary 3", "Secondary 4"],
+    "subject": [
+      "E Maths",
+      "A Maths",
+      "C Maths"
+    ],
+    "level": [
+      "Secondary 2",
+      "Secondary 3",
+      "Secondary 4"
+    ],
     "contact": {
       "email": "vvalentine@telegram.com",
       "phone": "94131322"
@@ -78,12 +114,18 @@
   {
     "_id": 5,
     "name": "Ahmad",
+    "img": "https://randomuser.me/api/portraits/med/men/6.jpg",
     "stars": 3,
     "gender": "Male",
     "location": "south",
     "bio": "A loving soul seeker who enlighten people with my knowledge of the Earth",
-    "subject": ["Physical Geography"],
-    "level": ["Secondary 1", "Secondary 2"],
+    "subject": [
+      "Physical Geography"
+    ],
+    "level": [
+      "Secondary 1",
+      "Secondary 2"
+    ],
     "contact": {
       "email": "amad-bon-bon@gmail.com",
       "phone": "9003032"
@@ -91,13 +133,21 @@
   },
   {
     "_id": 6,
-    "name": "Gambit Iglesias",
+    "name": "Gambitia Iglesias",
+    "img": "https://randomuser.me/api/portraits/med/women/7.jpg",
     "stars": 5,
     "gender": "male",
     "location": "north",
     "bio": "Plata O Plomo; Los Santos Hermanos",
-    "subject": ["French", "Sastera"],
-    "level": ["Primary 6", "Secondary 1", "Secondary 2"],
+    "subject": [
+      "French",
+      "Sastera"
+    ],
+    "level": [
+      "Primary 6",
+      "Secondary 1",
+      "Secondary 2"
+    ],
     "contact": {
       "email": "g.iglesias@gmail.com",
       "phone": "93122031"
@@ -106,12 +156,21 @@
   {
     "_id": 7,
     "name": "Lita Dumas",
+    "img": "https://randomuser.me/api/portraits/med/women/8.jpg",
     "stars": 5,
     "gender": "Female",
     "location": "east",
     "bio": "A kindred soul who is passionate in inspiring young minds to pursue their dreams",
-    "subject": ["English Language", "Chemistry", "Advanced Chemistry"],
-    "level": ["Secondary 1", "Secondary 2", "Secondary 3"],
+    "subject": [
+      "English Language",
+      "Chemistry",
+      "Advanced Chemistry"
+    ],
+    "level": [
+      "Secondary 1",
+      "Secondary 2",
+      "Secondary 3"
+    ],
     "contact": {
       "email": "lita.d.hardy@gmail.com",
       "phone": "94110032"
@@ -120,12 +179,19 @@
   {
     "_id": 8,
     "name": "Bret Hart",
+    "img": "https://randomuser.me/api/portraits/med/men/9.jpg",
     "stars": 5,
     "gender": "Male",
     "location": "north",
     "bio": "Ain't nothin much to say about me except that im aweeesooomme",
-    "subject": ["Pure Physics", "Pure Chemistry"],
-    "level": ["Secondary 3", "Secondary 4"],
+    "subject": [
+      "Pure Physics",
+      "Pure Chemistry"
+    ],
+    "level": [
+      "Secondary 3",
+      "Secondary 4"
+    ],
     "contact": {
       "email": "bret_hart_awesome@wcw.com",
       "phone": "83130021"
@@ -134,6 +200,7 @@
   {
     "_id": 9,
     "name": "Owen Hart",
+    "img": "https://randomuser.me/api/portraits/med/men/10.jpg",
     "stars": 5,
     "gender": "Male",
     "location": "central",
@@ -144,7 +211,60 @@
       "Human Geography",
       "History"
     ],
-    "level": ["Secondary 1", "Secondary 2", "Secondary 3", "Secondary 4"],
+    "level": [
+      "Secondary 1",
+      "Secondary 2",
+      "Secondary 3",
+      "Secondary 4"
+    ],
+    "contact": {
+      "email": "o.hart@gmail.com",
+      "phone": "99310043"
+    }
+  },
+  {
+    "_id": 10,
+    "name": "James Skesgard",
+    "img": "https://randomuser.me/api/portraits/med/men/11.jpg",
+    "stars": 2,
+    "gender": "Male",
+    "location": "north",
+    "bio": "Retired WCW legend whose current main focus is educating and motivating students to prosper in their education",
+    "subject": [
+      "English Language",
+      "English Literature",
+      "Human Geography",
+      "History"
+    ],
+    "level": [
+      "Secondary 3",
+      "Secondary 4"
+    ],
+    "contact": {
+      "email": "o.hart@gmail.com",
+      "phone": "99310043"
+    }
+  },
+  {
+    "_id": 11,
+    "name": "Sierra Connor",
+    "img": "https://randomuser.me/api/portraits/med/women/54.jpg",
+    "stars": 2,
+    "gender": "Male",
+    "location": "central",
+    "bio": "Retired WCW legend whose current main focus is educating and motivating students to prosper in their education",
+    "subject": [
+      "English Language",
+      "English Literature",
+      "Human Geography",
+      "History"
+    ],
+    "level": [
+      "Secondary 1",
+      "Secondary 2",
+      "Secondary 3",
+      "Secondary 4"
+    ],
     "contact": {
       "email": "o.hart@gmail.com",
       "phone": "99310043"

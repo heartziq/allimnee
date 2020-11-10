@@ -40,9 +40,7 @@ export default function Nav() {
           <Typography variant="h6" className={classes.title}>
             <NavLink to="/" color="inherit" className={classes.navLink}>
               <Hidden only={["sm", "xs"]}>
-                <NavLink to="/" color="inherit" className={classes.navLink}>
-                  Brand
-                </NavLink>
+                Brand
               </Hidden>
               <Hidden mdUp>
                 <DrawerFilter side={"left"}>

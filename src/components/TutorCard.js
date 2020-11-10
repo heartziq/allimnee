@@ -38,18 +38,37 @@ export default function TutorCard(props) {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    getRandomImage();
+    // 
+    const abort = new AbortController();
+
+    // with cleanup
+    // getRandomImage("https://randomuser.me/api/?results=1", { signal: abort.signal });
+
+    // without cleanup
+    // getRandomImage();
+
+    return function cleanup() {
+      // setImage(false);
+      console.log('Running: TutorCard cleanup...')
+      abort.abort();
+    }
   }, []);
 
-  async function getRandomImage() {
-    const response = await fetch("https://randomuser.me/api/?results=1");
-    const result = await response.json();
+  async function getRandomImage(uri="https://randomuser.me/api/?results=1", signal={}) {
 
-    const {
-      picture: { medium }
-    } = result.results[0];
+    try {
+      const response = await fetch(uri, signal);
+      const result = await response.json();
 
-    setImage(medium);
+      const {
+        picture: { medium }
+      } = result.results[0];
+
+      setImage(medium);
+    } catch (err) {
+      console.error(err.name)
+    }
+
   }
 
   return (
@@ -59,7 +78,7 @@ export default function TutorCard(props) {
           <Grid container justify="center" alignItems="center">
             <Avatar
               alt={props.tutor.name}
-              src={image}
+              src={props.tutor.img}
               className={classes.bigAvatar}
             />
           </Grid>

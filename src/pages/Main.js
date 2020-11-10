@@ -21,7 +21,9 @@ import qs from "query-string";
 import Filter from "../components/Filter";
 import Level from "../components/Filter/Level";
 import { sortClass } from "../redux/selectors";
-import { getAllClasses as FGetClasses } from "../api";
+
+// fetch api
+import { getAllClasses as FGetClasses, getTutorNameAndImage } from "../api";
 
 // helper
 import { getRandomImage, isBrowser } from "../helper";
@@ -61,14 +63,16 @@ function MainApp(props) {
   const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [ssr, setSsr] = React.useState("css");
+  console.log('pre-fetched by server? ', props.hasFetch)
 
-  React.useEffect(() => {
-    setSsr("js");
-  }, [ssr]);
+  // React.useEffect(() => {
+  //   setSsr("js");
+  // }, [ssr]);
   console.log("ssr: ", ssr);
+
   const [img, setImg] = React.useState("");
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(2);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     console.log(`you are now at page: ${newPage}`);
@@ -94,8 +98,16 @@ function MainApp(props) {
   }
 
   React.useEffect(() => {
-    popImg();
+    const abort = new AbortController();
+    // popImg();
+
     if (!props.hasFetch) fetchClass();
+    return function cleanup() {
+      // ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+      console.log('running AbortController...')
+      abort.abort();
+
+    };
   }, []);
 
   const lookupTable = {
@@ -147,61 +159,67 @@ function MainApp(props) {
     }
   }
 
+  // get tutor_id from props.classes
+  // const list_tutor_id = props.classes.map(eachClass => eachClass._id).join(',');
+
   function renderClasses() {
     const classList = props.classes;
     return classList
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      .map(thisClass => (
-        <React.Fragment key={thisClass._id}>
-          <ListItem>
-            <Grid container>
-              <Grid item container direction="row" xs={9} md={4}>
-                <Hidden smDown>
-                  <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src={img} />
-                  </ListItemAvatar>
-                </Hidden>
+      .map(thisClass => {
+        // popImg();
+        return (
+          <React.Fragment key={thisClass._id}>
+            <ListItem>
+              <Grid container>
+                <Grid item container direction="row" xs={9} md={4}>
+                  <Hidden smDown>
+                    <ListItemAvatar>
+                      <Avatar alt="Remy Sharp" src={thisClass.img} />
+                    </ListItemAvatar>
+                  </Hidden>
 
-                <ListItemText
-                  primary={
-                    <NavLink to="/browse" className={classes.navLink}>
-                      <Typography
-                        variant="body1"
-                        className={classes.subjectStyle}
-                      >
-                        {getLevelText(thisClass.level)}, {thisClass.subject}
-                      </Typography>
-                    </NavLink>
-                  }
-                  secondary={
-                    <React.Fragment>
-                      <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
-                      <span style={{ verticalAlign: "text-bottom" }}>
-                        {thisClass.datetime}
-                      </span>
-                    </React.Fragment>
-                  }
-                />
-              </Grid>
-              <Grid item xs={3} md={4}>
-                <ListItemText secondary={renderLocation(thisClass.location)} />
-              </Grid>
-              <Hidden smDown>
-                <Grid item md={4}>
                   <ListItemText
+                    primary={
+                      <NavLink to="/browse" className={classes.navLink}>
+                        <Typography
+                          variant="body1"
+                          className={classes.subjectStyle}
+                        >
+                          {getLevelText(thisClass.level)}, {thisClass.subject}
+                        </Typography>
+                      </NavLink>
+                    }
                     secondary={
-                      <Typography variant="subtitle1" align="right">
-                        {thisClass.tutorName}
-                      </Typography>
+                      <React.Fragment>
+                        <TodayIcon style={{ fontSize: 15, marginRight: 3 }} />
+                        <span style={{ verticalAlign: "text-bottom" }}>
+                          {thisClass.datetime}
+                        </span>
+                      </React.Fragment>
                     }
                   />
                 </Grid>
-              </Hidden>
-            </Grid>
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </React.Fragment>
-      ));
+                <Grid item xs={3} md={4}>
+                  <ListItemText secondary={renderLocation(thisClass.location)} />
+                </Grid>
+                <Hidden smDown>
+                  <Grid item md={4}>
+                    <ListItemText
+                      secondary={
+                        <Typography variant="subtitle1" align="right">
+                          {thisClass.name}
+                        </Typography>
+                      }
+                    />
+                  </Grid>
+                </Hidden>
+              </Grid>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </React.Fragment>
+        )
+      });
   }
 
   return (

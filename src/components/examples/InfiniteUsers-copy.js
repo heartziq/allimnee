@@ -8,9 +8,7 @@ import InsertData from "./Injector";
 const useStyles = makeStyles(theme => ({
   root: {
     // some styles here...
-  },
-  mainHeading: {
-    color: 'red'
+
   }
 }));
 
@@ -28,10 +26,10 @@ function InifiniteUsers(props) {
   const [isBrowser, setBrowser] = React.useState(false);
 
   const populateInitialUsers = async () => {
-    const response = await fetch("http://localhost:3000/api/classes?limit=10");
+    const response = await fetch("https://randomuser.me/api/?results=10");
     const results = await response.json();
 
-    setOverallState({ ...overallState, users: [...results] });
+    setOverallState({ ...overallState, users: [...results.results] });
   };
 
   React.useEffect(() => {
@@ -42,18 +40,19 @@ function InifiniteUsers(props) {
   // fetch 3 class per scroll
   const fetchRandomUsers = async numberOfUsers => {
     const response = await fetch(
-      `http://localhost:3000/api/classes?limit=${numberOfUsers}`
+      `https://randomuser.me/api/?results=${numberOfUsers}`
     );
 
     const results = await response.json();
 
     try {
       // new list of users
-      const nextUsers = results.map(user => ({
-        id: user._id,
-        subject: user.subject,
-        name: user.tutorName,
-        location: user.location
+      const nextUsers = results.results.map(user => ({
+        email: user.email,
+        name: Object.values(user.name).join(" "),
+        photo: user.picture.large,
+        username: user.login.username,
+        uuid: user.login.uuid
       }));
 
       // Merge into list of existing users
@@ -103,7 +102,7 @@ function InifiniteUsers(props) {
 
   return (
     <div>
-      <h1 className={classes.mainHeading}>Infinite Users!</h1>
+      <h1>Inifinite Users!</h1>
 
       {users.map((user, index) => (
         <div key={index}>
@@ -111,20 +110,24 @@ function InifiniteUsers(props) {
             style={{
               marginRight: 5,
               fontStyle: "italic",
-              fontSize: "1rem",
+              fontSize: "2rem",
               float: "left",
               verticalAlign: "top"
             }}
           >
-            
+            {user.uuid || user.login.uuid}
           </span>
           <h2>
-            {user._id} = {user.subject}
+            {index} = {user.name.first}, {user.name.last}
           </h2>
-          <p>{user.tutorName}</p>
+          <p>email: {user.email}</p>
           <ul>
-            <li>{user.location}</li>
+            <li>username: {user.username}</li>
           </ul>
+          <img
+            src={user.photo ? user.photo : user.picture.large}
+            alt="profile-pic"
+          />
         </div>
       ))}
     </div>

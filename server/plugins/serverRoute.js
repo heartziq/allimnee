@@ -5,21 +5,42 @@ import qs from "query-string";
 module.exports = {
   name: "route-handling",
   version: "1.0.0",
-  register: async function(server) {
+  register: async function (server) {
     // Main Page (Browse ClassList)
     server.route({
       method: "GET",
       path: "/",
-      handler: async function(request, h) {
+      handler: async function (request, h) {
         console.info("running [SERVER] fetch(Main)....");
         const qParam = request.url.search;
+        let qStrippedOff = qs.parse(qParam)
+
+        // Get query fields and values as object
+
         // let qParam = qs.stringify(qStrippedOff);
+        // http://localhost:3000/?search=id&basket=1
+        // console.log(qStrippedOff.search) // id
+        // console.log(qStrippedOff.basket) // 1
+
+        console.log(qs.stringify(qStrippedOff)) // basket=1&search=id
 
         const uri = `http://localhost:3000/api/classes${qParam}`;
         console.log("serverRoute > uri", uri);
         const res = await fetch(uri);
         const result = await res.json();
 
+        // const list_tutor_id = result.map(eachClass => eachClass._id).join(',');
+ 
+        // Grab tutor name and img src
+        // const tutor_uri = `http://localhost:3000/api/tutor?id=${list_tutor_id}`;
+        // const response = await fetch(tutor_uri);
+        // const responseResult = await response.json();
+
+        // console.log(responseResult);
+
+        // consolidate with classes (1 tutor can have multiple classes )
+
+        // Overwrite InitialState in redux store
         const state = {
           classes: result,
           hasFetch: true
@@ -43,7 +64,7 @@ module.exports = {
     server.route({
       method: "GET",
       path: "/class/{id}",
-      handler: async (req, res) => {}
+      handler: async (req, res) => { }
     });
 
     // BrowseTutor
@@ -82,7 +103,7 @@ module.exports = {
     server.route({
       method: "GET",
       path: "/test",
-      handler: function(request, h) {
+      handler: function (request, h) {
         const { cssData, htmlData, initialState } = serverRender(request, {});
 
         return h.view("index", {

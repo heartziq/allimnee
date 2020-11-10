@@ -1,12 +1,19 @@
 export const getRandomImage = async () => {
-  const response = await fetch("https://randomuser.me/api/?results=1");
-  const result = await response.json();
+  try {
+    const response = await fetch("https://randomuser.me/api/?results=1");
+    // console.log('response:' , response.ok)
+    if (!response.ok)
+      throw Error(response.statusText)
+    const result = await response.json();
 
-  const {
-    picture: { medium }
-  } = result.results[0];
+    const {
+      picture: { medium }
+    } = result.results[0];
 
-  return medium;
+    return medium;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const isBrowser = () => {

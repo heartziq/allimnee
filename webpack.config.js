@@ -1,4 +1,6 @@
 const path = require("path");
+// const { nodeEnv } = require('./config')
+// console.log(nodeEnv === "development")
 
 module.exports = {
   entry: ["core-js/stable", "regenerator-runtime/runtime", "./src/index.js"],
