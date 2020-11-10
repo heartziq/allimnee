@@ -1,10 +1,12 @@
-# Pivot! - MVP (by EOY 2019) :
+# Pivot! - MVP:
 
 - [ ] Browse ClassList
   - [ ] UI/UX
-    - [ ] For < MD; replace pagination with InfiniteScrolling
+    - [ ] For < screensize=MD; replace pagination with InfiniteScrolling
       - [x] Study code example
       - [ ] Implement!
+    - [ ] Improve Left Pane filter
+      - [ ] Increase line width
   - [ ] URI - Query params persistent (stays when refreshed)
     - [ ] How to make query params 'synchronize' with current filters? (Redux + URI)
     - [ ] [Challenge] How to make frontend pagination works with DB pagination
@@ -16,5 +18,6 @@
     - [ ] Class Details
   - [ ] [BUTTON] Contact Tutor (email)
 - [ ] Tutor details
+  - [ ] Replace dummy tutor stars
 - [ ] Deploy to github
 
