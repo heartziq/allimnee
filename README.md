@@ -5,6 +5,7 @@
     - [ ] For < screensize=MD; replace pagination with InfiniteScrolling
       - [x] Study code example
       - [ ] Implement!
+      - [ ] Revamp UI
     - [ ] Improve Left Pane filter
       - [ ] Increase line width
   - [ ] URI - Query params persistent (stays when refreshed)
@@ -17,7 +18,7 @@
       - [ ] [step 3] only load DB every 50 records
     - [ ] Class Details
   - [ ] [BUTTON] Contact Tutor (email)
-- [ ] Tutor details
-  - [ ] Replace dummy tutor stars
+- [x] Tutor details
+  - [x] Replace dummy tutor stars
 - [ ] Deploy to github
 
