@@ -11,6 +11,8 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
 import StarIcon from "@material-ui/icons/Star";
+import StarOutlineIcon from '@material-ui/icons/StarOutlined';
+import StarBorderOutlinedIcon from '@material-ui/icons/StarBorderOutlined';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,7 +56,7 @@ export default function TutorCard(props) {
     }
   }, []);
 
-  async function getRandomImage(uri="https://randomuser.me/api/?results=1", signal={}) {
+  async function getRandomImage(uri = "https://randomuser.me/api/?results=1", signal = {}) {
 
     try {
       const response = await fetch(uri, signal);
@@ -69,6 +71,22 @@ export default function TutorCard(props) {
       console.error(err.name)
     }
 
+  }
+
+  function renderStarIcon() {
+    const items = [];
+
+    for (let i = 0; i < 5; i++) {
+      const star = i < props.tutor.stars ? <StarIcon key={i} /> : <StarBorderOutlinedIcon key={items.length} />
+      items.push(star)
+    }
+    
+    return (
+
+      <React.Fragment>
+        {items}
+      </React.Fragment>
+    )
   }
 
   return (
@@ -87,11 +105,7 @@ export default function TutorCard(props) {
               {props.tutor.name}
             </Typography>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
+              {renderStarIcon()}
             </div>
           </CardContent>
         </CardContent>
