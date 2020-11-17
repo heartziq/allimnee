@@ -2,7 +2,10 @@
   {
     "_id": 0,
     "subject": "Mathematics",
-    "level": [1, 2],
+    "level": [
+      1,
+      2
+    ],
     "tutor_id": 0,
     "name": "Tifa Lockheart",
     "img": "https://randomuser.me/api/portraits/med/women/1.jpg",
@@ -12,7 +15,11 @@
   {
     "_id": 1,
     "subject": "Science",
-    "level": [4, 5, 6],
+    "level": [
+      4,
+      5,
+      6
+    ],
     "tutor_id": 1,
     "name": "Aerith West",
     "img": "https://randomuser.me/api/portraits/med/women/2.jpg",
@@ -22,7 +29,9 @@
   {
     "_id": 2,
     "subject": "English",
-    "level": [11],
+    "level": [
+      11
+    ],
     "name": "Cait K. Sith",
     "tutor_id": 2,
     "img": "https://randomuser.me/api/portraits/med/men/3.jpg",
@@ -32,7 +41,11 @@
   {
     "_id": 3,
     "subject": "Chemistry (Pure)",
-    "level": [9, 10, 11],
+    "level": [
+      9,
+      10,
+      11
+    ],
     "tutor_id": 3,
     "name": "Cloud Strife",
     "img": "https://randomuser.me/api/portraits/med/men/4.jpg",
@@ -42,7 +55,11 @@
   {
     "_id": 4,
     "subject": "Physics (Pure)",
-    "level": [9, 10, 11],
+    "level": [
+      9,
+      10,
+      11
+    ],
     "tutor_id": 4,
     "name": "Vincent Valentine",
     "img": "https://randomuser.me/api/portraits/med/men/5.jpg",
@@ -52,7 +69,10 @@
   {
     "_id": 5,
     "subject": "Social Studies",
-    "level": [7, 8],
+    "level": [
+      7,
+      8
+    ],
     "tutor_id": 5,
     "name": "Ahmad",
     "img": "https://randomuser.me/api/portraits/med/men/6.jpg",
@@ -62,7 +82,10 @@
   {
     "_id": 6,
     "subject": "Mathematics",
-    "level": [4, 5],
+    "level": [
+      4,
+      5
+    ],
     "tutor_id": 6,
     "name": "Gambitia Iglesias",
     "img": "https://randomuser.me/api/portraits/med/women/7.jpg",
@@ -72,7 +95,11 @@
   {
     "_id": 7,
     "subject": "Mathematics",
-    "level": [1, 2, 3],
+    "level": [
+      1,
+      2,
+      3
+    ],
     "tutor_id": 7,
     "name": "Lita Dumas",
     "img": "https://randomuser.me/api/portraits/med/women/8.jpg",
@@ -82,7 +109,11 @@
   {
     "_id": 8,
     "subject": "Mandarin",
-    "level": [1, 2, 3],
+    "level": [
+      1,
+      2,
+      3
+    ],
     "tutor_id": 8,
     "name": "Bret Hart",
     "img": "https://randomuser.me/api/portraits/med/men/9.jpg",
@@ -92,7 +123,11 @@
   {
     "_id": 9,
     "subject": "Mandarin",
-    "level": [4, 5, 6],
+    "level": [
+      4,
+      5,
+      6
+    ],
     "tutor_id": 9,
     "name": "Owen Hart",
     "img": "https://randomuser.me/api/portraits/med/men/10.jpg",
@@ -102,7 +137,10 @@
   {
     "_id": 10,
     "subject": "History",
-    "level": [7, 8],
+    "level": [
+      7,
+      8
+    ],
     "tutor_id": 10,
     "name": "James Skesgard",
     "img": "https://randomuser.me/api/portraits/med/men/11.jpg",
@@ -112,11 +150,79 @@
   {
     "_id": 11,
     "subject": "History",
-    "level": [10, 11],
+    "level": [
+      10,
+      11
+    ],
     "tutor_id": 11,
     "name": "Sierra Connor",
     "img": "https://randomuser.me/api/portraits/med/women/54.jpg",
     "location": "Pagoda Tower, 4th Floor",
     "datetime": "Sun, 9:00pm - 11:30pm"
+  },
+  {
+    "_id": 12,
+    "subject": "Malay Lit",
+    "level": [
+      3,
+      4
+    ],
+    "tutor_id": 1,
+    "name": "Aerith West",
+    "img": "https://randomuser.me/api/portraits/med/women/2.jpg",
+    "location": "494 Tampines Ave 3",
+    "datetime": "Sat, 4:30pm - 7:00pm"
+  },
+  {
+    "_id": 13,
+    "subject": "Geography",
+    "level": [
+      7,
+      8
+    ],
+    "tutor_id": 4,
+    "name": "Vincent Valentine",
+    "img": "https://randomuser.me/api/portraits/med/men/5.jpg",
+    "location": "11 Madlin St, Albino",
+    "datetime": "Sun, 11:00am - 1:00pm"
+  },
+  {
+    "_id": 14,
+    "subject": "Spanish Language",
+    "level": [
+      11
+    ],
+    "tutor_id": 5,
+    "name": "Ahmad",
+    "img": "https://randomuser.me/api/portraits/med/men/6.jpg",
+    "location": "112 Baskerville St",
+    "datetime": "Mon, 10:00am - 12:00pm"
+  },
+  {
+    "_id": 15,
+    "subject": "Chemistry (Combined)",
+    "level": [
+      9,
+      10,
+      11
+    ],
+    "tutor_id": 6,
+    "name": "Gambitia Iglesias",
+    "img": "https://randomuser.me/api/portraits/med/women/7.jpg",
+    "location": "72nd Washington St, Alfredo's Mansion",
+    "datetime": "Wed, 10:00am - 12:00pm"
+  },
+  {
+    "_id": 16,
+    "subject": "History",
+    "level": [
+      7,
+      8
+    ],
+    "tutor_id": 7,
+    "name": "Lita Dumas",
+    "img": "https://randomuser.me/api/portraits/med/women/8.jpg",
+    "location": "72nd Washington St, Alfredo's Mansion",
+    "datetime": "Wed, 12:00pm - 2:00pm"
   }
 ]

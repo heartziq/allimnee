@@ -22,16 +22,17 @@ function InifiniteUsers(props) {
     error: false,
     hasMore: true,
     isLoading: false,
+    skip: 0,
     users: []
   });
 
   const [isBrowser, setBrowser] = React.useState(false);
 
   const populateInitialUsers = async () => {
-    const response = await fetch("http://localhost:3000/api/classes?limit=10");
+    const response = await fetch("http://localhost:3000/api/classes?limit=4");
     const results = await response.json();
 
-    setOverallState({ ...overallState, users: [...results] });
+    setOverallState(prevState => ({ ...overallState, skip: prevState.skip + 4, users: [...results] }));
   };
 
   React.useEffect(() => {
@@ -42,28 +43,30 @@ function InifiniteUsers(props) {
   // fetch 3 class per scroll
   const fetchRandomUsers = async numberOfUsers => {
     const response = await fetch(
-      `http://localhost:3000/api/classes?limit=${numberOfUsers}`
+      `http://localhost:3000/api/classes?limit=${numberOfUsers}&skip=${overallState.skip}`
     );
 
     const results = await response.json();
+    console.log(results)
 
     try {
       // new list of users
       const nextUsers = results.map(user => ({
-        id: user._id,
+        _id: user._id,
         subject: user.subject,
-        name: user.tutorName,
-        location: user.location
+        name: user.name,
+        img: user.img
       }));
 
       // Merge into list of existing users
       // maxed 100 users at any given time
-      setOverallState({
+      setOverallState(prevState => ({
         ...overallState,
         hasMore: overallState.users.length < 100,
         isLoading: false,
+        skip: prevState.skip+4,
         users: [...users, ...nextUsers]
-      });
+      }));
     } catch (err) {
       setOverallState({
         ...overallState,
@@ -91,7 +94,7 @@ function InifiniteUsers(props) {
           // React.useEffect(() => {
           //   fetchRandomUsers(10);
           // }, [overallState]);
-          fetchRandomUsers(10);
+          fetchRandomUsers(4);
         }
       }, 100);
     }
@@ -116,14 +119,14 @@ function InifiniteUsers(props) {
               verticalAlign: "top"
             }}
           >
-            
+
           </span>
           <h2>
             {user._id} = {user.subject}
           </h2>
-          <p>{user.tutorName}</p>
+          <p>{user.name}</p>
           <ul>
-            <li>{user.location}</li>
+            <li>{user.img}</li>
           </ul>
         </div>
       ))}
