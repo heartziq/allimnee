@@ -4,7 +4,7 @@
   - [ ] UI/UX
     - [ ] For < screensize=MD; replace pagination with InfiniteScrolling
       - [x] Study code example
-      - [ ] Implement!
+      - [x] Implement!
       - [ ] Revamp UI
     - [ ] Improve Left Pane filter
       - [ ] Increase line width
