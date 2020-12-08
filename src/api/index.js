@@ -1,8 +1,10 @@
 import fetch from "isomorphic-fetch";
+import qs from "query-string";
 
-export const getAllClasses = async (id = "") => {
-  const queryParam = id && `id=${id}`;
-  // console.log('queryParam', queryParam)
+export const getAllClasses = async (param = {}) => {
+  
+  const queryParam = qs.stringify(param)
+  console.log('queryParam', queryParam)
   const resp = await fetch(`/api/classes?${queryParam}`);
   const result = await resp.json();
 

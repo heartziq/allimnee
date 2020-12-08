@@ -13,7 +13,13 @@ const filter = {
 };
 
 // class list...
-const classDefaultState = [];
+const classDefaultState = {
+  error: false,
+  hasMore: true,
+  isLoading: false,
+  skip: 0,
+  users: []
+};
 
 // filter classes...
 const filterClass = {
@@ -35,10 +41,17 @@ const hasFetchReducer = (state = hasFetch, action) => {
   }
 };
 // class reducer
-const classReducer = (state = classDefaultState, action) => {
-  switch (action.type) {
+const classReducer = (state = classDefaultState, { type, initialData }) => {
+  switch (type) {
     case "updateClassList":
-      return action.initialData;
+      return { ...state, users: initialData };
+    case "updateWholeClassObj":
+      return { ...state, skip: state.skip + 4, users: initialData };
+    case "mergeNewUsers":
+      console.log('store > redux > mergeNewusers', initialData)
+      return { ...state, hasMore: state.users.length < 100, isLoading: false, skip: state.skip + 4, users: initialData }
+    case "updateError":
+      return { ...state, isLoading: false, error: initialData }
 
     default:
       return state;

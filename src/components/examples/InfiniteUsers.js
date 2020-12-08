@@ -4,6 +4,8 @@ import debounce from "lodash.debounce";
 import fetch from "isomorphic-fetch";
 import PropTypes from "prop-types";
 import InsertData from "./Injector";
+// fetch api
+import { getAllClasses } from "../../api";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,25 +16,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function InifiniteUsers(props) {
+function InfiniteUsers({ overallState, updateWholeClassObj, mergeNewUsers, updateError }) {
   const classes = useStyles();
 
   // state to keep track of scrolling & listofusers
-  const [overallState, setOverallState] = React.useState({
-    error: false,
-    hasMore: true,
-    isLoading: false,
-    skip: 0,
-    users: []
-  });
 
   const [isBrowser, setBrowser] = React.useState(false);
 
   const populateInitialUsers = async () => {
-    const response = await fetch("http://localhost:3000/api/classes?limit=4");
-    const results = await response.json();
+    const results = await getAllClasses({ limit: 4 });
+    // const results = await response.json();
 
-    setOverallState(prevState => ({ ...overallState, skip: prevState.skip + 4, users: [...results] }));
+    updateWholeClassObj({ type: "updateWholeClassObj", initialData: [...results] })
+    // setOverallState(prevState => ({ ...overallState, skip: prevState.skip + 4, users: [...results] }));
   };
 
   React.useEffect(() => {
@@ -47,7 +43,6 @@ function InifiniteUsers(props) {
     );
 
     const results = await response.json();
-    console.log(results)
 
     try {
       // new list of users
@@ -60,19 +55,9 @@ function InifiniteUsers(props) {
 
       // Merge into list of existing users
       // maxed 100 users at any given time
-      setOverallState(prevState => ({
-        ...overallState,
-        hasMore: overallState.users.length < 100,
-        isLoading: false,
-        skip: prevState.skip+4,
-        users: [...users, ...nextUsers]
-      }));
+      mergeNewUsers({ type: "mergeNewUsers", initialData: [...users, ...nextUsers] });
     } catch (err) {
-      setOverallState({
-        ...overallState,
-        error: err.message,
-        isLoading: false
-      });
+      updateError({ type: "updateError", initialData: err.message });
     }
   };
 
@@ -134,9 +119,9 @@ function InifiniteUsers(props) {
   );
 }
 
-InifiniteUsers.propTypes = {
+InfiniteUsers.propTypes = {
   data: PropTypes.array
 };
 
-// export default InsertData(InifiniteUsers);
-export default InifiniteUsers;
+// export default InsertData(InfiniteUsers);
+export default InfiniteUsers;

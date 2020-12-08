@@ -95,8 +95,8 @@ function MainApp(props) {
     console.info("running [FE] fetch(Main)....");
     // id will be synchronize with uri
     // get id from uri
-    let classList = await FGetClasses();
-    props.updateClassList({ type: "updateClassList", initialData: classList });
+    const classList = await FGetClasses();
+    props.dispatch({ type: "updateClassList", initialData: classList });
   }
 
   React.useEffect(() => {
@@ -136,7 +136,6 @@ function MainApp(props) {
   // grab user query param (use this for URI persistent refresh)
   const userQuery = qs.parse(props.location.search);
   // console.log(`[FE]userQuery: ${JSON.stringify(userQuery)}`);
-  // console.log(qs.stringify(userQuery))
 
   function renderLocation(location) {
     if (isMobileOrTablet) {
@@ -170,7 +169,6 @@ function MainApp(props) {
 
   function renderClasses() {
     const classList = props.classes;
-    // console.log(props.classes)
     return classList
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map(thisClass => {
@@ -231,7 +229,7 @@ function MainApp(props) {
 
   function renderMain() {
     if (isMobileOrTablet) {
-      return (<InfiniteUsers overallState={props.mainClassObj} updateWholeClassObj={props.updateWholeClassObj} updateError={props.updateError} mergeNewUsers={props.mergeNewUsers} />)
+      return (<InfiniteUsers />)
     } else {
       return (
         <React.Fragment>
@@ -291,19 +289,8 @@ function MainBody(props) {
 }
 
 const mapStateToProps = state => ({
-  classes: sortClass(state.classes.users, state.filterClass),
-  hasFetch: state.hasFetch,
-  mainClassObj: state.classes,
+  classes: sortClass(state.classes, state.filterClass),
+  hasFetch: state.hasFetch
 });
 
-// testing mapDispatchToProps
-const mapDispatchToProps = dispatch => {
-  return {
-    updateClassList: data => dispatch(data),
-    updateWholeClassObj: data => dispatch(data),
-    mergeNewUsers: data => dispatch(data),
-    updateError: data => dispatch(data),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainApp);
+export default connect(mapStateToProps)(MainApp);

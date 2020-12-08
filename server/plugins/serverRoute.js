@@ -30,7 +30,7 @@ module.exports = {
         const result = await res.json();
 
         // const list_tutor_id = result.map(eachClass => eachClass._id).join(',');
- 
+
         // Grab tutor name and img src
         // const tutor_uri = `http://localhost:3000/api/tutor?id=${list_tutor_id}`;
         // const response = await fetch(tutor_uri);
@@ -42,7 +42,13 @@ module.exports = {
 
         // Overwrite InitialState in redux store
         const state = {
-          classes: result,
+          classes: {
+            error: false,
+            hasMore: true,
+            isLoading: false,
+            skip: 0,
+            users: result
+          },
           hasFetch: true
         };
 
