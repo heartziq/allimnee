@@ -21,7 +21,7 @@
     "ejs": "^3.1.5",
     "isomorphic-fetch": "^3.0.0",
     "lodash.debounce": "^4.0.8",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongodb": "^3.6.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
